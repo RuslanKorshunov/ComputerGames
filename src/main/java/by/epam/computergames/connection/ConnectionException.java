@@ -1,4 +1,4 @@
-package by.epam.computergames.exception;
+package by.epam.computergames.connection;
 
 public class ConnectionException extends Exception
 {
