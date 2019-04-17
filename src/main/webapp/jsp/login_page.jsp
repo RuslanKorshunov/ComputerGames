@@ -4,7 +4,7 @@
     <title>Вход</title>
 </head>
 <body>
-    <form action="MainServlet" method="post">
+    <form action="ControlServlet" method="post">
         <table>
             <tr>
                 <td>Логин: </td>

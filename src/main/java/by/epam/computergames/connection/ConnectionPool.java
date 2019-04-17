@@ -1,7 +1,11 @@
 package by.epam.computergames.connection;
 
+import by.epam.computergames.creator.ConnectionBuilder;
 import by.epam.computergames.exception.IncorrectDataException;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -9,37 +13,44 @@ public class ConnectionPool
 {
     private static final int SIZE=20;
     private static ConnectionPool instance;
-    private BlockingQueue<WrapperConnection> connectionsFree=new LinkedBlockingQueue<WrapperConnection>(SIZE);
-    private BlockingQueue<WrapperConnection> connectionsUses=new LinkedBlockingQueue<WrapperConnection>(SIZE);
+    private BlockingQueue<Connection> connectionsFree;
+    private BlockingQueue<Connection> connectionsUses=new LinkedBlockingQueue<>(SIZE);
     
     private ConnectionPool() throws ConnectionException
     {
-        for(int index=0; index<SIZE; index++)//TODO как я понял, это нужно вынести в класс ConnectionCreator
+        try
         {
-            connectionsFree.add(new WrapperConnection());
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            ConnectionBuilder builder=new ConnectionBuilder();
+            builder.create(SIZE);
+            connectionsFree=builder.getConnections();
+        }
+        catch (SQLException e)
+        {
+            throw new ConnectionException("DriverManager can't register Driver.");
         }
     }
 
-    public static WrapperConnection getConnection() throws ConnectionException
+    public static Connection getConnection() throws ConnectionException
     {
         if(instance==null)
         {
             instance=new ConnectionPool();
         }
-        WrapperConnection connection=null;
+        Connection connection=null;
         try
         {
-            connection=instance.connectionsUses.take();
-            instance.connectionsFree.remove(connection);
+            connection=instance.connectionsFree.take();
+            instance.connectionsUses.remove(connection);
         }
         catch (InterruptedException e)
         {
-            //TODO пробросить исключение?
+            throw new ConnectionException("ConnectionPool cant' give connection.");
         }
         return connection;
     }
 
-    public static void returnConnection(WrapperConnection connection) throws IncorrectDataException
+    public static void returnConnection(Connection connection) throws IncorrectDataException
     {
         if(instance==null)
         {
@@ -63,10 +74,9 @@ public class ConnectionPool
         int sizeUses=instance.connectionsUses.size();
         if(sizeFree+sizeUses!=SIZE)//TODO это так делается???
         {
-            for(int index=sizeFree+sizeUses; index<SIZE; index++)
-            {
-                instance.connectionsFree.add(new WrapperConnection());
-            }
+            ConnectionBuilder builder=new ConnectionBuilder();
+            builder.create(Math.abs(SIZE-(sizeFree+sizeUses)));
+            instance.connectionsFree.addAll(builder.getConnections());
         }
     }
 }

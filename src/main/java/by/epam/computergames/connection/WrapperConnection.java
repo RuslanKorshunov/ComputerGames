@@ -11,7 +11,7 @@ public class WrapperConnection
 
     private Connection connection;
 
-    private static final String URL="jdbc:mysql://localhost:3306/games";//TODO вынести в ConnectionCreator
+    private static final String URL="jdbc:mysql://localhost:3306/games";
     private static final String USER="root";
     private static final String PASSWORD="12345";
 
