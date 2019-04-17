@@ -2,8 +2,8 @@ package by.epam.computergames.entity;
 
 public class User
 {
-    private String login="";
-    private String password="";
+    private String login;
+    private String password;
     private UserEnum type=UserEnum.GUEST;
 
     public String getLogin() {

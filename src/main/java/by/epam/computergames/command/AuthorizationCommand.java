@@ -7,21 +7,40 @@ import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class AuthorizationCommand implements AbstractCommand
 {
-    private static final String LOGIN="login";
-    private static final String PASSWORD="password";
-
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ConnectionException,
-                                                                                            IncorrectDataException
+    public Router execute(HttpServletRequest request) throws ConnectionException, IncorrectDataException
     {
-        String login=request.getParameter(LOGIN);
-        String password=request.getParameter(PASSWORD);
+        Router router=new Router();
+
+        ConstEnum constEnum=ConstEnum.LOGIN;
+        String login=request.getParameter(constEnum.getValue());
+        constEnum=ConstEnum.PASSWORD;
+        String password=request.getParameter(constEnum.getValue());
 
         AbstractDAO dao=new UserDAO();
         User user=(User)dao.findById(login);
+        dao.returnConnection();
+
+        if(user.getLogin()==null || !user.getPassword().equals(password))
+        {
+            router.setTarget("jsp/login_page.jsp");
+        }
+        else
+        {
+            //TODO это десь делать?
+            HttpSession session=request.getSession();
+            constEnum=ConstEnum.LOGIN;
+            session.setAttribute(constEnum.getValue(), login);
+            constEnum=ConstEnum.ROLE;
+            session.setAttribute(constEnum.getValue(), user.getType());
+
+            router.setTarget("jsp/main_page.jsp");
+        }
+
+        return router;
     }
 }

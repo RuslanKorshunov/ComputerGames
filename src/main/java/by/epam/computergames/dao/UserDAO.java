@@ -5,9 +5,9 @@ import by.epam.computergames.entity.User;
 import by.epam.computergames.entity.UserEnum;
 import by.epam.computergames.exception.IncorrectDataException;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class UserDAO extends AbstractDAO<User>
 {
@@ -20,10 +20,11 @@ public class UserDAO extends AbstractDAO<User>
     public User findById(String login) throws ConnectionException, IncorrectDataException
     {
         User user=new User();
+        PreparedStatement statement=null;
         try
         {
-            Statement statement=connection.createStatement();
-            String query="SELECT password, type FROM users WHERE login='"+login+"'";
+            final String query="SELECT password, type FROM users WHERE login='"+login+"'";
+            statement=connection.prepareStatement(query);//todo насколько это обоснованно?
             ResultSet rs=statement.executeQuery(query);
             while (rs.next())
             {
@@ -46,14 +47,17 @@ public class UserDAO extends AbstractDAO<User>
         }
         catch(SQLException e)
         {
-            System.out.println(e);
             throw new ConnectionException("");//TODO может, придумать другое исключение???
+        }
+        finally
+        {
+            closeStatement(statement);
         }
         return user;
     }
 
     @Override
-    public void returnConnection() throws IncorrectDataException {
+    public void returnConnection() throws IncorrectDataException, ConnectionException {
         super.returnConnection();
     }
 }

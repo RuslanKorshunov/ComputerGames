@@ -4,10 +4,8 @@ import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.exception.IncorrectDataException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public interface AbstractCommand
 {
-    void execute(HttpServletRequest request, HttpServletResponse response) throws ConnectionException,
-                                                                                    IncorrectDataException;
+    Router execute(HttpServletRequest request) throws ConnectionException, IncorrectDataException;
 }
