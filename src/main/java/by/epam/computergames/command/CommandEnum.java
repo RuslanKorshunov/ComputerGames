@@ -2,7 +2,8 @@ package by.epam.computergames.command;
 
 public enum CommandEnum
 {
-    AUTHORIZATION("authorization");
+    AUTHORIZATION("authorization"),
+    LOGOUT("logout");
 
     private String value;
 

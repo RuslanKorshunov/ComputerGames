@@ -15,6 +15,10 @@ public class CommandProvider
             {
                 case AUTHORIZATION:
                     command=new AuthorizationCommand();
+                    break;
+                case LOGOUT:
+                    command=new LogOutCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

@@ -31,12 +31,13 @@ public class AuthorizationCommand implements AbstractCommand
             session.setAttribute(constEnum.getValue(), login);
             constEnum=ConstEnum.ROLE;
             session.setAttribute(constEnum.getValue(), userService.getUser().getType());
-
-            router.setTarget("jsp/main_page.jsp");
+            PageEnum page=PageEnum.MAIN_PAGE;
+            router.setTarget(page.getPath());
         }
         else
         {
-            router.setTarget("jsp/login_page.jsp");
+            PageEnum page=PageEnum.LOGIN_PAGE;
+            router.setTarget(page.getPath());
         }
 
         return router;

@@ -4,6 +4,9 @@
     <title>Компьютерные игры</title>
 </head>
 <body>
-Привет
+    <form action="ControlServlet" method="get">
+        <input type="hidden" name="command" value="logout">
+        <input type="submit" name="button" value="Выйти">
+    </form>
 </body>
 </html>

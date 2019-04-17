@@ -7,8 +7,7 @@ public class Router
     public enum Type
     {
         FORWARD,
-        REDIRECT,
-        FORWARD_REDIRECT
+        REDIRECT
     }
 
     private String target;
@@ -30,11 +29,6 @@ public class Router
     public void setRedirect()
     {
         type=Type.REDIRECT;
-    }
-
-    public void setForwardRedirect()
-    {
-        type=Type.FORWARD_REDIRECT;
     }
 
     public Type getType()

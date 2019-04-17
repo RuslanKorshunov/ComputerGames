@@ -57,5 +57,9 @@ public class ControlServlet extends HttpServlet
         {
             request.getRequestDispatcher(router.getTarget()).forward(request ,response);
         }
+        else
+        {
+            response.sendRedirect(router.getTarget());
+        }
     }
 }
