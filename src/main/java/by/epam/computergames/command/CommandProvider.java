@@ -19,6 +19,9 @@ public class CommandProvider
                 case LOGOUT:
                     command=new LogOutCommand();
                     break;
+                case GET_USER_INFO:
+                    command=new GetUserInfoCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

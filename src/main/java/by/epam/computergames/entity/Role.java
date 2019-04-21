@@ -1,6 +1,6 @@
 package by.epam.computergames.entity;
 
-public enum UserEnum
+public enum Role
 {
     ADMIN(1),
     USER(2),
@@ -8,7 +8,7 @@ public enum UserEnum
 
     int id;
 
-    UserEnum(int id)
+    Role(int id)
     {
         this.id=id;
     }

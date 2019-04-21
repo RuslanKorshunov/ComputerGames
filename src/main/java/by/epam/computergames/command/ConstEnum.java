@@ -4,7 +4,11 @@ public enum ConstEnum
 {
     LOGIN("login"),
     PASSWORD("password"),
-    ROLE("role");
+    ROLE("role"),
+    NAME("name"),
+    SURNAME("surname"),
+    SEX("sex"),
+    EMAIL("email");
 
     String value;
 

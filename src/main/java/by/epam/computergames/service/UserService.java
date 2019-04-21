@@ -10,30 +10,16 @@ import by.epam.computergames.validator.PasswordValidator;
 
 public class UserService
 {
-    private User user;
-
-    public boolean checkUser(String login, String password) throws ConnectionException,
+    public User find(String login, String password) throws ConnectionException,
                                                                     IncorrectDataException
     {
-        boolean result=false;
-        result=LoginValidator.validate(login);
-        result=PasswordValidator.validate(password);
+        User user=null;
         if(LoginValidator.validate(login) && PasswordValidator.validate(password))
         {
             AbstractDAO dao=new UserDAO();
-            user=(User)dao.findById(login);
+            user=(User)dao.findBy(login);
             dao.returnConnection();
-
-            if(user.getLogin()!=null && user.getPassword().equals(password))
-            {
-                result=true;
-            }
         }
-        return result;
-    }
-
-    public User getUser()//TODO ???
-    {
         return user;
     }
 }

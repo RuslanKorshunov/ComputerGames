@@ -21,7 +21,7 @@ public abstract class AbstractDAO<T>
         this.connection=ConnectionPool.getInstance().getConnection();
     }
 
-    public abstract T findById(String id) throws ConnectionException, IncorrectDataException;
+    public abstract T findBy(String id) throws ConnectionException, IncorrectDataException;
 
     public void returnConnection() throws IncorrectDataException, ConnectionException
     {
