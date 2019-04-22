@@ -22,6 +22,9 @@ public class CommandProvider
                 case GET_USER_INFO:
                     command=new GetUserInfoCommand();
                     break;
+                case CHANGE_NAME:
+                    command=new ChangeUserParameterCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

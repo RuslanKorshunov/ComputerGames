@@ -7,8 +7,8 @@
 <body>
     <c:import url="header.jsp"/>
     <form action="ControlServlet" method="get">
-        <input role="hidden" name="command" value="logout">
-        <input role="submit" name="button" value="Выйти">
+        <input type="hidden" name="command" value="logout">
+        <input type="submit" name="button" value="Выйти">
     </form>
 </body>
 </html>

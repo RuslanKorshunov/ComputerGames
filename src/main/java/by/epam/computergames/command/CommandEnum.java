@@ -4,7 +4,8 @@ public enum CommandEnum
 {
     AUTHORIZATION("authorization"),
     LOGOUT("logout"),
-    GET_USER_INFO("get_user_info");
+    GET_USER_INFO("get_user_info"),
+    CHANGE_NAME("change_name");
 
     private String value;
 
