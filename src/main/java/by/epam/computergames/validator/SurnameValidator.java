@@ -1,6 +1,6 @@
 package by.epam.computergames.validator;
 
-public class NameValidator
+public class SurnameValidator
 {
     private static final String REGEX="[A-z]{1}([A-z]|[0-9]){0,14}";
 

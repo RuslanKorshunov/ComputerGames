@@ -23,6 +23,7 @@ public class CommandProvider
                     command=new GetUserInfoCommand();
                     break;
                 case CHANGE_NAME:
+                case CHANGE_SURNAME:
                     command=new ChangeUserParameterCommand();
                     break;
             }

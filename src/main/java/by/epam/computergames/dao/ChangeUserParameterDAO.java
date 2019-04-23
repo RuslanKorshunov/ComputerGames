@@ -20,6 +20,7 @@ public class ChangeUserParameterDAO extends AbstractDAO
         {
             final String QUERY="update "+tableName+" set "+column+"='"+newValue+"' where login='"+login+"'";
             statement=connection.prepareStatement(QUERY);
+            statement.executeUpdate();
         }
         catch(SQLException e)
         {

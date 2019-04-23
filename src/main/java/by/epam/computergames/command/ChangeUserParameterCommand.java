@@ -26,6 +26,9 @@ public class ChangeUserParameterCommand implements AbstractCommand
             case CHANGE_NAME:
                 newValue=request.getParameter(ConstEnum.NEW_NAME_FORM.getValue());
                 break;
+            case CHANGE_SURNAME:
+                newValue=request.getParameter(ConstEnum.NEW_SURNAME_FORM.getValue());
+                break;
         }
 
         AbstractCommand getUserInfoCommand=new GetUserInfoCommand();

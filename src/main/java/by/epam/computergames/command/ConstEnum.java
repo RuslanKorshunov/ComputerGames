@@ -10,6 +10,7 @@ public enum ConstEnum
     SEX("sex"),
     EMAIL("email"),
     NEW_NAME_FORM("new_name_form"),
+    NEW_SURNAME_FORM("new_surname_form"),
     COMMAND("command");
 
     String value;

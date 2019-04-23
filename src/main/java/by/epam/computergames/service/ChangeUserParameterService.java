@@ -8,6 +8,7 @@ import by.epam.computergames.dao.ChangeUserParameterDAO;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.validator.NameValidator;
+import by.epam.computergames.validator.SurnameValidator;
 
 public class ChangeUserParameterService
 {
@@ -27,6 +28,13 @@ public class ChangeUserParameterService
                     throw new IncorrectDataException("Name"+newValue+"has incorrect value.");
                 }
                 column=ConstEnum.NAME.getValue();//TODO может, создать отдельные переменные
+                break;
+            case CHANGE_SURNAME:
+                if(!SurnameValidator.validate(newValue))
+                {
+                    throw new IncorrectDataException("Surname"+newValue+"has incorrect value.");
+                }
+                column=ConstEnum.SURNAME.getValue();//TODO может, создать отдельные переменные
                 break;
         }
         AbstractDAO dao=new ChangeUserParameterDAO();
