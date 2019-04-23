@@ -8,7 +8,9 @@ public enum ConstEnum
     NAME("name"),
     SURNAME("surname"),
     SEX("sex"),
-    EMAIL("email");
+    EMAIL("email"),
+    NEW_NAME_FORM("new_name_form"),
+    COMMAND("command");
 
     String value;
 

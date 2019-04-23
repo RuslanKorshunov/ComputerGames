@@ -4,7 +4,6 @@ import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.Sex;
 import by.epam.computergames.entity.User;
-import by.epam.computergames.exception.IncorrectDataException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,19 +17,19 @@ public class GetUserInfoDAO extends AbstractDAO<User>
     }
 
     @Override
-    public User findBy(String login) throws ConnectionException, IncorrectDataException
+    public User findBy(String login) throws DAOException
     {
         User user=new User();
         PreparedStatement statement=null;
         try
         {
-            final String query="select users.login, users.password, " +
+            final String QUERY="select users.login, users.password, " +
                     "users.type, userinfo.name, " +
                     "userinfo.surname, userinfo.sex, " +
                     "userinfo.email " +
                     "from userinfo join users " +
                     "on users.login=userinfo.login where users.login='"+login+"'";
-            statement=connection.prepareStatement(query);
+            statement=connection.prepareStatement(QUERY);
             ResultSet rs=statement.executeQuery();
             while (rs.next())
             {
@@ -45,7 +44,7 @@ public class GetUserInfoDAO extends AbstractDAO<User>
                     case 2:
                         user.setRole(Role.USER);
                     default:
-                        throw new IncorrectDataException("Data in database has invalid value.");
+                        throw new DAOException("Data in database has invalid value.");
                 }
                 String name=rs.getString(4);
                 user.setName(name);
@@ -62,7 +61,7 @@ public class GetUserInfoDAO extends AbstractDAO<User>
                     case "third":
                         user.setSex(Sex.THIRD);
                     default:
-                        throw new IncorrectDataException("Data in database has invalid value.");
+                        throw new DAOException("Data in database has invalid value.");
                 }
                 String email=rs.getString(7);
                 user.setEmail(email);
@@ -70,7 +69,7 @@ public class GetUserInfoDAO extends AbstractDAO<User>
         }
         catch (SQLException e)
         {
-            throw new ConnectionException("");//TODO может, придумать другое исключение???
+            throw new DAOException("GetUserInfoDAO can't get data from database due to an internal error.");
         }
         finally
         {

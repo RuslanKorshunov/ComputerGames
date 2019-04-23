@@ -2,11 +2,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script>
+        function changeDisplay(form) {
+            if (form.style.display == "none") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+    </script>
     <title>Страница пользователя</title>
 </head>
 <body>
-    <form action="ControlServlet" method="post">
-        Имя: ${name} <input type="button" name="command" value="change_name"><br>
+    Имя: ${name} <input type="button" onclick="changeDisplay(document.getElementById('form_name'))"><br>
+    <form id="form_name" action="ControlServlet" method="post" style="display: none;">
+        <input type="text" name="new_name_form" value="${name}"> <input type="submit" value="Сохранить">
+        <input type="hidden" name="command" value="change_name">
+    </form>
         Фамилия: ${surname}<br>
         Логин: ${login}<br>
         Пароль: ${password}<br>
@@ -36,6 +48,5 @@
             </c:otherwise>
         </c:choose>
         Email: ${email}<br>
-    </form>
 </body>
 </html>

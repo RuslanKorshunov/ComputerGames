@@ -53,15 +53,15 @@ public class ConnectionPool
         return connection;
     }
 
-    public void returnConnection(ProxyConnection connection) throws IncorrectDataException
+    public void returnConnection(ProxyConnection connection) throws ConnectionException
     {
         if(instance==null)
         {
-            throw new IncorrectDataException("ConnectionPool isn't initialized.");
+            throw new ConnectionException("ConnectionPool isn't initialized.");
         }
         if(connection==null)
         {
-            throw new IncorrectDataException("Connection is null.");
+            throw new ConnectionException("Connection is null.");
         }
         if(instance.connectionsUses.contains(connection))
         {

@@ -2,8 +2,10 @@ package by.epam.computergames.servlet;
 
 import by.epam.computergames.command.AbstractCommand;
 import by.epam.computergames.command.CommandProvider;
+import by.epam.computergames.command.ConstEnum;
 import by.epam.computergames.command.Router;
 import by.epam.computergames.connection.ConnectionException;
+import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
 
 import javax.servlet.ServletException;
@@ -16,8 +18,6 @@ import java.io.IOException;
 @WebServlet(name = "ControlServlet", urlPatterns = {"/ControlServlet"})
 public class ControlServlet extends HttpServlet
 {
-    private static final String COMMAND="command";//TODO наверное, это нужно перенести
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -25,7 +25,7 @@ public class ControlServlet extends HttpServlet
         {
             processRequest(request ,response);
         }
-        catch (ConnectionException|IncorrectDataException e)
+        catch (ConnectionException|IncorrectDataException|DAOException e)
         {
 
         }
@@ -38,19 +38,20 @@ public class ControlServlet extends HttpServlet
         {
             processRequest(request ,response);
         }
-        catch (ConnectionException|IncorrectDataException e)
+        catch (ConnectionException|IncorrectDataException|DAOException e)
         {
 
         }
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ConnectionException,
-                                                                                                    IncorrectDataException,
                                                                                                     IOException,
-                                                                                                    ServletException
+                                                                                                    ServletException,
+                                                                                                    IncorrectDataException,
+                                                                                                    DAOException
     {
         CommandProvider commandProvider=new CommandProvider();
-        String commandName=request.getParameter(COMMAND);
+        String commandName=request.getParameter(ConstEnum.COMMAND.getValue());
         AbstractCommand command=commandProvider.provide(commandName);
         Router router=command.execute(request);
         if(router.getType()== Router.Type.FORWARD)
@@ -62,4 +63,5 @@ public class ControlServlet extends HttpServlet
             response.sendRedirect(router.getTarget());
         }
     }
+    //TODO где обрабатывать исключения connectionexception и incorrectdataexception
 }

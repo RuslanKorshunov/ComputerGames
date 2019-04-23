@@ -9,7 +9,6 @@ public class LogOutCommand implements AbstractCommand
     public Router execute(HttpServletRequest request)//TODO здесь должен быть уровень логики
     {
         HttpSession session=request.getSession();
-        System.out.println((String) session.getAttribute("login"));
         Router router=new Router();
         PageEnum page=PageEnum.INDEX;
         router.setTarget(page.getPath());

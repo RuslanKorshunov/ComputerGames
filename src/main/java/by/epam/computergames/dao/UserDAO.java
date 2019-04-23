@@ -3,7 +3,6 @@ package by.epam.computergames.dao;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.User;
-import by.epam.computergames.exception.IncorrectDataException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,14 +16,14 @@ public class UserDAO extends AbstractDAO<User>
     }
 
     @Override
-    public User findBy(String login) throws ConnectionException, IncorrectDataException
+    public User findBy(String login) throws DAOException
     {
         User user=new User();
         PreparedStatement statement=null;
         try
         {
-            final String query="SELECT password, type FROM users WHERE login='"+login+"'";
-            statement=connection.prepareStatement(query);//todo насколько это обоснованно?
+            final String QUERY="SELECT password, type FROM users WHERE login='"+login+"'";
+            statement=connection.prepareStatement(QUERY);
             ResultSet rs=statement.executeQuery();
             while (rs.next())
             {
@@ -39,13 +38,13 @@ public class UserDAO extends AbstractDAO<User>
                     case 2:
                         user.setRole(Role.USER);
                         default:
-                            throw new IncorrectDataException("Data in database has invalid value.");
+                            throw new DAOException("Data in database has invalid value.");
                 }
             }
         }
         catch(SQLException e)
         {
-            throw new ConnectionException("");//TODO может, придумать другое исключение???
+            throw new DAOException("UserDAO can't get data from database due to an internal error.");
         }
         finally
         {
@@ -55,7 +54,7 @@ public class UserDAO extends AbstractDAO<User>
     }
 
     @Override
-    public void returnConnection() throws IncorrectDataException, ConnectionException {
+    public void returnConnection() throws ConnectionException {
         super.returnConnection();
     }
 }

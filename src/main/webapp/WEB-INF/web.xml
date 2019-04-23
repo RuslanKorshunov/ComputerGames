@@ -10,4 +10,8 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  <error-page>
+    <exception-type>by.epam.computergames.connection.ConnectionException</exception-type>
+    <location>/errors/error_connection.jsp</location>
+  </error-page>
 </web-app>

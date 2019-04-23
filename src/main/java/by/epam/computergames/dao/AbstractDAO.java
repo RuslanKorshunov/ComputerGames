@@ -3,7 +3,6 @@ package by.epam.computergames.dao;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.connection.ConnectionPool;
 import by.epam.computergames.connection.ProxyConnection;
-import by.epam.computergames.exception.IncorrectDataException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,9 +20,15 @@ public abstract class AbstractDAO<T>
         this.connection=ConnectionPool.getInstance().getConnection();
     }
 
-    public abstract T findBy(String id) throws ConnectionException, IncorrectDataException;
+    public T findBy(String id) throws DAOException
+    {
+        return null;
+    }
 
-    public void returnConnection() throws IncorrectDataException, ConnectionException
+    public void update(String tableName, String column, String newValue, String id) throws DAOException
+    { }
+
+    public void returnConnection() throws ConnectionException
     {
         ConnectionPool.getInstance().returnConnection(connection);
     }
