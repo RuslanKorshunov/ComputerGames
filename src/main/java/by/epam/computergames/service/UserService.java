@@ -26,6 +26,12 @@ public class UserService
         AbstractDAO dao=new UserDAO();
         User user=(User)dao.findBy(login);
         dao.returnConnection();
+
+        if(!user.getPassword().equals(password))
+        {
+            throw new IncorrectDataException("User Password isn't equal to entered password.");
+        }
+
         return user;
     }
 }

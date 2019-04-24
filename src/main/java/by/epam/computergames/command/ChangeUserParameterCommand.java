@@ -29,18 +29,24 @@ public class ChangeUserParameterCommand implements AbstractCommand
             case CHANGE_SURNAME:
                 newValue=request.getParameter(ConstEnum.NEW_SURNAME_FORM.getValue());
                 break;
+            case CHANGE_PASSWORD:
+                newValue=request.getParameter(ConstEnum.NEW_PASSWORD_FORM.getValue());
+                break;
+            case CHANGE_EMAIL:
+                newValue=request.getParameter(ConstEnum.NEW_EMAIL_FORM.getValue());
         }
 
         AbstractCommand getUserInfoCommand=new GetUserInfoCommand();
-        Router router=getUserInfoCommand.execute(request);
+        Router router;
         service=new ChangeUserParameterService();
         try
         {
             service.change(login, command, newValue);
+            router=getUserInfoCommand.execute(request);
         }
         catch (IncorrectDataException e)
         {
-            //todo добавить надписи
+            router=getUserInfoCommand.execute(request);
         }
 
         return router;

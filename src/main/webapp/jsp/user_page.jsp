@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 <html>
+<fmt:setLocale value="en_US" scope="session" />
+<fmt:setBundle basename="prop.text"  />
 <head>
     <script>
         function changeDisplay(form) {
@@ -11,50 +14,56 @@
             }
         }
     </script>
-    <title>Страница пользователя</title>
+    <title><fmt:message key="label.userpage"/></title>
 </head>
 <body>
-    Имя: ${name} <input type="button" onclick="changeDisplay(document.getElementById('form_name'))"><br>
+    <fmt:message key="label.name"/> : ${name} <input type="button" onclick="changeDisplay(document.getElementById('form_name'))"><br>
     <form id="form_name" action="ControlServlet" method="post" style="display: none;">
-        <input type="text" name="new_name_form" value="${name}"> <input type="submit" value="Сохранить">
+        <input type="text" name="new_name_form" value="${name}"> <input type="submit" value="<fmt:message key="label.save"/>">
         <input type="hidden" name="command" value="change_name">
     </form>
-    Фамилия: ${surname} <input type="button" onclick="changeDisplay(document.getElementById('form_surname'))"><br>
+    <fmt:message key="label.surname"/> : ${surname} <input type="button" onclick="changeDisplay(document.getElementById('form_surname'))"><br>
     <form id="form_surname" action="ControlServlet" method="post" style="display: none;">
-        <input type="text" name="new_surname_form" value="${surname}"> <input type="submit" value="Сохранить">
+        <input type="text" name="new_surname_form" value="${surname}"> <input type="submit" value="<fmt:message key="label.save"/>">
         <input type="hidden" name="command" value="change_surname">
     </form>
-    Логин: ${login}<br>
-    Пароль: ${password} <br>
-    <form id="form_password" action="ControlServlet" method="post" style="display: none">
-        <input type="text" name="new_password_form" value="${password}"> <input type="submit" value="Сохранить">
+    <fmt:message key="label.login"/> : ${login}<br>
+    <fmt:message key="label.password"/> : ${password} <input type="button" onclick="changeDisplay(document.getElementById('form_password'))"><br>
+    <form id="form_password" action="ControlServlet" method="post" style="display: none;">
+        <input type="text" name="new_password_form" value="${password}"> <input type="submit" value="<fmt:message key="label.save"/>">
         <input type="hidden" name="command" value="change_password">
     </form>
+    <fmt:message key="label.status"/>:
     <c:choose>
-        <c:when test="${role=1}">
-            Статус: админ<br>
+        <c:when test="${role eq 1}">
+            <fmt:message key="label.administrator"/> <br>
         </c:when>
-        <c:when test="${role=1}">
-            Статус: пользователь<br>
+        <c:when test="${role eq 2}">
+            <fmt:message key="label.user"/> <br>
         </c:when>
         <c:otherwise>
-            Статус: не определен<br>
+            <br>
         </c:otherwise>
     </c:choose>
-        <c:choose>
-            <c:when test="${sex eq 'male'}">
-                Пол: муж<br>
-            </c:when>
-            <c:when test="${sex eq 'female'}">
-                Пол: жен<br>
-            </c:when>
-            <c:when test="${sex eq 'third'}">
-                Пол: третий<br>
-            </c:when>
-            <c:otherwise>
-                Пол: не определен<br>
-            </c:otherwise>
-        </c:choose>
-        Email: ${email}<br>
+    <fmt:message key="label.sex"/>:
+    <c:choose>
+        <c:when test="${sex eq 'male'}">
+            <fmt:message key="label.male"/> <br>
+        </c:when>
+        <c:when test="${sex eq 'female'}">
+            <fmt:message key="label.female"/> <br>
+        </c:when>
+        <c:when test="${sex eq 'third'}">
+            <fmt:message key="label.third"/> <br>
+        </c:when>
+        <c:otherwise>
+            <br>
+        </c:otherwise>
+    </c:choose>
+    Email: ${email} <input type="button" onclick="changeDisplay(document.getElementById('form_email'))"><br>
+    <form id="form_email" action="ControlServlet" method="post" style="display: none;">
+        <input type="text" name="new_email_form" value="${email}"> <input type="submit" value="<fmt:message key="label.save"/>">
+        <input type="hidden" name="command" value="change_email">
+    </form>
 </body>
 </html>

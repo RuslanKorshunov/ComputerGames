@@ -24,6 +24,8 @@ public class CommandProvider
                     break;
                 case CHANGE_NAME:
                 case CHANGE_SURNAME:
+                case CHANGE_PASSWORD:
+                case CHANGE_EMAIL:
                     command=new ChangeUserParameterCommand();
                     break;
             }

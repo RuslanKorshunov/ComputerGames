@@ -4,8 +4,8 @@ public class SurnameValidator
 {
     private static final String REGEX="[A-z]{1}([A-z]|[0-9]){0,14}";
 
-    public static boolean validate(String name)
+    public static boolean validate(String surname)
     {
-        return name.matches(REGEX);
+        return surname.matches(REGEX);
     }
 }

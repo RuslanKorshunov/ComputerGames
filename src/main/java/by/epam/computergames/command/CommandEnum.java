@@ -6,7 +6,9 @@ public enum CommandEnum
     LOGOUT("logout"),
     GET_USER_INFO("get_user_info"),
     CHANGE_NAME("change_name"),
-    CHANGE_SURNAME("change_surname");
+    CHANGE_SURNAME("change_surname"),
+    CHANGE_PASSWORD("change_password"),
+    CHANGE_EMAIL("change_email");
 
     private String value;
 

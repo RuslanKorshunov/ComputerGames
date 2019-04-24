@@ -11,6 +11,8 @@ public enum ConstEnum
     EMAIL("email"),
     NEW_NAME_FORM("new_name_form"),
     NEW_SURNAME_FORM("new_surname_form"),
+    NEW_PASSWORD_FORM("new_password_form"),
+    NEW_EMAIL_FORM("new_email_form"),
     COMMAND("command");
 
     String value;
