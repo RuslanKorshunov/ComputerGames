@@ -60,6 +60,7 @@ public class GetUserInfoDAO extends AbstractDAO<User>
                         break;
                     case "third":
                         user.setSex(Sex.THIRD);
+                        break;
                     default:
                         throw new DAOException("Data in database has invalid value.");
                 }

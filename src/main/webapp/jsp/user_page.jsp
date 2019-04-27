@@ -48,18 +48,34 @@
     <fmt:message key="label.sex"/>:
     <c:choose>
         <c:when test="${sex eq 'male'}">
-            <fmt:message key="label.male"/> <br>
+            <fmt:message key="label.male"/>
         </c:when>
         <c:when test="${sex eq 'female'}">
-            <fmt:message key="label.female"/> <br>
+            <fmt:message key="label.female"/>
         </c:when>
         <c:when test="${sex eq 'third'}">
-            <fmt:message key="label.third"/> <br>
+            <fmt:message key="label.third"/>
         </c:when>
         <c:otherwise>
-            <br>
+
         </c:otherwise>
-    </c:choose>
+    </c:choose> <input type="button" onclick="changeDisplay(document.getElementById('form_sex'))"><br>
+    <form id="form_sex" action="ControlServlet" method="post" style="display: none">
+<%--        <select name="new_sex_form" size="3">
+            <option disabled><fmt:message key="label.choosesex"/></option>
+            <option value="male"><fmt:message key="label.male"/></option>
+            <option value="female"><fmt:message key="label.female"/></option>
+            <option value="third"><fmt:message key="label.third"/></option>
+        </select>--%>
+        <input type="radio" id="radio1" name="new_sex_form" value="male">
+        <fmt:message key="label.male"/>
+        <input type="radio" id="radio2" name="new_sex_form" value="female">
+        <fmt:message key="label.female"/>
+        <input type="radio" id="radio3" name="new_sex_form" value="third">
+        <fmt:message key="label.third"/>
+        <input type="submit" value=" <fmt:message key="label.save"/>">
+        <input type="hidden" name="command" value="change_sex">
+    </form>
     Email: ${email} <input type="button" onclick="changeDisplay(document.getElementById('form_email'))"><br>
     <form id="form_email" action="ControlServlet" method="post" style="display: none;">
         <input type="text" name="new_email_form" value="${email}"> <input type="submit" value="<fmt:message key="label.save"/>">

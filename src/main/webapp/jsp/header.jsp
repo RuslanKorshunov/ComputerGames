@@ -9,7 +9,7 @@
 </head>
 <body>
     <fmt:message key="label.welcome"/>,
-    <a href="ControlServlet?command=get_user_info">${login}</a>!
+    <a href="ControlServlet?command=get_user_info">${name} ${surname}</a>!
     <hr/>
     <!--<form action="ControlServlet" method="get">
         <input type="hidden" name="command" value="search_games"/>

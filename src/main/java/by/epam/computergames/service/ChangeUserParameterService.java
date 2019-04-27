@@ -50,6 +50,10 @@ public class ChangeUserParameterService
                 column=ConstEnum.PASSWORD.getValue();//TODO может, создать отдельные переменные
                 table=USERS;
                 break;
+            case CHANGE_SEX:
+                column=ConstEnum.SEX.getValue();
+                table=USER_INFO;
+                break;
             case CHANGE_EMAIL:
                 if(!EmailValidator.validate(newValue))
                 {

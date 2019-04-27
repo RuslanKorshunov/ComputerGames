@@ -22,7 +22,7 @@ public class UserDAO extends AbstractDAO<User>
         PreparedStatement statement=null;
         try
         {
-            final String QUERY="SELECT password, type FROM users WHERE login='"+login+"'";
+            final String QUERY="SELECT users.password, users.type, userinfo.name, userinfo.surname FROM users JOIN userinfo ON users.login=userinfo.login WHERE users.login='"+login+"'";
             statement=connection.prepareStatement(QUERY);
             ResultSet rs=statement.executeQuery();
             while (rs.next())
@@ -40,6 +40,10 @@ public class UserDAO extends AbstractDAO<User>
                         default:
                             throw new DAOException("Data in database has invalid value.");
                 }
+                String name=rs.getString(3);
+                user.setName(name);
+                String surname=rs.getString(4);
+                user.setSurname(surname);
             }
         }
         catch(SQLException e)

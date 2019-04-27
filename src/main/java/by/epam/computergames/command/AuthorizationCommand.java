@@ -18,20 +18,18 @@ public class AuthorizationCommand implements AbstractCommand
     {
         Router router = new Router();
 
-        ConstEnum constEnum = ConstEnum.LOGIN;
-        String login = request.getParameter(constEnum.getValue());
-        constEnum = ConstEnum.PASSWORD;
-        String password = request.getParameter(constEnum.getValue());
+        String login = request.getParameter(ConstEnum.LOGIN.getValue());
+        String password = request.getParameter(ConstEnum.PASSWORD.getValue());
 
         userService = new UserService();
         try
         {
             User user = userService.find(login, password);
             HttpSession session = request.getSession();
-            constEnum = ConstEnum.LOGIN;
-            session.setAttribute(constEnum.getValue(), login);
-            constEnum = ConstEnum.ROLE;
-            session.setAttribute(constEnum.getValue(), user.getRole());
+            session.setAttribute(ConstEnum.LOGIN.getValue(), login);
+            session.setAttribute(ConstEnum.ROLE.getValue(), user.getRole());
+            session.setAttribute(ConstEnum.NAME.getValue(), user.getName());
+            session.setAttribute(ConstEnum.SURNAME.getValue(), user.getSurname());
             PageEnum page = PageEnum.MAIN_PAGE;
             router.setTarget(page.getPath());
         }

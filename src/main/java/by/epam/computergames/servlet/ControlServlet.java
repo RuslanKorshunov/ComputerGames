@@ -27,7 +27,7 @@ public class ControlServlet extends HttpServlet
         }
         catch (ConnectionException|IncorrectDataException|DAOException e)
         {
-
+            System.out.println(e);
         }
     }
 
@@ -40,7 +40,7 @@ public class ControlServlet extends HttpServlet
         }
         catch (ConnectionException|IncorrectDataException|DAOException e)
         {
-
+            System.out.println(e);
         }
     }
 

@@ -32,6 +32,9 @@ public class ChangeUserParameterCommand implements AbstractCommand
             case CHANGE_PASSWORD:
                 newValue=request.getParameter(ConstEnum.NEW_PASSWORD_FORM.getValue());
                 break;
+            case CHANGE_SEX:
+                newValue=request.getParameter(ConstEnum.NEW_SEX_FORM.getValue());
+                break;
             case CHANGE_EMAIL:
                 newValue=request.getParameter(ConstEnum.NEW_EMAIL_FORM.getValue());
         }

@@ -8,7 +8,8 @@ public enum CommandEnum
     CHANGE_NAME("change_name"),
     CHANGE_SURNAME("change_surname"),
     CHANGE_PASSWORD("change_password"),
-    CHANGE_EMAIL("change_email");
+    CHANGE_EMAIL("change_email"),
+    CHANGE_SEX("change_sex");
 
     private String value;
 
