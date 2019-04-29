@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
-<fmt:setLocale value="en_US" scope="session" />
-<fmt:setBundle basename="prop.text"  />
+<fmt:setLocale value="en_US" scope="session"/>
+<fmt:setBundle basename="prop.text"/>
 <head>
     <title><fmt:message key="label.title"/></title>
 </head>
@@ -16,11 +16,16 @@
         </tr>
         <tr>
             <td><fmt:message key="label.password"/>: </td>
-            <td><input type="text" name="password"/></td>
+            <td><input type="password" name="password"/></td>
         </tr>
         <tr>
             <td>
                 <input type="submit" name="button" value="<fmt:message key="label.ok"/>"/>
+            </td>
+            <td>
+                <a href="ControlServlet?command=get_registration_page" >
+                    <fmt:message key="label.registration"/>
+                </a>
             </td>
         </tr>
     </table>

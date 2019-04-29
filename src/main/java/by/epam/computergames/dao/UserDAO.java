@@ -1,5 +1,6 @@
 package by.epam.computergames.dao;
 
+import by.epam.computergames.command.Table;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.User;
@@ -37,6 +38,7 @@ public class UserDAO extends AbstractDAO<User>
                         break;
                     case 2:
                         user.setRole(Role.USER);
+                        break;
                         default:
                             throw new DAOException("Data in database has invalid value.");
                 }
@@ -55,6 +57,48 @@ public class UserDAO extends AbstractDAO<User>
             closeStatement(statement);
         }
         return user;
+    }
+
+    @Override
+    public void create(User user) throws DAOException
+    {
+        PreparedStatement statement=null;
+        try
+        {
+            connection.setAutoCommit(false);
+            String query="INSERT INTO "+ Table.USERS.getValue() +" VALUES" +
+                    "('"+user.getLogin()+"', '"+user.getPassword()+"', '"+Role.USER.getId()+"')";
+            statement=connection.prepareStatement(query);
+            statement.executeUpdate();
+            query="INSERT INTO "+Table.USER_INFO.getValue()+" VALUES" +
+                    "('"+user.getLogin()+"', '"+user.getName()+"', '"+user.getSurname()+"', '"+user.getSex().getValue()
+                    +"', '"+user.getEmail()+"')";
+            statement=connection.prepareStatement(query);
+            statement.executeUpdate();
+            connection.commit();
+        }
+        catch (SQLException e)
+        {
+            try
+            {
+                connection.rollback();
+            }
+            catch (SQLException eSQL)
+            {
+                //todo логгирование
+            }
+            throw new  DAOException("UserDAO can't get data from database due to an internal error.");
+        }
+        finally
+        {
+            try
+            {
+                connection.setAutoCommit(true);
+            }
+            catch (SQLException e)
+            {
+            }
+        }
     }
 
     @Override

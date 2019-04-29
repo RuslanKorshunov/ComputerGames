@@ -14,7 +14,7 @@
             }
         }
     </script>
-    <title><fmt:message key="label.userpage"/></title>
+    <title><fmt:message key="label.user_page"/></title>
 </head>
 <body>
     <fmt:message key="label.name"/> : ${name} <input type="button" onclick="changeDisplay(document.getElementById('form_name'))"><br>
@@ -61,12 +61,6 @@
         </c:otherwise>
     </c:choose> <input type="button" onclick="changeDisplay(document.getElementById('form_sex'))"><br>
     <form id="form_sex" action="ControlServlet" method="post" style="display: none">
-<%--        <select name="new_sex_form" size="3">
-            <option disabled><fmt:message key="label.choosesex"/></option>
-            <option value="male"><fmt:message key="label.male"/></option>
-            <option value="female"><fmt:message key="label.female"/></option>
-            <option value="third"><fmt:message key="label.third"/></option>
-        </select>--%>
         <input type="radio" id="radio1" name="new_sex_form" value="male">
         <fmt:message key="label.male"/>
         <input type="radio" id="radio2" name="new_sex_form" value="female">
@@ -76,10 +70,14 @@
         <input type="submit" value=" <fmt:message key="label.save"/>">
         <input type="hidden" name="command" value="change_sex">
     </form>
-    Email: ${email} <input type="button" onclick="changeDisplay(document.getElementById('form_email'))"><br>
+    <fmt:message key="label.email"/> : ${email} <input type="button" onclick="changeDisplay(document.getElementById('form_email'))"><br>
     <form id="form_email" action="ControlServlet" method="post" style="display: none;">
         <input type="text" name="new_email_form" value="${email}"> <input type="submit" value="<fmt:message key="label.save"/>">
         <input type="hidden" name="command" value="change_email">
+    </form>
+    <form action="ControlServlet" method="get">
+        <input type="submit" name="button" value="<fmt:message key="label.go_back"/>">
+        <input type="hidden" name="command" value="go_back">
     </form>
 </body>
 </html>

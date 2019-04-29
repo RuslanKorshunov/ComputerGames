@@ -28,6 +28,9 @@ public abstract class AbstractDAO<T>
     public void update(String tableName, String column, String newValue, String id) throws DAOException
     { }
 
+    public void create(T entity) throws DAOException
+    {}
+
     public void returnConnection() throws ConnectionException
     {
         ConnectionPool.getInstance().returnConnection(connection);

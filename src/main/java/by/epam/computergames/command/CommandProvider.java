@@ -29,6 +29,15 @@ public class CommandProvider
                 case CHANGE_SEX:
                     command=new ChangeUserParameterCommand();
                     break;
+                case GO_BACK:
+                    command=new GoBackCommand();
+                    break;
+                case REGISTRATION:
+                    command=new RegistrationCommand();
+                    break;
+                case GET_REGISTRATION_PAGE:
+                    command=new GetRegistrationPageCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

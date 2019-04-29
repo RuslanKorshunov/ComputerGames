@@ -11,10 +11,9 @@
     <fmt:message key="label.welcome"/>,
     <a href="ControlServlet?command=get_user_info">${name} ${surname}</a>!
     <hr/>
-    <!--<form action="ControlServlet" method="get">
-        <input type="hidden" name="command" value="search_games"/>
-        <input type="submit" name="button" value="Игры">
-    </form>-->
+        <fmt:message key="menu.game"/>
+        <fmt:message key="menu.developers"/>
+        <fmt:message key="menu.ratings"/>
     <hr/>
 </body>
 </html>

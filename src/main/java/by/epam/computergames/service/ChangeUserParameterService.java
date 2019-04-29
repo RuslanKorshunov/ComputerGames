@@ -2,6 +2,7 @@ package by.epam.computergames.service;
 
 import by.epam.computergames.command.CommandEnum;
 import by.epam.computergames.command.ConstEnum;
+import by.epam.computergames.command.Table;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.dao.AbstractDAO;
 import by.epam.computergames.dao.ChangeUserParameterDAO;
@@ -14,9 +15,6 @@ import by.epam.computergames.validator.SurnameValidator;
 
 public class ChangeUserParameterService
 {
-    private static final String USER_INFO="userinfo";
-    private static final String USERS="users";
-
     public void change(String login, CommandEnum command, String newValue) throws IncorrectDataException,
                                                                                     ConnectionException,
                                                                                     DAOException
@@ -31,16 +29,16 @@ public class ChangeUserParameterService
                 {
                     throw new IncorrectDataException("Name"+newValue+"has incorrect value.");
                 }
-                column=ConstEnum.NAME.getValue();//TODO может, создать отдельные переменные
-                table=USER_INFO;
+                column=ConstEnum.NAME.getValue();
+                table=Table.USER_INFO.getValue();
                 break;
             case CHANGE_SURNAME:
                 if(!SurnameValidator.validate(newValue))
                 {
                     throw new IncorrectDataException("Surname"+newValue+"has incorrect value.");
                 }
-                column=ConstEnum.SURNAME.getValue();//TODO может, создать отдельные переменные
-                table=USER_INFO;
+                column=ConstEnum.SURNAME.getValue();
+                table=Table.USER_INFO.getValue();
                 break;
             case CHANGE_PASSWORD:
                 if(!PasswordValidator.validate(newValue))
@@ -48,11 +46,11 @@ public class ChangeUserParameterService
                     throw new IncorrectDataException("Password "+newValue+"has incorrect value.");
                 }
                 column=ConstEnum.PASSWORD.getValue();//TODO может, создать отдельные переменные
-                table=USERS;
+                table=Table.USERS.getValue();
                 break;
             case CHANGE_SEX:
                 column=ConstEnum.SEX.getValue();
-                table=USER_INFO;
+                table=Table.USER_INFO.getValue();
                 break;
             case CHANGE_EMAIL:
                 if(!EmailValidator.validate(newValue))
@@ -60,7 +58,7 @@ public class ChangeUserParameterService
                     throw new IncorrectDataException("Email "+newValue+"has incorrect value.");
                 }
                 column=ConstEnum.EMAIL.getValue();
-                table=USER_INFO;
+                table=Table.USER_INFO.getValue();
                 break;
         }
         AbstractDAO dao=new ChangeUserParameterDAO();

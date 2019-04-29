@@ -43,6 +43,7 @@ public class GetUserInfoDAO extends AbstractDAO<User>
                         break;
                     case 2:
                         user.setRole(Role.USER);
+                        break;
                     default:
                         throw new DAOException("Data in database has invalid value.");
                 }

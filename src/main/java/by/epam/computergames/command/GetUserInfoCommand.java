@@ -26,8 +26,8 @@ public class GetUserInfoCommand implements AbstractCommand
 
         if(role==Role.GUEST)
         {
-            PageEnum pageEnum=PageEnum.MAIN_PAGE;
-            router.setTarget(pageEnum.getPath());
+            Page page = Page.MAIN_PAGE;
+            router.setTarget(page.getPath());
         }
         else
         {
@@ -39,7 +39,7 @@ public class GetUserInfoCommand implements AbstractCommand
             request.setAttribute(constEnum.getValue(), user.getSurname());
             constEnum=ConstEnum.LOGIN;
             request.setAttribute(constEnum.getValue(), user.getLogin());
-            constEnum=ConstEnum.PASSWORD;
+            constEnum=ConstEnum.PASSWORD;//TODO ПАРОЛИ!!!
             request.setAttribute(constEnum.getValue(), user.getPassword());
             constEnum=ConstEnum.ROLE;
             request.setAttribute(constEnum.getValue(), user.getRole().getId());
@@ -47,10 +47,10 @@ public class GetUserInfoCommand implements AbstractCommand
             request.setAttribute(constEnum.getValue(), user.getSex().getValue());
             constEnum=ConstEnum.EMAIL;
             request.setAttribute(constEnum.getValue(), user.getEmail());
-            PageEnum pageEnum=PageEnum.USER_PAGE;
-            router.setTarget(pageEnum.getPath());
+            Page page = Page.USER_PAGE;
+            router.setTarget(page.getPath());
 /*                //TODO логгирование
-                PageEnum page=PageEnum.INDEX;
+                Page page=Page.INDEX;
                 router.setTarget(page.getPath());
                 router.setRedirect();
                 session.invalidate();*/

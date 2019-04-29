@@ -9,7 +9,10 @@ public enum CommandEnum
     CHANGE_SURNAME("change_surname"),
     CHANGE_PASSWORD("change_password"),
     CHANGE_EMAIL("change_email"),
-    CHANGE_SEX("change_sex");
+    CHANGE_SEX("change_sex"),
+    GO_BACK("go_back"),
+    REGISTRATION("registration"),
+    GET_REGISTRATION_PAGE("get_registration_page");
 
     private String value;
 

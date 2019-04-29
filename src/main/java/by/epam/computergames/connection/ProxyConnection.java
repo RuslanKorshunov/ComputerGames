@@ -14,6 +14,7 @@ public class ProxyConnection
         try
         {
             connection= DriverManager.getConnection(url, user, password);
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
         }
         catch (SQLException e)
         {

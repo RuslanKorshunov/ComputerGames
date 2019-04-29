@@ -6,11 +6,11 @@ import javax.servlet.http.HttpSession;
 public class LogOutCommand implements AbstractCommand
 {
     @Override
-    public Router execute(HttpServletRequest request)//TODO здесь должен быть уровень логики
+    public Router execute(HttpServletRequest request)
     {
         HttpSession session=request.getSession();
         Router router=new Router();
-        PageEnum page=PageEnum.INDEX;
+        Page page= Page.INDEX;
         router.setTarget(page.getPath());
         router.setRedirect();
         session.invalidate();
