@@ -3,6 +3,7 @@ package by.epam.computergames.dao;
 import by.epam.computergames.command.Table;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Role;
+import by.epam.computergames.entity.Sex;
 import by.epam.computergames.entity.User;
 
 import java.sql.PreparedStatement;
@@ -23,15 +24,20 @@ public class UserDAO extends AbstractDAO<User>
         PreparedStatement statement=null;
         try
         {
-            final String QUERY="SELECT users.password, users.type, userinfo.name, userinfo.surname FROM users JOIN userinfo ON users.login=userinfo.login WHERE users.login='"+login+"'";
+            final String QUERY="select users.login, users.password, " +
+                    "users.type, userinfo.name, " +
+                    "userinfo.surname, userinfo.sex, " +
+                    "userinfo.email " +
+                    "from userinfo join users " +
+                    "on users.login=userinfo.login where users.login='"+login+"'";
             statement=connection.prepareStatement(QUERY);
             ResultSet rs=statement.executeQuery();
             while (rs.next())
             {
                 user.setLogin(login);
-                String password=rs.getString(1);
+                String password=rs.getString(2);
                 user.setPassword(password);
-                switch (rs.getInt(2))
+                switch (rs.getInt(3))
                 {
                     case 1:
                         user.setRole(Role.ADMIN);
@@ -39,13 +45,29 @@ public class UserDAO extends AbstractDAO<User>
                     case 2:
                         user.setRole(Role.USER);
                         break;
-                        default:
-                            throw new DAOException("Data in database has invalid value.");
+                    default:
+                        throw new DAOException("Data in database has invalid value.");
                 }
-                String name=rs.getString(3);
+                String name=rs.getString(4);
                 user.setName(name);
-                String surname=rs.getString(4);
+                String surname=rs.getString(5);
                 user.setSurname(surname);
+                switch (rs.getString(6))
+                {
+                    case "male":
+                        user.setSex(Sex.MALE);
+                        break;
+                    case "female":
+                        user.setSex(Sex.FEMALE);
+                        break;
+                    case "third":
+                        user.setSex(Sex.THIRD);
+                        break;
+                    default:
+                        throw new DAOException("Data in database has invalid value.");
+                }
+                String email=rs.getString(7);
+                user.setEmail(email);
             }
         }
         catch(SQLException e)
@@ -98,6 +120,26 @@ public class UserDAO extends AbstractDAO<User>
             catch (SQLException e)
             {
             }
+        }
+    }
+
+    @Override
+    public void update(String tableName, String column, String newValue, String login) throws DAOException
+    {
+        PreparedStatement statement=null;
+        try
+        {
+            final String QUERY="update "+tableName+" set "+column+"='"+newValue+"' where login='"+login+"'";
+            statement=connection.prepareStatement(QUERY);
+            statement.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+            throw new DAOException("UserDAO can't update data in database due to an internal error.");
+        }
+        finally
+        {
+            closeStatement(statement);
         }
     }
 

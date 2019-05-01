@@ -9,9 +9,5 @@
 </head>
 <body>
     <c:import url="header.jsp"/>
-    <form action="ControlServlet" method="get">
-        <input type="hidden" name="command" value="logout"/>
-        <input type="submit" name="button" value="<fmt:message key="label.logout"/>"/>
-    </form>
 </body>
 </html>

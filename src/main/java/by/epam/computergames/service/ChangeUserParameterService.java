@@ -5,8 +5,8 @@ import by.epam.computergames.command.ConstEnum;
 import by.epam.computergames.command.Table;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.dao.AbstractDAO;
-import by.epam.computergames.dao.ChangeUserParameterDAO;
 import by.epam.computergames.dao.DAOException;
+import by.epam.computergames.dao.UserDAO;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.validator.EmailValidator;
 import by.epam.computergames.validator.NameValidator;
@@ -61,7 +61,7 @@ public class ChangeUserParameterService
                 table=Table.USER_INFO.getValue();
                 break;
         }
-        AbstractDAO dao=new ChangeUserParameterDAO();
+        AbstractDAO dao=new UserDAO();
         dao.update(table, column, newValue, login);
         dao.returnConnection();
     }

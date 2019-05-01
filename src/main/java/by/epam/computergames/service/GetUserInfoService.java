@@ -3,7 +3,7 @@ package by.epam.computergames.service;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.dao.AbstractDAO;
 import by.epam.computergames.dao.DAOException;
-import by.epam.computergames.dao.GetUserInfoDAO;
+import by.epam.computergames.dao.UserDAO;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.User;
 
@@ -20,7 +20,7 @@ public class GetUserInfoService
         }
         else
         {
-            AbstractDAO dao=new GetUserInfoDAO();
+            AbstractDAO dao=new UserDAO();
             user=(User) dao.findBy(login);
             dao.returnConnection();
         }
