@@ -1,8 +1,10 @@
 package by.epam.computergames.command;
 
 import by.epam.computergames.connection.ConnectionException;
+import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.ChangeUserParameterService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,11 +12,11 @@ import javax.servlet.http.HttpSession;
 
 public class ChangeUserParameterCommand implements AbstractCommand
 {
-    private ChangeUserParameterService service;
-
     @Override
     public Router execute(HttpServletRequest request) throws DAOException,
-                                                                ConnectionException
+                                                                ConnectionException,
+                                                                CryptologistException,
+                                                                IncorrectDataException
     {
         Router router;
         HttpSession session=request.getSession();
@@ -55,7 +57,7 @@ public class ChangeUserParameterCommand implements AbstractCommand
                     newValue=request.getParameter(ConstEnum.NEW_EMAIL_FORM.getValue());
             }
 
-            service=new ChangeUserParameterService();
+            AbstractService service=new ChangeUserParameterService();
             service.change(login, command, newValue);
             router=getUserInfoCommand.execute(request);
         }

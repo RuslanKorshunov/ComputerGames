@@ -11,13 +11,16 @@ import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.validator.LoginValidator;
 import by.epam.computergames.validator.PasswordValidator;
 
-public class AuthorizationService
+public class AuthorizationService extends AbstractService<User>
 {
-    public User find(String login, String password) throws IncorrectDataException,
+    @Override
+    public User find(Object ... values) throws IncorrectDataException,
                                                             ConnectionException,
                                                             DAOException,
                                                             CryptologistException
     {
+        String login=(String) values[0];
+        String password=(String) values[1];
         if(!LoginValidator.validate(login))
         {
             throw new IncorrectDataException("login has invalid value.");

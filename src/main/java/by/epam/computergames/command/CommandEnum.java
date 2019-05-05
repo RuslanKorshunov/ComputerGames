@@ -12,7 +12,8 @@ public enum CommandEnum
     CHANGE_SEX("change_sex"),
     GO_BACK("go_back"),
     REGISTRATION("registration"),
-    GET_REGISTRATION_PAGE("get_registration_page");
+    GET_REGISTRATION_PAGE("get_registration_page"),
+    GET_GAMES("get_games");
 
     private String value;
 

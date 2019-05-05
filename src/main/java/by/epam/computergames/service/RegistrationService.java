@@ -10,8 +10,9 @@ import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.validator.*;
 
-public class RegistrationService
+public class RegistrationService extends AbstractService<User>
 {
+    @Override
     public void add(User user) throws IncorrectDataException,
                                         ConnectionException,
                                         DAOException,

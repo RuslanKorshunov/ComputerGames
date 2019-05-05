@@ -5,6 +5,7 @@ import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.AuthorizationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,6 @@ import javax.servlet.http.HttpSession;
 
 public class AuthorizationCommand implements AbstractCommand
 {
-    private AuthorizationService authorizationService;
-
     @Override
     public Router execute(HttpServletRequest request) throws DAOException, ConnectionException
     {
@@ -22,10 +21,10 @@ public class AuthorizationCommand implements AbstractCommand
         String login = request.getParameter(ConstEnum.LOGIN.getValue());
         String password = request.getParameter(ConstEnum.PASSWORD.getValue());
 
-        authorizationService = new AuthorizationService();
+        AbstractService service = new AuthorizationService();
         try
         {
-            User user = authorizationService.find(login, password);
+            User user = (User)service.find(login, password);
             HttpSession session = request.getSession();
             session.setAttribute(ConstEnum.LOGIN.getValue(), login);
             session.setAttribute(ConstEnum.ROLE.getValue(), user.getRole());

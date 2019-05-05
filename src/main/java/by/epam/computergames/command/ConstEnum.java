@@ -14,7 +14,10 @@ public enum ConstEnum
     NEW_PASSWORD_FORM("new_password_form"),
     NEW_SEX_FORM("new_sex_form"),
     NEW_EMAIL_FORM("new_email_form"),
-    COMMAND("command");
+    COMMAND("command"),
+    PAGE("page"),
+    LIST("list"),
+    GAMES("games");
 
     String value;
 

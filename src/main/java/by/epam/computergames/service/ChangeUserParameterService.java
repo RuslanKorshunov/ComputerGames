@@ -7,18 +7,23 @@ import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.dao.AbstractDAO;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.dao.UserDAO;
+import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.validator.EmailValidator;
 import by.epam.computergames.validator.NameValidator;
 import by.epam.computergames.validator.PasswordValidator;
 import by.epam.computergames.validator.SurnameValidator;
 
-public class ChangeUserParameterService
+public class ChangeUserParameterService extends AbstractService<User>
 {
-    public void change(String login, CommandEnum command, String newValue) throws IncorrectDataException,
-                                                                                    ConnectionException,
-                                                                                    DAOException
+    @Override
+    public void change(Object ... values) throws IncorrectDataException,
+                                            ConnectionException,
+                                            DAOException
     {
+        String login=(String) values[0];
+        CommandEnum command=(CommandEnum) values[1];
+        String newValue=(String) values[2];
         String column=null;
         String table=null;
 

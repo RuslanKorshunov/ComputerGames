@@ -1,9 +1,12 @@
 package by.epam.computergames.command;
 
 import by.epam.computergames.connection.ConnectionException;
+import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.User;
+import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.GetUserInfoService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +14,11 @@ import javax.servlet.http.HttpSession;
 
 public class GetUserInfoCommand implements AbstractCommand
 {
-    private GetUserInfoService service;
-
     @Override
-    public Router execute(HttpServletRequest request) throws ConnectionException, DAOException
+    public Router execute(HttpServletRequest request) throws ConnectionException,
+                                                            DAOException,
+                                                            IncorrectDataException,
+                                                            CryptologistException
     {
         Router router=new Router();
 
@@ -31,8 +35,8 @@ public class GetUserInfoCommand implements AbstractCommand
         }
         else
         {
-            service=new GetUserInfoService();
-            User user=service.find(login, role);
+            AbstractService service=new GetUserInfoService();
+            User user=(User) service.find(login, role);
             constEnum=ConstEnum.NAME;
             request.setAttribute(constEnum.getValue(), user.getName());
             constEnum=ConstEnum.SURNAME;

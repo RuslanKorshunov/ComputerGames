@@ -7,11 +7,14 @@ import by.epam.computergames.dao.UserDAO;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.User;
 
-public class GetUserInfoService
+public class GetUserInfoService extends AbstractService<User>
 {
-    public User find(String login, Role role) throws ConnectionException,
+    @Override
+    public User find(Object ... values) throws ConnectionException,
                                                         DAOException
     {
+        String login=(String) values[0];
+        Role role=(Role) values[1];
         User user=new User();
         user.setLogin(login);
         if(role == Role.GUEST)

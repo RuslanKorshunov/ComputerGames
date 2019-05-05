@@ -10,7 +10,7 @@ public class LogOutCommand implements AbstractCommand
     {
         HttpSession session=request.getSession();
         Router router=new Router();
-        Page page= Page.INDEX;
+        Page page=Page.INDEX;
         router.setTarget(page.getPath());
         router.setRedirect();
         session.invalidate();

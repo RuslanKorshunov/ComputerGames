@@ -38,6 +38,9 @@ public class CommandProvider
                 case GET_REGISTRATION_PAGE:
                     command=new GetRegistrationPageCommand();
                     break;
+                case GET_GAMES:
+                    command=new SearchGamesCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

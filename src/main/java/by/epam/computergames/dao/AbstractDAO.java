@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public abstract class AbstractDAO<T>
 {
@@ -21,6 +22,11 @@ public abstract class AbstractDAO<T>
     }
 
     public T findBy(String id) throws DAOException
+    {
+        return null;
+    }
+
+    public List<T> find(int idFirst, int size) throws DAOException
     {
         return null;
     }

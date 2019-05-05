@@ -6,6 +6,7 @@ import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.entity.Sex;
 import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.RegistrationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +46,7 @@ public class RegistrationCommand implements AbstractCommand
                 throw new IncorrectDataException("Sex has invalid value.");
             }
 
-            RegistrationService service=new RegistrationService();
+            AbstractService service=new RegistrationService();
             service.add(user);
             Page page=Page.MAIN_PAGE;
             router.setTarget(page.getPath());

@@ -5,6 +5,7 @@ import by.epam.computergames.command.CommandProvider;
 import by.epam.computergames.command.ConstEnum;
 import by.epam.computergames.command.Router;
 import by.epam.computergames.connection.ConnectionException;
+import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
 
@@ -25,7 +26,7 @@ public class ControlServlet extends HttpServlet
         {
             processRequest(request ,response);
         }
-        catch (ConnectionException|IncorrectDataException|DAOException e)
+        catch (ConnectionException|IncorrectDataException|DAOException|CryptologistException e)
         {
             System.out.println(e);
         }
@@ -38,7 +39,7 @@ public class ControlServlet extends HttpServlet
         {
             processRequest(request ,response);
         }
-        catch (ConnectionException|IncorrectDataException|DAOException e)
+        catch (ConnectionException|IncorrectDataException|DAOException|CryptologistException e)
         {
             System.out.println(e);
         }
@@ -48,7 +49,8 @@ public class ControlServlet extends HttpServlet
                                                                                                     IOException,
                                                                                                     ServletException,
                                                                                                     IncorrectDataException,
-                                                                                                    DAOException
+                                                                                                    DAOException,
+                                                                                                    CryptologistException
     {
         CommandProvider commandProvider=new CommandProvider();
         String commandName=request.getParameter(ConstEnum.COMMAND.getValue());
