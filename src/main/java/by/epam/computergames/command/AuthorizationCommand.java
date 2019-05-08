@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class AuthorizationCommand implements AbstractCommand
 {
     @Override
-    public Router execute(HttpServletRequest request) throws DAOException, ConnectionException
+    public Router execute(HttpServletRequest request)
     {
         Router router = new Router();
 
@@ -33,7 +33,7 @@ public class AuthorizationCommand implements AbstractCommand
             Page page = Page.MAIN_PAGE;
             router.setTarget(page.getPath());
         }
-        catch (IncorrectDataException|CryptologistException e)
+        catch (IncorrectDataException|CryptologistException|DAOException|ConnectionException e)
         {
             Page page = Page.LOGIN_PAGE;
             router.setTarget(page.getPath());

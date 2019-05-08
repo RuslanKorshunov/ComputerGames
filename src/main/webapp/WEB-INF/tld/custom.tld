@@ -10,14 +10,27 @@
     <uri>CustomTags</uri>
 
     <tag>
-        <name>gamesTag</name>
-        <tag-class>by.epam.computergames.tag.GameTag</tag-class>
+        <name>pictureTag</name>
+        <tag-class>by.epam.computergames.tag.PictureTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
-            <name>pictures</name>
+            <name>deliveries</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.util.List</type>
         </attribute>
     </tag>
+
+    <tag>
+        <name>genreTag</name>
+        <tag-class>by.epam.computergames.tag.GenreTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>idGenre</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+    </tag>
+
 </taglib>

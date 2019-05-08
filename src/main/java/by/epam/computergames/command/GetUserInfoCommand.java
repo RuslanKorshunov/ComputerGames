@@ -15,10 +15,7 @@ import javax.servlet.http.HttpSession;
 public class GetUserInfoCommand implements AbstractCommand
 {
     @Override
-    public Router execute(HttpServletRequest request) throws ConnectionException,
-                                                            DAOException,
-                                                            IncorrectDataException,
-                                                            CryptologistException
+    public Router execute(HttpServletRequest request)
     {
         Router router=new Router();
 
@@ -35,29 +32,33 @@ public class GetUserInfoCommand implements AbstractCommand
         }
         else
         {
-            AbstractService service=new GetUserInfoService();
-            User user=(User) service.find(login, role);
-            constEnum=ConstEnum.NAME;
-            request.setAttribute(constEnum.getValue(), user.getName());
-            constEnum=ConstEnum.SURNAME;
-            request.setAttribute(constEnum.getValue(), user.getSurname());
-            constEnum=ConstEnum.LOGIN;
-            request.setAttribute(constEnum.getValue(), user.getLogin());
-            constEnum=ConstEnum.PASSWORD;//TODO ПАРОЛИ!!!
-            request.setAttribute(constEnum.getValue(), user.getPassword());
-            constEnum=ConstEnum.ROLE;
-            request.setAttribute(constEnum.getValue(), user.getRole().getId());
-            constEnum=ConstEnum.SEX;
-            request.setAttribute(constEnum.getValue(), user.getSex().getValue());
-            constEnum=ConstEnum.EMAIL;
-            request.setAttribute(constEnum.getValue(), user.getEmail());
-            Page page = Page.USER_PAGE;
-            router.setTarget(page.getPath());
-/*                //TODO логгирование
-                Page page=Page.INDEX;
+            try
+            {
+                AbstractService service=new GetUserInfoService();
+                User user=(User) service.find(login, role);
+                constEnum=ConstEnum.NAME;
+                request.setAttribute(constEnum.getValue(), user.getName());
+                constEnum=ConstEnum.SURNAME;
+                request.setAttribute(constEnum.getValue(), user.getSurname());
+                constEnum=ConstEnum.LOGIN;
+                request.setAttribute(constEnum.getValue(), user.getLogin());
+                constEnum=ConstEnum.PASSWORD;//TODO ПАРОЛИ!!!
+                request.setAttribute(constEnum.getValue(), user.getPassword());
+                constEnum=ConstEnum.ROLE;
+                request.setAttribute(constEnum.getValue(), user.getRole().getId());
+                constEnum=ConstEnum.SEX;
+                request.setAttribute(constEnum.getValue(), user.getSex().getValue());
+                constEnum=ConstEnum.EMAIL;
+                request.setAttribute(constEnum.getValue(), user.getEmail());
+                Page page = Page.USER_PAGE;
                 router.setTarget(page.getPath());
-                router.setRedirect();
-                session.invalidate();*/
+            }
+            catch (ConnectionException|DAOException|IncorrectDataException|CryptologistException e)
+            {
+                Page page=Page.MAIN_PAGE;
+                router.setTarget(page.getPath());
+            }
+
         }
 
         return router;

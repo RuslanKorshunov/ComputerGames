@@ -1,7 +1,6 @@
 package by.epam.computergames.command;
 
 import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
@@ -13,14 +12,11 @@ import javax.servlet.http.HttpSession;
 public class ChangeUserParameterCommand implements AbstractCommand
 {
     @Override
-    public Router execute(HttpServletRequest request) throws DAOException,
-                                                                ConnectionException,
-                                                                CryptologistException,
-                                                                IncorrectDataException
+    public Router execute(HttpServletRequest request)
     {
         Router router;
         HttpSession session=request.getSession();
-        AbstractCommand getUserInfoCommand=new GetUserInfoCommand();
+        GetUserInfoCommand getUserInfoCommand=new GetUserInfoCommand();
         try
         {
             String login=(String) session.getAttribute(ConstEnum.LOGIN.getValue());
@@ -61,8 +57,9 @@ public class ChangeUserParameterCommand implements AbstractCommand
             service.change(login, command, newValue);
             router=getUserInfoCommand.execute(request);
         }
-        catch (IncorrectDataException e)
+        catch (IncorrectDataException|DAOException|ConnectionException e)
         {
+            //todo лог
             router=getUserInfoCommand.execute(request);
         }
 

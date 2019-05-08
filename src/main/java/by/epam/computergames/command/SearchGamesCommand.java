@@ -1,11 +1,11 @@
 package by.epam.computergames.command;
 
 import by.epam.computergames.entity.Game;
+import by.epam.computergames.entity.PictureDelivery;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.SearchGamesService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,25 +22,32 @@ public class SearchGamesCommand implements AbstractCommand
         try
         {
             List<Game> games=service.findEntities(page);
-            List<String> pictures=new ArrayList<>();
+            List<PictureDelivery> deliveries=new ArrayList<>();
             games.forEach(game ->
             {
-                System.out.println(game);
-                pictures.add(game.getPicture());
+                //TODO вынести в отдельный класс???
+                PictureDelivery delivery=new PictureDelivery();
+                long id=game.getIdGame();
+                delivery.setId(id);
+                String picture=game.getPicture();
+                delivery.setPicture(picture);
+                deliveries.add(delivery);
             });
             request.setAttribute(ConstEnum.LIST.getValue(), ConstEnum.GAMES.getValue());
-            request.setAttribute(ConstEnum.GAMES.getValue(), pictures);
+            request.setAttribute(ConstEnum.GAMES.getValue(), deliveries);
             Page pageMain=Page.MAIN_PAGE;
             router.setTarget(pageMain.getPath());
         }
         catch (Exception e)
         {
             //TODO log
-            HttpSession session=request.getSession();
+            /*HttpSession session=request.getSession();
             Page pageIndex=Page.INDEX;
             router.setTarget(pageIndex.getPath());
             router.setRedirect();
-            session.invalidate();
+            session.invalidate();*/
+            Page pageMain=Page.MAIN_PAGE;
+            router.setTarget(pageMain.getPath());
         }
 
         return router;

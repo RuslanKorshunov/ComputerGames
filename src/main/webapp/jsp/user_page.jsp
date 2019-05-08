@@ -77,7 +77,7 @@
     </form>
     <form action="ControlServlet" method="get">
         <input type="submit" name="button" value="<fmt:message key="label.go_back"/>">
-        <input type="hidden" name="command" value="go_back">
+        <input type="hidden" name="command" value="get_main_page">
     </form>
 </body>
 </html>

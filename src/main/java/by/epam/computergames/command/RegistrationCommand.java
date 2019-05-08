@@ -59,11 +59,13 @@ public class RegistrationCommand implements AbstractCommand
         }
         catch (IncorrectDataException|DAOException e)
         {
+            System.out.println(e);
             //todo лог
             router.setTarget(Page.REGISTRATION_PAGE.getPath());
         }
         catch (ConnectionException|CryptologistException e)
         {
+            System.out.println(e);
             //TODO мне кажется, лучше перенаправлять на главное окно с правами гостя
             //todo лог
             router.setTarget(Page.LOGIN_PAGE.getPath());

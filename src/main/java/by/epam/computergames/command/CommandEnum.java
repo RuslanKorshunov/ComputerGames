@@ -10,10 +10,11 @@ public enum CommandEnum
     CHANGE_PASSWORD("change_password"),
     CHANGE_EMAIL("change_email"),
     CHANGE_SEX("change_sex"),
-    GO_BACK("go_back"),
+    GET_MAIN_PAGE("get_main_page"),
     REGISTRATION("registration"),
     GET_REGISTRATION_PAGE("get_registration_page"),
-    GET_GAMES("get_games");
+    GET_GAMES("get_games"),
+    GET_GAME("get_game");
 
     private String value;
 

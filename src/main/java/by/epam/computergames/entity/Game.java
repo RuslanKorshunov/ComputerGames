@@ -2,8 +2,6 @@ package by.epam.computergames.entity;
 
 import by.epam.computergames.exception.IncorrectDataException;
 
-import java.io.File;
-
 public class Game
 {
     private static final String PATH="webapp/img/";
@@ -58,15 +56,16 @@ public class Game
 
     public void setPicture(String picture)
     {
-        File file=new File(PATH+picture);
+        //TODO сделать проверку на наличие картинки
+/*        File file=new File(PATH+picture);
         if(file.exists())
-        {
+        {*/
             this.picture = picture;
-        }
+/*        }
         else
         {
             this.picture=NOT_FOUND;
-        }
+        }*/
     }
 
     @Override

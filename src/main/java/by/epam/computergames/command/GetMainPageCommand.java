@@ -2,7 +2,7 @@ package by.epam.computergames.command;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class GoBackCommand implements AbstractCommand
+public class GetMainPageCommand implements AbstractCommand
 {
     @Override
     public Router execute(HttpServletRequest request)

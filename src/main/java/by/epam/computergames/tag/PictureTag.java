@@ -1,18 +1,20 @@
 package by.epam.computergames.tag;
 
+import by.epam.computergames.entity.PictureDelivery;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class AbstractTag extends TagSupport
+public class PictureTag extends TagSupport
 {
-    protected List<String> pictures;
+    private List<PictureDelivery> deliveries;
 
-    public void setPictures(List<String> pictures)
+    public void setDeliveries(List<PictureDelivery> deliveries)
     {
-        this.pictures=pictures;
+        this.deliveries = deliveries;
     }
 
     @Override
@@ -23,22 +25,23 @@ public abstract class AbstractTag extends TagSupport
             JspWriter writer=pageContext.getOut();
             String contextPath=pageContext.getServletContext().getContextPath();
 
-            writer.write("<div class=\"gallery-section\">");
+            /*writer.write("<div class=\"gallery-section\">");
             writer.write("<div class=\"inner-width\">");
             writer.write("<h1>MyGallery</h1>");
             writer.write("<div class=\"border\"></div>");
-            writer.write("<div class=\"gallery\">");
-            for (int index = 0; index < 8; index++)
+            writer.write("<div class=\"gallery\">");*/
+            for(PictureDelivery delivery: deliveries)
             {
-                for(String picture: pictures)
-                {
-                    String path=contextPath+"/img/"+picture;
-                    writer.write("<a href=\"#\" class=\"image\">");
-                    writer.write("<img src=\""+path+"\"/></a>");
-                    index++;
-                }
+                String path=contextPath+"/img/"+delivery.getPicture();
+                String command="ControlServlet?command="+delivery.getCommand().getValue()+"&id="+delivery.getId();
+                writer.write("<a href=\""+command+"\" class=\"image\">");
+                writer.write("<img src=\""+path+"\"/></a>");
+            }
+            for (int index = 0; index < 8- deliveries.size(); index++)
+            {
                 writer.write("<a href=\"#\" class=\"image\">");
-                writer.write("<img src=\""+contextPath+"/img/not_found.png\"/></a>");
+                writer.write("<img src=\""+contextPath+"/img/not_found.png\"/>");
+                writer.write("</a>");
             }
         }
         catch(IOException e)
@@ -48,7 +51,7 @@ public abstract class AbstractTag extends TagSupport
         return SKIP_BODY;
     }
 
-    @Override
+    /*@Override
     public int doEndTag() throws JspException
     {
         try
@@ -63,5 +66,5 @@ public abstract class AbstractTag extends TagSupport
             //TODO добавить лог
         }
         return EVAL_PAGE;
-    }
+    }*/
 }

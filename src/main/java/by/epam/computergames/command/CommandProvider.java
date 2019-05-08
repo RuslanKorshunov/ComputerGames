@@ -29,8 +29,8 @@ public class CommandProvider
                 case CHANGE_SEX:
                     command=new ChangeUserParameterCommand();
                     break;
-                case GO_BACK:
-                    command=new GoBackCommand();
+                case GET_MAIN_PAGE:
+                    command=new GetMainPageCommand();
                     break;
                 case REGISTRATION:
                     command=new RegistrationCommand();
@@ -40,6 +40,9 @@ public class CommandProvider
                     break;
                 case GET_GAMES:
                     command=new SearchGamesCommand();
+                    break;
+                case GET_GAME:
+                    command=new GetGameCommand();
                     break;
             }
         }

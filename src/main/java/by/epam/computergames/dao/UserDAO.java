@@ -84,12 +84,12 @@ public class UserDAO extends AbstractDAO<User>
     @Override
     public void create(User user) throws DAOException
     {
-        PreparedStatement statement=null;
+        PreparedStatement statement;
         try
         {
             connection.setAutoCommit(false);
             String query="INSERT INTO "+ Table.USERS.getValue() +" VALUES" +
-                    "('"+user.getLogin()+"', '"+user.getPassword()+"', '"+Role.USER.getId()+"')";
+                    "('"+user.getLogin()+"', \""+user.getPassword()+"\", "+Role.USER.getId()+")";
             statement=connection.prepareStatement(query);
             statement.executeUpdate();
             query="INSERT INTO "+Table.USER_INFO.getValue()+" VALUES" +
@@ -101,6 +101,7 @@ public class UserDAO extends AbstractDAO<User>
         }
         catch (SQLException e)
         {
+
             try
             {
                 connection.rollback();
@@ -108,6 +109,7 @@ public class UserDAO extends AbstractDAO<User>
             catch (SQLException eSQL)
             {
                 //todo логгирование
+                System.out.println(e);
             }
             throw new  DAOException("UserDAO can't get data from database due to an internal error.");
         }
@@ -119,6 +121,8 @@ public class UserDAO extends AbstractDAO<User>
             }
             catch (SQLException e)
             {
+                //todo log
+                System.out.println(e);
             }
         }
     }
@@ -135,6 +139,7 @@ public class UserDAO extends AbstractDAO<User>
         }
         catch(SQLException e)
         {
+            //todo log
             throw new DAOException("UserDAO can't update data in database due to an internal error.");
         }
         finally

@@ -17,7 +17,12 @@ public enum ConstEnum
     COMMAND("command"),
     PAGE("page"),
     LIST("list"),
-    GAMES("games");
+    GAMES("games"),
+    ID("id"),
+    GAME_NAME("game_name"),
+    GENRE("genre"),
+    DEVELOPER("developer"),
+    PICTURE("picture");
 
     String value;
 
