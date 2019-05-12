@@ -26,16 +26,21 @@ public abstract class AbstractDAO<T>
         return null;
     }
 
-    public List<T> find(int idFirst, int size) throws DAOException
+    public List<T> find(long idFirst, int size) throws DAOException
     {
         return null;
     }
 
     public void update(String tableName, String column, String newValue, String id) throws DAOException
-    { }
+    {}
 
     public void create(T entity) throws DAOException
     {}
+
+    public double findAverageValue(long id) throws DAOException
+    {
+        return 0;
+    }
 
     public void returnConnection() throws ConnectionException
     {

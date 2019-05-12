@@ -22,7 +22,10 @@ public enum ConstEnum
     GAME_NAME("game_name"),
     GENRE("genre"),
     DEVELOPER("developer"),
-    PICTURE("picture");
+    PICTURE("picture"),
+    STAR_FORM("star_form"),
+    RATING("rating"),
+    YEAR("year");
 
     String value;
 

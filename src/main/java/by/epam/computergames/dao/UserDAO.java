@@ -84,7 +84,7 @@ public class UserDAO extends AbstractDAO<User>
     @Override
     public void create(User user) throws DAOException
     {
-        PreparedStatement statement;
+        PreparedStatement statement=null;
         try
         {
             connection.setAutoCommit(false);
@@ -124,6 +124,7 @@ public class UserDAO extends AbstractDAO<User>
                 //todo log
                 System.out.println(e);
             }
+            closeStatement(statement);
         }
     }
 

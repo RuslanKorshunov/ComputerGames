@@ -43,8 +43,18 @@ public class RegistrationService extends AbstractService<User>
         String password=cryptologist.makeAs(user.getPassword());
         user.setPassword(password);
 
-        AbstractDAO dao=new UserDAO();
-        dao.create(user);
-        dao.returnConnection();
+        AbstractDAO dao=null;
+        try
+        {
+            dao=new UserDAO();
+            dao.create(user);
+        }
+        finally
+        {
+            if(dao!=null)
+            {
+                dao.returnConnection();
+            }
+        }
     }
 }

@@ -44,6 +44,9 @@ public class CommandProvider
                 case GET_GAME:
                     command=new GetGameCommand();
                     break;
+                case RATE_GAME:
+                    command=new RateGameCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

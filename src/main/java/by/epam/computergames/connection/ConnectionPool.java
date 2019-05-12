@@ -44,7 +44,7 @@ public class ConnectionPool
         try
         {
             connection=instance.connectionsFree.take();
-            instance.connectionsUses.remove(connection);
+            instance.connectionsUses.add(connection);
         }
         catch (InterruptedException e)
         {

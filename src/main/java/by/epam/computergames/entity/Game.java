@@ -12,6 +12,7 @@ public class Game
     private Genre genre;
     private String developer;
     private String picture;
+    private int year;
 
     public long getIdGame() {
         return idGame;
@@ -66,6 +67,14 @@ public class Game
         {
             this.picture=NOT_FOUND;
         }*/
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     @Override

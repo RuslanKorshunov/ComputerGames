@@ -14,7 +14,8 @@ public enum CommandEnum
     REGISTRATION("registration"),
     GET_REGISTRATION_PAGE("get_registration_page"),
     GET_GAMES("get_games"),
-    GET_GAME("get_game");
+    GET_GAME("get_game"),
+    RATE_GAME("rate_game");
 
     private String value;
 

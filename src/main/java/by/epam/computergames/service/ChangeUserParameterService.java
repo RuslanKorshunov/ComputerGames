@@ -66,8 +66,18 @@ public class ChangeUserParameterService extends AbstractService<User>
                 table=Table.USER_INFO.getValue();
                 break;
         }
-        AbstractDAO dao=new UserDAO();
-        dao.update(table, column, newValue, login);
-        dao.returnConnection();
+        AbstractDAO dao=null;
+        try
+        {
+            dao=new UserDAO();
+            dao.update(table, column, newValue, login);
+        }
+        finally
+        {
+            if(dao!=null)
+            {
+                dao.returnConnection();
+            }
+        }
     }
 }

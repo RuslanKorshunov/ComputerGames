@@ -18,7 +18,7 @@ public class GameDAO extends AbstractDAO<Game>
     }
 
     @Override
-    public List<Game> find(int idFirst, int size) throws DAOException
+    public List<Game> find(long idFirst, int size) throws DAOException
     {
         PreparedStatement statement=null;
         List<Game> games;
@@ -26,7 +26,7 @@ public class GameDAO extends AbstractDAO<Game>
         {
             final String QUERY="select games.idGame, games.name, " +
                     "games.idGenre, developers.developer, " +
-                    "games.picture from games " +
+                    "games.picture, games.year from games " +
                     "join developers on games.idDeveloper=developers.idDeveloper " +
                     "limit "+idFirst+", "+size;
             statement=connection.prepareStatement(QUERY);
@@ -45,6 +45,8 @@ public class GameDAO extends AbstractDAO<Game>
                 game.setDeveloper(developer);
                 String picture=rs.getString(5);
                 game.setPicture(picture);
+                int year=rs.getInt(6);
+                game.setYear(year);
                 games.add(game);
             }
         }

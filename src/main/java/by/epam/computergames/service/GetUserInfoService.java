@@ -23,9 +23,19 @@ public class GetUserInfoService extends AbstractService<User>
         }
         else
         {
-            AbstractDAO dao=new UserDAO();
-            user=(User) dao.findBy(login);
-            dao.returnConnection();
+            AbstractDAO dao=null;
+            try
+            {
+                dao=new UserDAO();
+                user=(User)dao.findBy(login);
+            }
+            finally
+            {
+                if(dao!=null)
+                {
+                    dao.returnConnection();
+                }
+            }
         }
         return user;
     }

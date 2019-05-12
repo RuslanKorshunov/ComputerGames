@@ -29,9 +29,22 @@ public class AuthorizationService extends AbstractService<User>
         {
             throw new IncorrectDataException("password has invalid value.");
         }
-        AbstractDAO dao=new UserDAO();
-        User user=(User)dao.findBy(login);
-        dao.returnConnection();
+
+        User user;
+        AbstractDAO dao=null;
+        try
+        {
+            dao=new UserDAO();
+            user=(User)dao.findBy(login);
+        }
+        finally
+        {
+            if(dao!=null)
+            {
+                dao.returnConnection();
+            }
+        }
+
 
         AESCryptologist cryptologist=new AESCryptologist();
         password=cryptologist.makeAs(password);

@@ -22,9 +22,20 @@ public class SearchGamesService extends AbstractService<Game>
         int page=(Integer) values[0];
         int idFirst=page*NUMBER_OF_ENTITIES;
         //TODO вернуться к проверке на наличие
-        AbstractDAO dao=new GameDAO();
-        List<Game> games=dao.find(idFirst, NUMBER_OF_ENTITIES);
-        dao.returnConnection();
+        AbstractDAO dao=null;
+        List<Game> games;
+        try
+        {
+            dao=new GameDAO();
+            games=dao.find(idFirst, NUMBER_OF_ENTITIES);
+        }
+        finally
+        {
+            if(dao!=null)
+            {
+                dao.returnConnection();
+            }
+        }
 
         GameWarehouse warehouse=GameWarehouse.getInstance();
         for(Game game:games)

@@ -2,7 +2,8 @@ package by.epam.computergames.command;
 
 import by.epam.computergames.entity.Game;
 import by.epam.computergames.entity.Genre;
-import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.service.AbstractService;
+import by.epam.computergames.service.FindAverageRatingService;
 import by.epam.computergames.warehouse.GameWarehouse;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,10 +31,16 @@ public class GetGameCommand implements AbstractCommand
             request.setAttribute(ConstEnum.GENRE.getValue(), genreValue);
             String picture=request.getContextPath()+"/img/"+game.getPicture();
             request.setAttribute(ConstEnum.PICTURE.getValue(), picture);
+            request.setAttribute(ConstEnum.ID.getValue(), idGame);
+            AbstractService service =new FindAverageRatingService();
+            double rating=(double)service.find(idGame);
+            request.setAttribute(ConstEnum.RATING.getValue(), rating);
+            int year=game.getYear();
+            request.setAttribute(ConstEnum.YEAR.getValue(), year);
             Page page=Page.GAME_PAGE;
             router.setTarget(page.getPath());
         }
-        catch (IncorrectDataException e)
+        catch (Exception e)
         {
             //TODO log
             Page page=Page.MAIN_PAGE;

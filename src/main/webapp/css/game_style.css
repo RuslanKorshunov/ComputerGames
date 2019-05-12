@@ -1,0 +1,120 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #f1f1f1;
+    font-family: "montserrat",sans-serif;
+}
+.card{
+    width: 600px;
+    background: rgba(255, 255, 255, 0);
+    overflow: hidden;
+    font-family: "montserrat",sans-serif;
+    box-shadow: 0 0 20px #00000070;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.card .top-section{
+    position: absolute;
+    padding: 20px;
+}
+.card .top-section img{
+    width: 250px;
+    height: 250px;
+}
+
+.card .info-section{
+    position: relative;
+    left: 290px;
+    width: 45%;
+    padding-top: 0;
+    color: #333;
+}
+
+/*.card .about-section{
+    position: relative;
+    padding-top: 60px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 180;
+    color: #333;
+}*/
+.card .about-section{
+    position: relative;
+    padding-top: 60px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 80px;
+    color: #333;
+}
+.card h2{
+    position: relative;
+    top: 30px;
+}
+.card p{
+    position: relative;
+    text-align: justify;
+    top: 30px;
+    bottom: 10px;
+}
+/*.card h2{
+    position: relative;
+    top: 10px;
+    bottom: 700px;
+    font-size: 16px;
+}
+.card .border{
+    width: 30px;
+    height: 3px;
+    background: #333;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+}
+.card p{
+    text-align: justify;
+    font-size: 14px;
+    top: 100%;
+    bottom: 10px;
+}*/
+.rating{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%)rotateY(180deg);
+    display: flex;
+}
+.rating input{
+    display: none;
+}
+.rating label{
+    display: block;
+    cursor: pointer;
+    width: 25px;
+}
+.rating label:before{
+    content: '\f005';
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 26px;
+    color: #101010;
+}
+.rating label:after{
+    content: '\f005';
+    font-family: fontAwesome;
+    position: absolute;
+    display: block;
+    font-size: 26px;
+    color: #1abc9c;
+    top: 0;
+    opacity: 0;
+    transition: .5s;
+    text-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after{
+    opacity: 1;
+}
