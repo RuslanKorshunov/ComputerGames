@@ -18,7 +18,7 @@ public class ProxyConnection
         }
         catch (SQLException e)
         {
-            throw new ConnectionException("Connection couldn't be created.");
+            throw new ConnectionException("Connection couldn't be created.", e);
         }
     }
 

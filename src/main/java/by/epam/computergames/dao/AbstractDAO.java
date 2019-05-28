@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class AbstractDAO<T>
 {
-    private static final Logger logger= LogManager.getLogger(AbstractDAO.class);
+    private static final Logger logger=LogManager.getLogger(AbstractDAO.class);
 
     protected ProxyConnection connection;
 
@@ -21,26 +21,15 @@ public abstract class AbstractDAO<T>
         this.connection=ConnectionPool.getInstance().getConnection();
     }
 
-    public T findBy(String id) throws DAOException
-    {
-        return null;
-    }
+    public abstract T findBy(String id) throws DAOException;
 
-    public List<T> find(long idFirst, int size) throws DAOException
-    {
-        return null;
-    }
+    public abstract List<T> find(long idFirst, int size) throws DAOException;
 
-    public void update(String tableName, String column, String newValue, String id) throws DAOException
-    {}
+    public abstract void update(String tableName, String column, String newValue, String id) throws DAOException;
 
-    public void create(T entity) throws DAOException
-    {}
+    public abstract void create(T entity) throws DAOException;
 
-    public double findAverageValue(long id) throws DAOException
-    {
-        return 0;
-    }
+    public abstract double findAverageValue(long id) throws DAOException;
 
     public void returnConnection() throws ConnectionException
     {
@@ -57,7 +46,7 @@ public abstract class AbstractDAO<T>
             }
             catch (SQLException e)
             {
-                logger.warn("statement couldn't be closed.");
+                logger.warn("statement couldn't be closed.", e);
             }
         }
     }

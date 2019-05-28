@@ -20,10 +20,8 @@ public class GetUserInfoCommand implements AbstractCommand
         Router router=new Router();
 
         HttpSession session=request.getSession();
-        ConstEnum constEnum = ConstEnum.LOGIN;
-        String login = (String) session.getAttribute(constEnum.getValue());
-        constEnum = ConstEnum.ROLE;
-        Role role = (Role) session.getAttribute(constEnum.getValue());
+        String login = (String) session.getAttribute(ConstEnum.LOGIN.getValue());
+        Role role = (Role) session.getAttribute(ConstEnum.ROLE.getValue());
 
         if(role==Role.GUEST)
         {
@@ -36,20 +34,11 @@ public class GetUserInfoCommand implements AbstractCommand
             {
                 AbstractService service=new GetUserInfoService();
                 User user=(User) service.find(login, role);
-                constEnum=ConstEnum.NAME;
-                request.setAttribute(constEnum.getValue(), user.getName());
-                constEnum=ConstEnum.SURNAME;
-                request.setAttribute(constEnum.getValue(), user.getSurname());
-                constEnum=ConstEnum.LOGIN;
-                request.setAttribute(constEnum.getValue(), user.getLogin());
-                constEnum=ConstEnum.PASSWORD;//TODO ПАРОЛИ!!!
-                request.setAttribute(constEnum.getValue(), user.getPassword());
-                constEnum=ConstEnum.ROLE;
-                request.setAttribute(constEnum.getValue(), user.getRole().getId());
-                constEnum=ConstEnum.SEX;
-                request.setAttribute(constEnum.getValue(), user.getSex().getValue());
-                constEnum=ConstEnum.EMAIL;
-                request.setAttribute(constEnum.getValue(), user.getEmail());
+                request.setAttribute(ConstEnum.NAME.getValue(), user.getName());
+                request.setAttribute(ConstEnum.SURNAME.getValue(), user.getSurname());
+                request.setAttribute(ConstEnum.LOGIN.getValue(), user.getLogin());
+                request.setAttribute(ConstEnum.SEX.getValue(), user.getSex().getValue());
+                request.setAttribute(ConstEnum.EMAIL.getValue(), user.getEmail());
                 Page page = Page.USER_PAGE;
                 router.setTarget(page.getPath());
             }
@@ -58,7 +47,6 @@ public class GetUserInfoCommand implements AbstractCommand
                 Page page=Page.MAIN_PAGE;
                 router.setTarget(page.getPath());
             }
-
         }
 
         return router;

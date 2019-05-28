@@ -1,8 +1,12 @@
 package by.epam.computergames.cryptologist;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -11,7 +15,8 @@ public class AESCryptologist
 {
     private static final String ALGORITHM="AES";
     private static final String ENCODING="UTF-8";
-    private static final String BLA_BLA_BLA="SHA-1";//todo ЧТО ЭТО?
+    private static final int LENGTH=16;
+    private static final String SHA ="SHA-1";
     private static final String SALT="je34h45hf4jqwqji4389nj";
 
     public String makeAs(String text) throws CryptologistException
@@ -25,10 +30,14 @@ public class AESCryptologist
             byte[]output=cipher.doFinal(text.getBytes());
             result=new String(output, ENCODING);
         }
-        catch(Exception e)
+        catch (UnsupportedEncodingException|
+                NoSuchAlgorithmException|
+                NoSuchPaddingException|
+                InvalidKeyException|
+                IllegalBlockSizeException|
+                BadPaddingException e)
         {
-            throw new CryptologistException("AESCryptologist couldn't "+
-                    "encrypt text because "+e+".");//TODO правильно ли записывать ошибку в новую ошибку
+            throw new CryptologistException("AESCryptologist couldn't encrypt text", e);
         }
         return result;
     }
@@ -37,9 +46,9 @@ public class AESCryptologist
                                                                     NoSuchAlgorithmException
     {
         byte[] key=(SALT+text).getBytes(ENCODING);
-        MessageDigest sha=MessageDigest.getInstance(BLA_BLA_BLA);
+        MessageDigest sha=MessageDigest.getInstance(SHA);
         key=sha.digest(key);
-        key= Arrays.copyOf(key, 16);//todo вынести 16
+        key= Arrays.copyOf(key, LENGTH);
 
         return new SecretKeySpec(key, ALGORITHM);
     }

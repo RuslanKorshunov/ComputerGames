@@ -1,7 +1,6 @@
 package by.epam.computergames.service;
 
 import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.AbstractDAO;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.dao.MarkDAO;

@@ -1,6 +1,5 @@
 package by.epam.computergames.dao;
 
-import by.epam.computergames.command.Table;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.Sex;
@@ -9,9 +8,19 @@ import by.epam.computergames.entity.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDAO extends AbstractDAO<User>
 {
+    private static final String SELECT_USER_BY_LOGIN_QUERY ="select users.login, users.password, " +
+                                                            "users.type, userinfo.name, " +
+                                                            "userinfo.surname, userinfo.sex, " +
+                                                            "userinfo.email " +
+                                                            "from userinfo join users " +
+                                                            "on users.login=userinfo.login where users.login=?";
+    private static final String INSERT_INTO_USERS_QUERY="insert into users values (?, ?, ?)";
+    private static final String INSERT_INTO_USERINFO_QUERY="insert into userinfo values (?, ?, ?, ?, ?)";
+
     public UserDAO() throws ConnectionException
     {
         super();
@@ -24,13 +33,8 @@ public class UserDAO extends AbstractDAO<User>
         PreparedStatement statement=null;
         try
         {
-            final String QUERY="select users.login, users.password, " +
-                    "users.type, userinfo.name, " +
-                    "userinfo.surname, userinfo.sex, " +
-                    "userinfo.email " +
-                    "from userinfo join users " +
-                    "on users.login=userinfo.login where users.login='"+login+"'";
-            statement=connection.prepareStatement(QUERY);
+            statement=connection.prepareStatement(SELECT_USER_BY_LOGIN_QUERY);
+            statement.setString(1, login);
             ResultSet rs=statement.executeQuery();
             while (rs.next())
             {
@@ -72,7 +76,7 @@ public class UserDAO extends AbstractDAO<User>
         }
         catch(SQLException e)
         {
-            throw new DAOException("UserDAO can't get data from database due to an internal error.");
+            throw new DAOException("UserDAO can't get data from database due to an internal error.", e);
         }
         finally
         {
@@ -88,20 +92,22 @@ public class UserDAO extends AbstractDAO<User>
         try
         {
             connection.setAutoCommit(false);
-            String query="INSERT INTO "+ Table.USERS.getValue() +" VALUES" +
-                    "('"+user.getLogin()+"', \""+user.getPassword()+"\", "+Role.USER.getId()+")";
-            statement=connection.prepareStatement(query);
+            statement=connection.prepareStatement(INSERT_INTO_USERS_QUERY);
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setInt(3, Role.USER.getId());
             statement.executeUpdate();
-            query="INSERT INTO "+Table.USER_INFO.getValue()+" VALUES" +
-                    "('"+user.getLogin()+"', '"+user.getName()+"', '"+user.getSurname()+"', '"+user.getSex().getValue()
-                    +"', '"+user.getEmail()+"')";
-            statement=connection.prepareStatement(query);
+            statement=connection.prepareStatement(INSERT_INTO_USERINFO_QUERY);
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getName());
+            statement.setString(3, user.getSurname());
+            statement.setString(4, user.getSex().getValue());
+            statement.setString(5, user.getEmail());
             statement.executeUpdate();
             connection.commit();
         }
         catch (SQLException e)
         {
-
             try
             {
                 connection.rollback();
@@ -111,7 +117,7 @@ public class UserDAO extends AbstractDAO<User>
                 //todo логгирование
                 System.out.println(e);
             }
-            throw new  DAOException("UserDAO can't get data from database due to an internal error.");
+            throw new  DAOException("UserDAO can't get data from database due to an internal error.", e);
         }
         finally
         {
@@ -134,14 +140,14 @@ public class UserDAO extends AbstractDAO<User>
         PreparedStatement statement=null;
         try
         {
-            final String QUERY="update "+tableName+" set "+column+"='"+newValue+"' where login='"+login+"'";
-            statement=connection.prepareStatement(QUERY);
+            final String UPDATE_USER_QUERY="update "+tableName+" set "+column+"='"+newValue+"' where login='"+login+"'";
+            statement=connection.prepareStatement(UPDATE_USER_QUERY);
             statement.executeUpdate();
         }
         catch(SQLException e)
         {
             //todo log
-            throw new DAOException("UserDAO can't update data in database due to an internal error.");
+            throw new DAOException("UserDAO can't update data in database due to an internal error.", e);
         }
         finally
         {
@@ -152,5 +158,15 @@ public class UserDAO extends AbstractDAO<User>
     @Override
     public void returnConnection() throws ConnectionException {
         super.returnConnection();
+    }
+
+    @Override
+    public List<User> find(long idFirst, int size) throws DAOException {
+        return null;
+    }
+
+    @Override
+    public double findAverageValue(long id) throws DAOException {
+        return 0;
     }
 }

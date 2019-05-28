@@ -27,8 +27,8 @@ public class SearchGamesCommand implements AbstractCommand
             {
                 //TODO вынести в отдельный класс???
                 PictureDelivery delivery=new PictureDelivery();
-                long id=game.getIdGame();
-                delivery.setId(id);
+                long idGame=game.getIdGame();
+                delivery.setId(idGame);
                 String picture=game.getPicture();
                 delivery.setPicture(picture);
                 deliveries.add(delivery);
@@ -41,15 +41,9 @@ public class SearchGamesCommand implements AbstractCommand
         catch (Exception e)
         {
             //TODO log
-            /*HttpSession session=request.getSession();
-            Page pageIndex=Page.INDEX;
-            router.setTarget(pageIndex.getPath());
-            router.setRedirect();
-            session.invalidate();*/
             Page pageMain=Page.MAIN_PAGE;
             router.setTarget(pageMain.getPath());
         }
-
         return router;
     }
 }

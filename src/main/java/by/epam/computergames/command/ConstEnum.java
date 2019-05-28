@@ -1,6 +1,6 @@
 package by.epam.computergames.command;
 
-public enum ConstEnum
+public enum ConstEnum//todo
 {
     LOGIN("login"),
     PASSWORD("password"),

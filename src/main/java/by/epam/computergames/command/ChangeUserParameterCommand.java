@@ -21,19 +21,7 @@ public class ChangeUserParameterCommand implements AbstractCommand
         {
             String login=(String) session.getAttribute(ConstEnum.LOGIN.getValue());
             String commandString=request.getParameter(ConstEnum.COMMAND.getValue());
-            CommandEnum command;
-            try
-            {
-                command=CommandEnum.valueOf(commandString.toUpperCase());
-            }
-            catch (NullPointerException e)//TODO заменить на Optional
-            {
-                throw new IncorrectDataException("command can't be null.");
-            }
-            catch (IllegalArgumentException e)
-            {
-                throw new IncorrectDataException("command has invalid value.");
-            }
+            CommandEnum command=CommandEnum.valueOf(commandString.toUpperCase());
             String newValue=null;
             switch (command)
             {
@@ -55,6 +43,15 @@ public class ChangeUserParameterCommand implements AbstractCommand
 
             AbstractService service=new ChangeUserParameterService();
             service.change(login, command, newValue);
+            switch (command)
+            {
+                case CHANGE_NAME:
+                    session.setAttribute(ConstEnum.NAME.getValue(), newValue);
+                    break;
+                case CHANGE_SURNAME:
+                    session.setAttribute(ConstEnum.SURNAME.getValue(), newValue);
+                    break;
+            }
             router=getUserInfoCommand.execute(request);
         }
         catch (IncorrectDataException|DAOException|ConnectionException e)

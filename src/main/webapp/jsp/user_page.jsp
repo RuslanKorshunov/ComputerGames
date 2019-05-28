@@ -28,23 +28,6 @@
         <input type="hidden" name="command" value="change_surname">
     </form>
     <fmt:message key="label.login"/> : ${login}<br>
-    <fmt:message key="label.password"/> : ${password} <input type="button" onclick="changeDisplay(document.getElementById('form_password'))"><br>
-    <form id="form_password" action="ControlServlet" method="post" style="display: none;">
-        <input type="text" name="new_password_form" value="${password}"> <input type="submit" value="<fmt:message key="label.save"/>">
-        <input type="hidden" name="command" value="change_password">
-    </form>
-    <fmt:message key="label.status"/>:
-    <c:choose>
-        <c:when test="${role eq 1}">
-            <fmt:message key="label.administrator"/> <br>
-        </c:when>
-        <c:when test="${role eq 2}">
-            <fmt:message key="label.user"/> <br>
-        </c:when>
-        <c:otherwise>
-            <br>
-        </c:otherwise>
-    </c:choose>
     <fmt:message key="label.sex"/>:
     <c:choose>
         <c:when test="${sex eq 'male'}">

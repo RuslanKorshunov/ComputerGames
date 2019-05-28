@@ -39,7 +39,7 @@ public class RateGameCommand implements AbstractCommand
             AbstractCommand command=new GetGameCommand();
             router=command.execute(request);
         }
-        catch (Exception e)
+        catch (ConnectionException|DAOException|IncorrectDataException|CryptologistException e)
         {
             //TODO log
             AbstractCommand command=new GetGameCommand();

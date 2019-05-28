@@ -25,7 +25,7 @@ public class ConnectionPool
         }
         catch (SQLException e)
         {
-            throw new ConnectionException("DriverManager can't register Driver.");
+            throw new ConnectionException("DriverManager can't register Driver.", e);
         }
     }
 
@@ -48,7 +48,7 @@ public class ConnectionPool
         }
         catch (InterruptedException e)
         {
-            throw new ConnectionException("ConnectionPool cant' give connection.");
+            throw new ConnectionException("ConnectionPool cant' give connection.", e);
         }
         return connection;
     }

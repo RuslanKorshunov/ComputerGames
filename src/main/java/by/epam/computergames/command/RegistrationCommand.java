@@ -33,17 +33,13 @@ public class RegistrationCommand implements AbstractCommand
             user.setEmail(email);
             user.setName(name);
             user.setSurname(surname);
-            try
+            if(sex==null)
+            {
+                user.setSex(Sex.THIRD);
+            }
+            else
             {
                 user.setSex(Sex.valueOf(sex.toUpperCase()));
-            }
-            catch (NullPointerException e)
-            {
-                throw new IncorrectDataException("Sex can't be null.");//TODO заменить на Optional
-            }
-            catch (IllegalArgumentException e)
-            {
-                throw new IncorrectDataException("Sex has invalid value.");
             }
 
             AbstractService service=new RegistrationService();

@@ -51,11 +51,11 @@ public class CommandProvider
         }
         catch (NullPointerException e)
         {
-            throw new IncorrectDataException("commandName can't be null.");
+            throw new IncorrectDataException("commandName can't be null.", e);
         }
         catch (IllegalArgumentException e)
         {
-            throw new IncorrectDataException("commandName has invalid value.");
+            throw new IncorrectDataException("commandName has invalid value.", e);
         }
         return command;
     }

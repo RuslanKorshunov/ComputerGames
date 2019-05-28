@@ -1,7 +1,11 @@
 package by.epam.computergames.command;
 
+import by.epam.computergames.connection.ConnectionException;
+import by.epam.computergames.cryptologist.CryptologistException;
+import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.entity.Game;
 import by.epam.computergames.entity.Genre;
+import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.FindAverageRatingService;
 import by.epam.computergames.warehouse.GameWarehouse;
@@ -40,7 +44,7 @@ public class GetGameCommand implements AbstractCommand
             Page page=Page.GAME_PAGE;
             router.setTarget(page.getPath());
         }
-        catch (Exception e)
+        catch (IncorrectDataException|ConnectionException|DAOException|CryptologistException e)
         {
             //TODO log
             Page page=Page.MAIN_PAGE;
