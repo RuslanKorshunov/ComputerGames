@@ -1,16 +1,16 @@
 package by.epam.computergames.entity;
 
-import by.epam.computergames.command.CommandEnum;
+import by.epam.computergames.command.CommandConst;
 
 public class PictureDelivery
 {
     private long id;
-    private CommandEnum command;
+    private CommandConst command;
     private String picture;
 
     public PictureDelivery()
     {
-        command =CommandEnum.GET_GAME;
+        command = CommandConst.GET_GAME;
     }
 
     public long getId() {
@@ -21,7 +21,7 @@ public class PictureDelivery
         this.id = id;
     }
 
-    public CommandEnum getCommand() {
+    public CommandConst getCommand() {
         return command;
     }
 

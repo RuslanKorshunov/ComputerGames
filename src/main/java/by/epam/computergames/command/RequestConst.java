@@ -1,6 +1,6 @@
 package by.epam.computergames.command;
 
-public enum ConstEnum//todo
+public enum RequestConst
 {
     LOGIN("login"),
     PASSWORD("password"),
@@ -25,11 +25,12 @@ public enum ConstEnum//todo
     PICTURE("picture"),
     STAR_FORM("star_form"),
     RATING("rating"),
-    YEAR("year");
+    YEAR("year"),
+    PAGE_NUMBER("page_number");
 
     String value;
 
-    ConstEnum(String value)
+    RequestConst(String value)
     {
         this.value = value;
     }

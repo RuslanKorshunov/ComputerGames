@@ -19,7 +19,7 @@ public class GetGameCommand implements AbstractCommand
     {
         Router router=new Router();
 
-        String idGameValue=request.getParameter(ConstEnum.ID.getValue());
+        String idGameValue=request.getParameter(RequestConst.ID.getValue());
         long idGame=Long.parseLong(idGameValue);
 
         GameWarehouse gameWarehouse=GameWarehouse.getInstance();
@@ -27,20 +27,20 @@ public class GetGameCommand implements AbstractCommand
         {
             Game game=gameWarehouse.get(idGame);
             String name=game.getName();
-            request.setAttribute(ConstEnum.GAME_NAME.getValue(), name);
+            request.setAttribute(RequestConst.GAME_NAME.getValue(), name);
             String developer=game.getDeveloper();
-            request.setAttribute(ConstEnum.DEVELOPER.getValue(), developer);
+            request.setAttribute(RequestConst.DEVELOPER.getValue(), developer);
             Genre genre=game.getGenre();
             String genreValue=genre.getValue();
-            request.setAttribute(ConstEnum.GENRE.getValue(), genreValue);
+            request.setAttribute(RequestConst.GENRE.getValue(), genreValue);
             String picture=request.getContextPath()+"/img/"+game.getPicture();
-            request.setAttribute(ConstEnum.PICTURE.getValue(), picture);
-            request.setAttribute(ConstEnum.ID.getValue(), idGame);
+            request.setAttribute(RequestConst.PICTURE.getValue(), picture);
+            request.setAttribute(RequestConst.ID.getValue(), idGame);
             AbstractService service =new FindAverageRatingService();
             double rating=(double)service.find(idGame);
-            request.setAttribute(ConstEnum.RATING.getValue(), rating);
+            request.setAttribute(RequestConst.RATING.getValue(), rating);
             int year=game.getYear();
-            request.setAttribute(ConstEnum.YEAR.getValue(), year);
+            request.setAttribute(RequestConst.YEAR.getValue(), year);
             Page page=Page.GAME_PAGE;
             router.setTarget(page.getPath());
         }

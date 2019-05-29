@@ -1,11 +1,11 @@
 package by.epam.computergames.entity;
 
-import by.epam.computergames.exception.IncorrectDataException;
-
 public enum Genre
 {
-    LIFE_SIMULATION(1, "life_simulation"),
-    INTERACTIVE_MOVIE(2, "interactive_movie");
+    LIFE_SIMULATION(1, "genre.life_simulation"),
+    INTERACTIVE_MOVIE(2, "genre.interactive_movie"),
+    RPG(3, "rpg"),
+    UNKNOWN(0, "genre.unknown");
 
     private int idGenre;
     private String value;
@@ -23,7 +23,7 @@ public enum Genre
         return value;
     }
 
-    public static Genre getGenre(int idGenre) throws IncorrectDataException
+    public static Genre getGenre(int idGenre)
     {
         Genre genre;
         switch (idGenre)
@@ -34,8 +34,11 @@ public enum Genre
             case 2:
                 genre=INTERACTIVE_MOVIE;
                 break;
+            case 3:
+                genre=RPG;
+                break;
                 default:
-                    throw new IncorrectDataException("idGenre has unknown value.");
+                    genre=UNKNOWN;
         }
         return genre;
     }

@@ -21,12 +21,12 @@ public class RateGameCommand implements AbstractCommand
     {
         Router router;
 
-        String starValue=request.getParameter(ConstEnum.STAR_FORM.getValue());
+        String starValue=request.getParameter(RequestConst.STAR_FORM.getValue());
         int star=Integer.parseInt(starValue);
-        String idGameValue=request.getParameter(ConstEnum.ID.value);
+        String idGameValue=request.getParameter(RequestConst.ID.value);
         long idGame=Long.parseLong(idGameValue);
         HttpSession session=request.getSession();
-        String login=(String)session.getAttribute(ConstEnum.LOGIN.getValue());
+        String login=(String)session.getAttribute(RequestConst.LOGIN.getValue());
 
         try
         {

@@ -2,7 +2,6 @@ package by.epam.computergames.dao;
 
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Game;
-import by.epam.computergames.exception.IncorrectDataException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +16,7 @@ public class GameDAO extends AbstractDAO<Game>
                                             "games.picture, games.year from games " +
                                             "join developers on games.idDeveloper=developers.idDeveloper " +
                                             "limit ?, ?";
+    private static final String FIND_SIZE_QUERY="select count(idGame) from games";
 
     public GameDAO() throws ConnectionException
     {
@@ -57,10 +57,6 @@ public class GameDAO extends AbstractDAO<Game>
         {
             throw new DAOException("GameDAO can't get data from database due to an internal error.", e);
         }
-        catch (IncorrectDataException e)
-        {
-            throw new DAOException("GameDAO can't get data from database because one of games has unknown idGenre.", e);
-        }
         finally
         {
             closeStatement(statement);
@@ -86,5 +82,26 @@ public class GameDAO extends AbstractDAO<Game>
     @Override
     public double findAverageValue(long id) throws DAOException {
         return 0;
+    }
+
+    @Override
+    public long findSize() throws DAOException
+    {
+        PreparedStatement statement=null;//TODO может, лучше заменить
+        long size=0;
+        try
+        {
+            statement=connection.prepareStatement(FIND_SIZE_QUERY);
+            ResultSet rs=statement.executeQuery();
+            while (rs.next())
+            {
+                size=rs.getLong(1);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DAOException("GameDAO can't find size from database due to an internal error.", e);
+        }
+        return size;
     }
 }

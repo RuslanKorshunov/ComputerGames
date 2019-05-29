@@ -51,10 +51,7 @@ public class RegistrationService extends AbstractService<User>
         }
         finally
         {
-            if(dao!=null)
-            {
-                dao.returnConnection();
-            }
+            returnConnection(dao);
         }
     }
 }

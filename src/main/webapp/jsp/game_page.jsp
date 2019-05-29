@@ -25,13 +25,16 @@
             <p>
                 <c:choose>
                     <c:when test="${fn:contains(genre, 'life_simulation')}">
-                        <fmt:message key="life_simulation"/>
+                        <fmt:message key="genre.life_simulation"/>
                     </c:when>
                     <c:when test="${fn:contains(genre, 'interactive_movie')}">
-                        <fmt:message key="interactive_movie"/>
+                        <fmt:message key="genre.interactive_movie"/>
+                    </c:when>
+                    <c:when test="${fn:contains(genre, 'rpg')}">
+                        <fmt:message key="genre.rpg"/>
                     </c:when>
                     <c:otherwise>
-                        <fmt:message key="not_defined"/>
+                        <fmt:message key="genre.unknown"/>
                     </c:otherwise>
                 </c:choose>
             </p>

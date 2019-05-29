@@ -39,10 +39,7 @@ public class AuthorizationService extends AbstractService<User>
         }
         finally
         {
-            if(dao!=null)
-            {
-                dao.returnConnection();
-            }
+            returnConnection(dao);
         }
 
 

@@ -2,7 +2,7 @@ package by.epam.computergames.servlet;
 
 import by.epam.computergames.command.AbstractCommand;
 import by.epam.computergames.command.CommandProvider;
-import by.epam.computergames.command.ConstEnum;
+import by.epam.computergames.command.RequestConst;
 import by.epam.computergames.command.Router;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.cryptologist.CryptologistException;
@@ -53,7 +53,7 @@ public class ControlServlet extends HttpServlet
                                                                                                     CryptologistException
     {
         CommandProvider commandProvider=new CommandProvider();
-        String commandName=request.getParameter(ConstEnum.COMMAND.getValue());
+        String commandName=request.getParameter(RequestConst.COMMAND.getValue());
         AbstractCommand command=commandProvider.provide(commandName);
         Router router=command.execute(request);
         if(router.getType()== Router.Type.FORWARD)

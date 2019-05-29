@@ -10,8 +10,8 @@ public class CommandProvider
         commandName=commandName.toUpperCase();
         try
         {
-            CommandEnum commandEnum=CommandEnum.valueOf(commandName);
-            switch (commandEnum)
+            CommandConst commandConst = CommandConst.valueOf(commandName);
+            switch (commandConst)
             {
                 case AUTHORIZATION:
                     command=new AuthorizationCommand();
@@ -46,6 +46,12 @@ public class CommandProvider
                     break;
                 case RATE_GAME:
                     command=new RateGameCommand();
+                    break;
+                case BACKWARD:
+                    command=new SearchGamesCommand();
+                    break;
+                case FORWARD:
+                    command=new SearchGamesCommand();
                     break;
             }
         }

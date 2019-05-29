@@ -21,7 +21,7 @@
 
         <ul class="menu">
             <a href="ControlServlet?command=get_user_info">${name} ${surname}</a>
-            <a href="ControlServlet?command=get_games&page=0"><fmt:message key="menu.games"/></a>
+            <a href="ControlServlet?command=get_games&page_number=0"><fmt:message key="menu.games"/></a>
             <a href="#"><fmt:message key="menu.developers"/></a>
             <a href="#"><fmt:message key="menu.ratings"/></a>
             <a href="ControlServlet?command=logout"><fmt:message key="label.logout"/></a>

@@ -19,26 +19,26 @@ public class ChangeUserParameterCommand implements AbstractCommand
         GetUserInfoCommand getUserInfoCommand=new GetUserInfoCommand();
         try
         {
-            String login=(String) session.getAttribute(ConstEnum.LOGIN.getValue());
-            String commandString=request.getParameter(ConstEnum.COMMAND.getValue());
-            CommandEnum command=CommandEnum.valueOf(commandString.toUpperCase());
+            String login=(String) session.getAttribute(RequestConst.LOGIN.getValue());
+            String commandString=request.getParameter(RequestConst.COMMAND.getValue());
+            CommandConst command= CommandConst.valueOf(commandString.toUpperCase());
             String newValue=null;
             switch (command)
             {
                 case CHANGE_NAME:
-                    newValue=request.getParameter(ConstEnum.NEW_NAME_FORM.getValue());
+                    newValue=request.getParameter(RequestConst.NEW_NAME_FORM.getValue());
                     break;
                 case CHANGE_SURNAME:
-                    newValue=request.getParameter(ConstEnum.NEW_SURNAME_FORM.getValue());
+                    newValue=request.getParameter(RequestConst.NEW_SURNAME_FORM.getValue());
                     break;
                 case CHANGE_PASSWORD:
-                    newValue=request.getParameter(ConstEnum.NEW_PASSWORD_FORM.getValue());
+                    newValue=request.getParameter(RequestConst.NEW_PASSWORD_FORM.getValue());
                     break;
                 case CHANGE_SEX:
-                    newValue=request.getParameter(ConstEnum.NEW_SEX_FORM.getValue());
+                    newValue=request.getParameter(RequestConst.NEW_SEX_FORM.getValue());
                     break;
                 case CHANGE_EMAIL:
-                    newValue=request.getParameter(ConstEnum.NEW_EMAIL_FORM.getValue());
+                    newValue=request.getParameter(RequestConst.NEW_EMAIL_FORM.getValue());
             }
 
             AbstractService service=new ChangeUserParameterService();
@@ -46,10 +46,10 @@ public class ChangeUserParameterCommand implements AbstractCommand
             switch (command)
             {
                 case CHANGE_NAME:
-                    session.setAttribute(ConstEnum.NAME.getValue(), newValue);
+                    session.setAttribute(RequestConst.NAME.getValue(), newValue);
                     break;
                 case CHANGE_SURNAME:
-                    session.setAttribute(ConstEnum.SURNAME.getValue(), newValue);
+                    session.setAttribute(RequestConst.SURNAME.getValue(), newValue);
                     break;
             }
             router=getUserInfoCommand.execute(request);

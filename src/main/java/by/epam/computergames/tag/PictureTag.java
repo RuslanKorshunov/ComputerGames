@@ -11,11 +11,13 @@ import java.util.List;
 public class PictureTag extends TagSupport
 {
     private List<PictureDelivery> deliveries;
+    private int pageNumber;
 
     public void setDeliveries(List<PictureDelivery> deliveries)
     {
         this.deliveries = deliveries;
     }
+    public void setPageNumber(int pageNumber){this.pageNumber=pageNumber;}
 
     @Override
     public int doStartTag() throws JspException
@@ -24,12 +26,6 @@ public class PictureTag extends TagSupport
         {
             JspWriter writer=pageContext.getOut();
             String contextPath=pageContext.getServletContext().getContextPath();
-
-            /*writer.write("<div class=\"gallery-section\">");
-            writer.write("<div class=\"inner-width\">");
-            writer.write("<h1>MyGallery</h1>");
-            writer.write("<div class=\"border\"></div>");
-            writer.write("<div class=\"gallery\">");*/
             for(PictureDelivery delivery: deliveries)
             {
                 String path=contextPath+"/img/"+delivery.getPicture();
@@ -51,20 +47,22 @@ public class PictureTag extends TagSupport
         return SKIP_BODY;
     }
 
-    /*@Override
+    @Override
     public int doEndTag() throws JspException
     {
         try
         {
             JspWriter writer=pageContext.getOut();
-            writer.write("</div>");
-            writer.write("</div>");
-            writer.write("</div>");
+            writer.write("<form action=\"ControlServlet\" method=\"get\">\n" +
+                    "<input type=\"submit\" name=\"command\" value=\"forward\">\n" +
+                    "<input type=\"submit\" name=\"command\" value=\"backward\">\n" +
+                    "<input type=\"hidden\" name=\"page_number\" value=\""+pageNumber+"\">\n" +
+                    "</form>");
         }
         catch (IOException e)
         {
             //TODO добавить лог
         }
         return EVAL_PAGE;
-    }*/
+    }
 }

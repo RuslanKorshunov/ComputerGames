@@ -23,10 +23,7 @@ public class RateGameService extends AbstractService<Mark>
             }
             finally
             {
-                if(dao!=null)
-                {
-                    dao.returnConnection();
-                }
+                returnConnection(dao);
             }
         }
         else

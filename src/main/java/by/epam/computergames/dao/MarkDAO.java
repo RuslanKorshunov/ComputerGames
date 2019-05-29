@@ -99,6 +99,10 @@ public class MarkDAO extends AbstractDAO<Mark>
 
     @Override
     public void update(String tableName, String column, String newValue, String id) throws DAOException {
+    }
 
+    @Override
+    public long findSize() throws DAOException {
+        return 0;
     }
 }

@@ -31,6 +31,8 @@ public abstract class AbstractDAO<T>
 
     public abstract double findAverageValue(long id) throws DAOException;
 
+    public abstract long findSize() throws DAOException;
+
     public void returnConnection() throws ConnectionException
     {
         ConnectionPool.getInstance().returnConnection(connection);

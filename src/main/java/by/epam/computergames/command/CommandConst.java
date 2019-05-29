@@ -1,6 +1,6 @@
 package by.epam.computergames.command;
 
-public enum CommandEnum
+public enum CommandConst
 {
     AUTHORIZATION("authorization"),
     LOGOUT("logout"),
@@ -15,11 +15,13 @@ public enum CommandEnum
     GET_REGISTRATION_PAGE("get_registration_page"),
     GET_GAMES("get_games"),
     GET_GAME("get_game"),
-    RATE_GAME("rate_game");
+    RATE_GAME("rate_game"),
+    BACKWARD("backward"),
+    FORWARD("forward");
 
     private String value;
 
-    CommandEnum(String value)
+    CommandConst(String value)
     {
         this.value = value;
     }

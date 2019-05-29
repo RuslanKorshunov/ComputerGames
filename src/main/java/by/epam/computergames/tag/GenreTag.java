@@ -1,7 +1,6 @@
 package by.epam.computergames.tag;
 
 import by.epam.computergames.entity.Genre;
-import by.epam.computergames.exception.IncorrectDataException;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -11,7 +10,7 @@ import java.io.IOException;
 public class GenreTag extends TagSupport
 {
     private int idGenre;
-    private static final String NOT_DEFINED="not_defined";
+    private static final String NOT_DEFINED= "genre.unknown";
 
     public void setIdGenre(int idGenre)
     {
@@ -24,18 +23,18 @@ public class GenreTag extends TagSupport
         JspWriter writer=pageContext.getOut();
         try
         {
-            try
-            {
+/*            try
+            {*/
                 Genre genre=Genre.getGenre(idGenre);
                 String genreValue=genre.getValue();
                 writer.write("<fmt:message key=\"interactive_movie\"/>");
                 writer.write("<br>");
-            }
+/*            }
             catch (IncorrectDataException e)
             {
                 //todo лог
                 writer.write("<fmt:message key=\""+NOT_DEFINED+"\"/>");
-            }
+            }*/
         }
         catch (IOException e)
         {

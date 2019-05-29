@@ -12,6 +12,7 @@
 </head>
 <body>
     <c:import url="header.jsp"/>
+    <input type="hidden" name="page_number" value="${page_number}">
     <div class="gallery-section">
         <div class="inner-width">
             <h1>
@@ -32,19 +33,24 @@
             </h1>
             <div class="border"></div>
             <div class="gallery">
-            <c:choose >
-                <c:when test="${fn:contains(list, 'games')}">
-                    <ctg:pictureTag deliveries="${games}"/>
-                </c:when>
-                <c:when test="${fn:contains(list, 'developers')}">
-                    2
-                </c:when>
-                <c:when test="${fn:contains(list, 'rating')}">
-                    3
-                </c:when>
-                <c:otherwise>
-                </c:otherwise>
-            </c:choose>
+                <c:choose >
+                    <c:when test="${fn:contains(list, 'games')}">
+                        <ctg:pictureTag deliveries="${games}" pageNumber="${page_number}"/>
+                    </c:when>
+                    <c:when test="${fn:contains(list, 'developers')}">
+                        2
+                    </c:when>
+                    <c:when test="${fn:contains(list, 'rating')}">
+                        3
+                    </c:when>
+                    <c:otherwise>
+                    </c:otherwise>
+                </c:choose>
+<%--                <form action="ControlServlet" method="get">
+                    <input type="submit" name="command" value="forward">
+                    <input type="submit" name="command" value="backward">
+                    <input type="hidden" name="page_number" value="${page_number}">
+                </form>--%>
             </div>
         </div>
     </div>

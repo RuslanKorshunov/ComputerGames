@@ -20,8 +20,8 @@ public class GetUserInfoCommand implements AbstractCommand
         Router router=new Router();
 
         HttpSession session=request.getSession();
-        String login = (String) session.getAttribute(ConstEnum.LOGIN.getValue());
-        Role role = (Role) session.getAttribute(ConstEnum.ROLE.getValue());
+        String login = (String) session.getAttribute(RequestConst.LOGIN.getValue());
+        Role role = (Role) session.getAttribute(RequestConst.ROLE.getValue());
 
         if(role==Role.GUEST)
         {
@@ -34,11 +34,11 @@ public class GetUserInfoCommand implements AbstractCommand
             {
                 AbstractService service=new GetUserInfoService();
                 User user=(User) service.find(login, role);
-                request.setAttribute(ConstEnum.NAME.getValue(), user.getName());
-                request.setAttribute(ConstEnum.SURNAME.getValue(), user.getSurname());
-                request.setAttribute(ConstEnum.LOGIN.getValue(), user.getLogin());
-                request.setAttribute(ConstEnum.SEX.getValue(), user.getSex().getValue());
-                request.setAttribute(ConstEnum.EMAIL.getValue(), user.getEmail());
+                request.setAttribute(RequestConst.NAME.getValue(), user.getName());
+                request.setAttribute(RequestConst.SURNAME.getValue(), user.getSurname());
+                request.setAttribute(RequestConst.LOGIN.getValue(), user.getLogin());
+                request.setAttribute(RequestConst.SEX.getValue(), user.getSex().getValue());
+                request.setAttribute(RequestConst.EMAIL.getValue(), user.getEmail());
                 Page page = Page.USER_PAGE;
                 router.setTarget(page.getPath());
             }

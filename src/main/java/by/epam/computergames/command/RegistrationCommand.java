@@ -19,12 +19,12 @@ public class RegistrationCommand implements AbstractCommand
     {
 
         Router router=new Router();
-        String login=request.getParameter(ConstEnum.LOGIN.getValue());
-        String password=request.getParameter(ConstEnum.PASSWORD.getValue());
-        String email=request.getParameter(ConstEnum.EMAIL.getValue());
-        String name=request.getParameter(ConstEnum.NAME.getValue());
-        String surname=request.getParameter(ConstEnum.SURNAME.getValue());
-        String sex=request.getParameter(ConstEnum.SEX.getValue());
+        String login=request.getParameter(RequestConst.LOGIN.getValue());
+        String password=request.getParameter(RequestConst.PASSWORD.getValue());
+        String email=request.getParameter(RequestConst.EMAIL.getValue());
+        String name=request.getParameter(RequestConst.NAME.getValue());
+        String surname=request.getParameter(RequestConst.SURNAME.getValue());
+        String sex=request.getParameter(RequestConst.SEX.getValue());
         try
         {
             User user=new User();
@@ -48,10 +48,10 @@ public class RegistrationCommand implements AbstractCommand
             router.setTarget(page.getPath());
 
             HttpSession session=request.getSession();
-            session.setAttribute(ConstEnum.LOGIN.getValue(), login);
-            session.setAttribute(ConstEnum.ROLE.getValue(), user.getRole());
-            session.setAttribute(ConstEnum.NAME.getValue(), user.getName());
-            session.setAttribute(ConstEnum.SURNAME.getValue(), user.getSurname());
+            session.setAttribute(RequestConst.LOGIN.getValue(), login);
+            session.setAttribute(RequestConst.ROLE.getValue(), user.getRole());
+            session.setAttribute(RequestConst.NAME.getValue(), user.getName());
+            session.setAttribute(RequestConst.SURNAME.getValue(), user.getSurname());
         }
         catch (IncorrectDataException|DAOException e)
         {

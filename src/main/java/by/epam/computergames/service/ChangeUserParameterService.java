@@ -1,7 +1,7 @@
 package by.epam.computergames.service;
 
-import by.epam.computergames.command.CommandEnum;
-import by.epam.computergames.command.ConstEnum;
+import by.epam.computergames.command.CommandConst;
+import by.epam.computergames.command.RequestConst;
 import by.epam.computergames.command.Table;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.dao.AbstractDAO;
@@ -22,7 +22,7 @@ public class ChangeUserParameterService extends AbstractService<User>
                                             DAOException
     {
         String login=(String) values[0];
-        CommandEnum command=(CommandEnum) values[1];
+        CommandConst command=(CommandConst) values[1];
         String newValue=(String) values[2];
         String column=null;
         String table=null;
@@ -34,7 +34,7 @@ public class ChangeUserParameterService extends AbstractService<User>
                 {
                     throw new IncorrectDataException("Name"+newValue+"has incorrect value.");
                 }
-                column=ConstEnum.NAME.getValue();
+                column= RequestConst.NAME.getValue();
                 table=Table.USER_INFO.getValue();
                 break;
             case CHANGE_SURNAME:
@@ -42,7 +42,7 @@ public class ChangeUserParameterService extends AbstractService<User>
                 {
                     throw new IncorrectDataException("Surname"+newValue+"has incorrect value.");
                 }
-                column=ConstEnum.SURNAME.getValue();
+                column= RequestConst.SURNAME.getValue();
                 table=Table.USER_INFO.getValue();
                 break;
             case CHANGE_PASSWORD:
@@ -50,11 +50,11 @@ public class ChangeUserParameterService extends AbstractService<User>
                 {
                     throw new IncorrectDataException("Password "+newValue+"has incorrect value.");
                 }
-                column=ConstEnum.PASSWORD.getValue();//TODO может, создать отдельные переменные
+                column= RequestConst.PASSWORD.getValue();//TODO может, создать отдельные переменные
                 table=Table.USERS.getValue();
                 break;
             case CHANGE_SEX:
-                column=ConstEnum.SEX.getValue();
+                column= RequestConst.SEX.getValue();
                 table=Table.USER_INFO.getValue();
                 break;
             case CHANGE_EMAIL:
@@ -62,7 +62,7 @@ public class ChangeUserParameterService extends AbstractService<User>
                 {
                     throw new IncorrectDataException("Email "+newValue+"has incorrect value.");
                 }
-                column=ConstEnum.EMAIL.getValue();
+                column= RequestConst.EMAIL.getValue();
                 table=Table.USER_INFO.getValue();
                 break;
         }
@@ -74,10 +74,7 @@ public class ChangeUserParameterService extends AbstractService<User>
         }
         finally
         {
-            if(dao!=null)
-            {
-                dao.returnConnection();
-            }
+            returnConnection(dao);
         }
     }
 }

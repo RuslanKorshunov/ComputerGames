@@ -1,7 +1,5 @@
 package by.epam.computergames.entity;
 
-import by.epam.computergames.exception.IncorrectDataException;
-
 public class Game
 {
     private static final String PATH="webapp/img/";
@@ -34,7 +32,7 @@ public class Game
         return genre;
     }
 
-    public void setGenre(int idGenre) throws IncorrectDataException
+    public void setGenre(int idGenre)
     {
         genre=Genre.getGenre(idGenre);
     }
@@ -57,16 +55,7 @@ public class Game
 
     public void setPicture(String picture)
     {
-        //TODO сделать проверку на наличие картинки
-/*        File file=new File(PATH+picture);
-        if(file.exists())
-        {*/
-            this.picture = picture;
-/*        }
-        else
-        {
-            this.picture=NOT_FOUND;
-        }*/
+        this.picture = picture;
     }
 
     public int getYear() {
@@ -85,6 +74,7 @@ public class Game
                 ", genre=" + genre +
                 ", developer='" + developer + '\'' +
                 ", picture='" + picture + '\'' +
+                ", year=" + year +
                 '}';
     }
 }

@@ -31,10 +31,7 @@ public class GetUserInfoService extends AbstractService<User>
             }
             finally
             {
-                if(dao!=null)
-                {
-                    dao.returnConnection();
-                }
+                returnConnection(dao);
             }
         }
         return user;

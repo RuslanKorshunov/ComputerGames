@@ -23,10 +23,7 @@ public class FindAverageRatingService extends AbstractService
             }
             finally
             {
-                if(dao!=null)
-                {
-                    dao.returnConnection();
-                }
+                returnConnection(dao);
             }
 
         }

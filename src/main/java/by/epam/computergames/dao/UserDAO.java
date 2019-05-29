@@ -169,4 +169,9 @@ public class UserDAO extends AbstractDAO<User>
     public double findAverageValue(long id) throws DAOException {
         return 0;
     }
+
+    @Override
+    public long findSize() throws DAOException {
+        return 0;
+    }
 }
