@@ -161,7 +161,7 @@ public class UserDAO extends AbstractDAO<User>
     }
 
     @Override
-    public List<User> find(long idFirst, int size) throws DAOException {
+    public List<User> find(Object... values) throws DAOException {
         return null;
     }
 

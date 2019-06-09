@@ -19,30 +19,30 @@
         </div>
 
         <div class="info-section">
-            <h2><fmt:message key="label.genre"/>
+            <h2><fmt:message key="label.idGenre"/>
                 <div class="border"></div>
             </h2>
             <p>
                 <c:choose>
-                    <c:when test="${fn:contains(genre, 'life_simulation')}">
-                        <fmt:message key="genre.life_simulation"/>
+                    <c:when test="${fn:contains(idGenre, 'life_simulation')}">
+                        <fmt:message key="idGenre.life_simulation"/>
                     </c:when>
-                    <c:when test="${fn:contains(genre, 'interactive_movie')}">
-                        <fmt:message key="genre.interactive_movie"/>
+                    <c:when test="${fn:contains(idGenre, 'interactive_movie')}">
+                        <fmt:message key="idGenre.interactive_movie"/>
                     </c:when>
-                    <c:when test="${fn:contains(genre, 'rpg')}">
-                        <fmt:message key="genre.rpg"/>
+                    <c:when test="${fn:contains(idGenre, 'rpg')}">
+                        <fmt:message key="idGenre.rpg"/>
                     </c:when>
                     <c:otherwise>
-                        <fmt:message key="genre.unknown"/>
+                        <fmt:message key="idGenre.unknown"/>
                     </c:otherwise>
                 </c:choose>
             </p>
-            <h2><fmt:message key="label.developer"/>
+            <h2><fmt:message key="label.idDeveloper"/>
                 <div class="border"></div>
             </h2>
             <p>
-                ${developer}
+                ${idDeveloper}
             </p>
             <h2><fmt:message key="label.year"/>
                 <div class="border"></div>

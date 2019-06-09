@@ -93,7 +93,7 @@ public class MarkDAO extends AbstractDAO<Mark>
     }
 
     @Override
-    public List<Mark> find(long idFirst, int size) throws DAOException {
+    public List<Mark> find(Object... values) throws DAOException {
         return null;
     }
 

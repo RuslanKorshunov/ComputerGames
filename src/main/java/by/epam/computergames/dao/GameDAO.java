@@ -2,6 +2,7 @@ package by.epam.computergames.dao;
 
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Game;
+import by.epam.computergames.entity.PageDelivery;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,11 +12,13 @@ import java.util.List;
 
 public class GameDAO extends AbstractDAO<Game>
 {
-    private static final String GAME_QUERY="select games.idGame, games.name, " +
-                                            "games.idGenre, developers.developer, " +
-                                            "games.picture, games.year from games " +
-                                            "join developers on games.idDeveloper=developers.idDeveloper " +
-                                            "limit ?, ?";
+    private static final int NUMBER_OF_ENTITIES=8;
+    private static final String BEGIN_QUERY="select games.idGame as idGame, games.name, " +
+                                            "games.idGenre as idGenre, developers.developer as developer, " +
+                                            "games.picture, games.year as year from games " +
+                                            "join developers on games.idDeveloper=developers.idDeveloper";
+
+    private static final String END_QUERY=" limit ?, ?";
     private static final String FIND_SIZE_QUERY="select count(idGame) from games";
 
     public GameDAO() throws ConnectionException
@@ -24,15 +27,24 @@ public class GameDAO extends AbstractDAO<Game>
     }
 
     @Override
-    public List<Game> find(long idFirst, int size) throws DAOException
+    public List<Game> find(Object... values) throws DAOException
     {
+        long idFirst=(long)values[0];
+        PageDelivery pageDelivery =(PageDelivery) values[1];
+
+        long idLast=idFirst+NUMBER_OF_ENTITIES;
+
+        String regex=BEGIN_QUERY;
+        regex=checkPageDelivery(pageDelivery, regex);
+        regex+=END_QUERY;
+
         PreparedStatement statement=null;
         List<Game> games;
         try
         {
-            statement=connection.prepareStatement(GAME_QUERY);
+            statement=connection.prepareStatement(regex);
             statement.setLong(1, idFirst);
-            statement.setInt(2, size);
+            statement.setLong(2, idLast);
             ResultSet rs=statement.executeQuery();
             games=new ArrayList<>();
             while (rs.next())
@@ -103,5 +115,59 @@ public class GameDAO extends AbstractDAO<Game>
             throw new DAOException("GameDAO can't find size from database due to an internal error.", e);
         }
         return size;
+    }
+
+    private String checkPageDelivery(PageDelivery pageDelivery, String regex)
+    {
+        final String WHERE=" where ";
+        final String AND=" and ";
+        boolean isUsed=false;
+
+        String yearFrom=pageDelivery.getYearFrom();
+        if(yearFrom!=null)
+        {
+            regex+=WHERE+"year>="+yearFrom;
+            isUsed=true;
+        }
+        String yearTo=pageDelivery.getYearTo();
+        if(yearTo!=null)
+        {
+            if(isUsed)
+            {
+                regex+=AND+"year<="+yearTo;
+            }
+            else
+            {
+                regex+=WHERE+"year<="+yearTo;
+                isUsed=true;
+            }
+        }
+        String genre=pageDelivery.getIdGenre();
+        if(genre!=null)
+        {
+            if(isUsed)
+            {
+                regex+=AND+"idGenre="+genre;
+            }
+            else
+            {
+                regex+=WHERE+"idGenre="+genre;
+                isUsed=true;
+            }
+        }
+        String developer=pageDelivery.getIdDeveloper();
+        if(developer!=null)
+        {
+            if(isUsed)
+            {
+                regex+=AND+"games.idDeveloper="+developer;
+            }
+            else
+            {
+                regex+=WHERE+"games.idDeveloper="+developer;
+            }
+        }
+
+        return regex;
     }
 }

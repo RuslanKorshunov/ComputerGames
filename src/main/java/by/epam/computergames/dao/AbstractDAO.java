@@ -23,7 +23,7 @@ public abstract class AbstractDAO<T>
 
     public abstract T findBy(String id) throws DAOException;
 
-    public abstract List<T> find(long idFirst, int size) throws DAOException;
+    public abstract List<T> find(Object...values) throws DAOException;
 
     public abstract void update(String tableName, String column, String newValue, String id) throws DAOException;
 

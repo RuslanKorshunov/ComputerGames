@@ -5,6 +5,7 @@ import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.entity.Game;
 import by.epam.computergames.entity.GamesDelivery;
+import by.epam.computergames.entity.PageDelivery;
 import by.epam.computergames.entity.PictureDelivery;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
@@ -22,17 +23,26 @@ public class SearchGamesCommand implements AbstractCommand
     public Router execute(HttpServletRequest request)
     {
         Router router=new Router();
-        String pageNumberStr=request.getParameter(RequestConst.PAGE_NUMBER.getValue());
-        int pageNumberInt=Integer.parseInt(pageNumberStr);
-        pageNumberInt=checkCommand(request, pageNumberInt);
+        String pageNumber=request.getParameter(RequestConst.PAGE_NUMBER.getValue());
+        String yearFrom=request.getParameter(RequestConst.YEAR_FROM.getValue());
+        String yearTo=request.getParameter(RequestConst.YEAR_TO.getValue());
+        String genre=request.getParameter(RequestConst.GENRE.getValue());
+        String developer=request.getParameter(RequestConst.DEVELOPER.getValue());
+        String command=request.getParameter(RequestConst.COMMAND.getValue());
+
+        PageDelivery pageDelivery=new PageDelivery();
+        pageDelivery.setPageNumber(pageNumber);
+        pageDelivery.setYearFrom(yearFrom);
+        pageDelivery.setYearTo(yearTo);
+        pageDelivery.setIdGenre(genre);
+        pageDelivery.setIdDeveloper(developer);
+        pageDelivery.setCommand(command);
 
         AbstractService service=new SearchGamesService();
         try
         {
-            GamesDelivery gamesDelivery=(GamesDelivery) service.find(pageNumberInt);
+            GamesDelivery gamesDelivery=(GamesDelivery) service.find(pageDelivery);
             List<Game> games=gamesDelivery.getGames();
-            pageNumberInt=gamesDelivery.getPageNumber();
-
             List<PictureDelivery> deliveries=new ArrayList<>();
             games.forEach(game ->
             {
@@ -46,7 +56,7 @@ public class SearchGamesCommand implements AbstractCommand
             });
             request.setAttribute(RequestConst.LIST.getValue(), RequestConst.GAMES.getValue());
             request.setAttribute(RequestConst.GAMES.getValue(), deliveries);
-            request.setAttribute(RequestConst.PAGE_NUMBER.getValue(), pageNumberInt);
+            request.setAttribute(RequestConst.PAGE_NUMBER.getValue(), pageDelivery.getPageNumber());
             Page pageMain=Page.MAIN_PAGE;
             router.setTarget(pageMain.getPath());
         }
@@ -57,19 +67,5 @@ public class SearchGamesCommand implements AbstractCommand
             router.setTarget(pageMain.getPath());
         }
         return router;
-    }
-
-    private int checkCommand(HttpServletRequest request, int pageNumber)//TODO верно ли это???
-    {
-        String command=request.getParameter(RequestConst.COMMAND.getValue());
-        if(command.equals(CommandConst.FORWARD.getValue()))
-        {
-            pageNumber++;
-        }
-        if(command.equals(CommandConst.BACKWARD.getValue()) && pageNumber!=FIRST_PAGE_INDEX)
-        {
-            pageNumber--;
-        }
-        return pageNumber;
     }
 }

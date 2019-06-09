@@ -7,7 +7,8 @@ public enum Page
     MAIN_PAGE("jsp/main_page.jsp"),
     USER_PAGE("jsp/user_page.jsp"),
     REGISTRATION_PAGE("jsp/registration_page.jsp"),
-    GAME_PAGE("jsp/game_page.jsp");
+    GAME_PAGE("jsp/game_page.jsp"),
+    SEARCH_PAGE("jsp/search_page.jsp");
 
     private String path;
 

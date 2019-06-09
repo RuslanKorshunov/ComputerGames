@@ -12,7 +12,6 @@
 </head>
 <body>
     <c:import url="header.jsp"/>
-    <input type="hidden" name="page_number" value="${page_number}">
     <div class="gallery-section">
         <div class="inner-width">
             <h1>
@@ -35,6 +34,10 @@
             <div class="gallery">
                 <c:choose >
                     <c:when test="${fn:contains(list, 'games')}">
+                        <form action="ControlServlet" method="get">
+                            <input type="submit" value="<fmt:message key="label.search"/>"/>
+                            <input type="hidden" name="command" value="get_search_page"/>
+                        </form>
                         <ctg:pictureTag deliveries="${games}" pageNumber="${page_number}"/>
                     </c:when>
                     <c:when test="${fn:contains(list, 'developers')}">

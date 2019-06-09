@@ -53,6 +53,9 @@ public class CommandProvider
                 case FORWARD:
                     command=new SearchGamesCommand();
                     break;
+                case GET_SEARCH_PAGE:
+                    command=new GetSearchPageCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

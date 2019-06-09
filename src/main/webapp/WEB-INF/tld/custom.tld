@@ -28,6 +28,18 @@
     </tag>
 
     <tag>
+        <name>developerSelect</name>
+        <tag-class>by.epam.computergames.tag.DeveloperSelectTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>developers</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.List</type>
+        </attribute>
+    </tag>
+
+    <tag>
         <name>genreTag</name>
         <tag-class>by.epam.computergames.tag.GenreTag</tag-class>
         <body-content>scriptless</body-content>

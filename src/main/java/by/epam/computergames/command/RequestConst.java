@@ -26,7 +26,10 @@ public enum RequestConst
     STAR_FORM("star_form"),
     RATING("rating"),
     YEAR("year"),
-    PAGE_NUMBER("page_number");
+    PAGE_NUMBER("page_number"),
+    DEVELOPERS("developers"),
+    YEAR_FROM("year_from"),
+    YEAR_TO("year_to");
 
     String value;
 
