@@ -6,9 +6,10 @@ import by.epam.computergames.dao.AbstractDAO;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.dao.GameDAO;
 import by.epam.computergames.entity.Game;
-import by.epam.computergames.entity.GamesDelivery;
-import by.epam.computergames.entity.PageDelivery;
+import by.epam.computergames.entity.GameParameter;
 import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.validator.DeveloperValidator;
+import by.epam.computergames.validator.GenreValidator;
 import by.epam.computergames.validator.YearValidator;
 import by.epam.computergames.warehouse.GameWarehouse;
 
@@ -18,65 +19,43 @@ public class SearchGamesService extends AbstractService
 {
     private static final int NUMBER_OF_ENTITIES=8;
     private static final int FIRST_PAGE_INDEX=0;
-    private static final int DEFAULT_YEAR_FROM=1900;
-    private static final int DEFAULT_YEAR_TO=2050;
 
     @Override
-    public GamesDelivery find(Object... values) throws ConnectionException,
-                                                            DAOException,
-                                                            IncorrectDataException
+    public List<Game> findAll(Object... values) throws ConnectionException,
+                                                        DAOException,
+                                                        IncorrectDataException
     {
-        PageDelivery pageDelivery=(PageDelivery)values[0];
-        GamesDelivery delivery=new GamesDelivery();
+        GameParameter gameParameter =(GameParameter)values[0];
 
-        String yearFrom=pageDelivery.getYearFrom();
-        if(yearFrom!=null)
+        String yearFrom= gameParameter.getYearFrom();
+        if(yearFrom!=null &&!YearValidator.validate(yearFrom))
         {
-            if(!YearValidator.validate(yearFrom))
-            {
-                throw new IncorrectDataException("Year "+yearFrom+" has invalid value.");
-            }
-            if(yearFrom.equals(""))
-            {
-                pageDelivery.setYearFrom(DEFAULT_YEAR_FROM);
-            }
+            throw new IncorrectDataException("Year "+yearFrom+" has invalid value.");
         }
-        String yearTo=pageDelivery.getYearTo();
-        if(yearTo!=null)
+        String yearTo= gameParameter.getYearTo();
+        if(yearTo!=null && !YearValidator.validate(yearTo))
         {
-            if(!YearValidator.validate(yearTo))
-            {
-                throw new IncorrectDataException("Year "+yearTo+" has invalid value.");
-            }
-            if(yearTo.equals(""))
-            {
-                pageDelivery.setYearTo(DEFAULT_YEAR_TO);
-            }
+            throw new IncorrectDataException("Year "+yearTo+" has invalid value.");
         }
         //todo БРЕЕЕЕД
-        String genre=pageDelivery.getIdGenre();
-        if(genre!=null)
+        String idGenre= gameParameter.getIdGenre();
+        if(idGenre!=null && !GenreValidator.validate(idGenre))
         {
-            if(genre.equals(""))
-            {
-                pageDelivery.setIdGenre(null);
-            }
+            throw new IncorrectDataException("IdGenre "+idGenre+" has invalid value.");
         }
-        String developer=pageDelivery.getIdDeveloper();
-        if(developer!=null)
+        String idDeveloper= gameParameter.getIdDeveloper();
+        if(idDeveloper!=null && !DeveloperValidator.validate(idDeveloper))
         {
-            if(developer.equals(""))
-            {
-                pageDelivery.setIdDeveloper(null);
-            }
+            throw new IncorrectDataException("IdDeveloper "+idDeveloper+" has invalid value.");
         }
-        int pageNumber=checkCommand(pageDelivery);
+        int pageNumber=checkCommand(gameParameter);
 
         long idFirst=pageNumber*NUMBER_OF_ENTITIES;
-        long size=findSize();
-        if(idFirst>size && pageNumber!=FIRST_PAGE_INDEX)
+        long size=findSize(gameParameter);
+        if(idFirst>=size && pageNumber!=FIRST_PAGE_INDEX)
         {
             pageNumber--;
+            gameParameter.setPageNumber(pageNumber);
             idFirst=pageNumber*NUMBER_OF_ENTITIES;
         }
         AbstractDAO dao=null;
@@ -84,7 +63,7 @@ public class SearchGamesService extends AbstractService
         try
         {
             dao=new GameDAO();
-            games=dao.find(idFirst, pageDelivery);
+            games=dao.find(idFirst, gameParameter);
         }
         finally
         {
@@ -97,13 +76,10 @@ public class SearchGamesService extends AbstractService
             warehouse.put(game.getIdGame(), game);
         }
 
-        delivery.setPageNumber(pageNumber);
-        delivery.setGames(games);
-
-        return delivery;
+        return games;
     }
 
-    private long findSize() throws ConnectionException, DAOException
+    private long findSize(GameParameter gameParameter) throws ConnectionException, DAOException
     {
         Long size;
 
@@ -111,7 +87,7 @@ public class SearchGamesService extends AbstractService
         try
         {
             dao=new GameDAO();
-            size=dao.findSize();
+            size=dao.findSize(gameParameter);
         }
         finally
         {
@@ -121,17 +97,17 @@ public class SearchGamesService extends AbstractService
         return size;
     }
 
-    private int checkCommand(PageDelivery pageDelivery)
+    private int checkCommand(GameParameter gameParameter)
     {
-        String command=pageDelivery.getCommand();
-        int pageNumber=Integer.parseInt(pageDelivery.getPageNumber());
+        String command= gameParameter.getCommand();
+        int pageNumber=Integer.parseInt(gameParameter.getPageNumber());
         if(command.equals(CommandConst.FORWARD.getValue()))
         {
-            pageDelivery.setPageNumber(pageNumber++);
+            gameParameter.setPageNumber(pageNumber++);
         }
         if(command.equals(CommandConst.BACKWARD.getValue()) && pageNumber!=FIRST_PAGE_INDEX)
         {
-            pageDelivery.setPageNumber(pageNumber--);
+            gameParameter.setPageNumber(pageNumber--);
         }
         return pageNumber;
     }

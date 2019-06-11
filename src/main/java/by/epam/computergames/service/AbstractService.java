@@ -6,12 +6,22 @@ import by.epam.computergames.dao.AbstractDAO;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
 
+import java.util.List;
+
 public abstract class AbstractService<T>
 {
     public T find(Object ... values) throws IncorrectDataException,
                                             ConnectionException,
                                             DAOException,
                                             CryptologistException
+    {
+        return null;
+    }
+
+    public List<T> findAll(Object ... values) throws IncorrectDataException,
+                                                        ConnectionException,
+                                                        DAOException,
+                                                        CryptologistException
     {
         return null;
     }

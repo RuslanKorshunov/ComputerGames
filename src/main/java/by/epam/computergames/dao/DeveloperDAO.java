@@ -71,7 +71,7 @@ public class DeveloperDAO extends AbstractDAO<Developer>
     }
 
     @Override
-    public long findSize() throws DAOException {
+    public long findSize(Object... values) throws DAOException {
         return 0;
     }
 }

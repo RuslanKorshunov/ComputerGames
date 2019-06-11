@@ -1,8 +1,9 @@
 package by.epam.computergames.dao;
 
 import by.epam.computergames.connection.ConnectionException;
+import by.epam.computergames.entity.EntityConst;
 import by.epam.computergames.entity.Game;
-import by.epam.computergames.entity.PageDelivery;
+import by.epam.computergames.entity.GameParameter;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,12 +31,12 @@ public class GameDAO extends AbstractDAO<Game>
     public List<Game> find(Object... values) throws DAOException
     {
         long idFirst=(long)values[0];
-        PageDelivery pageDelivery =(PageDelivery) values[1];
+        GameParameter gameParameter =(GameParameter) values[1];
 
         long idLast=idFirst+NUMBER_OF_ENTITIES;
 
         String regex=BEGIN_QUERY;
-        regex=checkPageDelivery(pageDelivery, regex);
+        regex= checkGameParameter(gameParameter, regex);
         regex+=END_QUERY;
 
         PreparedStatement statement=null;
@@ -97,13 +98,16 @@ public class GameDAO extends AbstractDAO<Game>
     }
 
     @Override
-    public long findSize() throws DAOException
+    public long findSize(Object ... values) throws DAOException
     {
-        PreparedStatement statement=null;//TODO может, лучше заменить
+        GameParameter gameParameter=(GameParameter) values[0];
+        String regex=FIND_SIZE_QUERY;
+        regex=checkGameParameter(gameParameter, regex);
+        PreparedStatement statement;//TODO может, лучше заменить
         long size=0;
         try
         {
-            statement=connection.prepareStatement(FIND_SIZE_QUERY);
+            statement=connection.prepareStatement(regex);
             ResultSet rs=statement.executeQuery();
             while (rs.next())
             {
@@ -117,19 +121,19 @@ public class GameDAO extends AbstractDAO<Game>
         return size;
     }
 
-    private String checkPageDelivery(PageDelivery pageDelivery, String regex)
+    private String checkGameParameter(GameParameter gameParameter, String regex)
     {
         final String WHERE=" where ";
         final String AND=" and ";
         boolean isUsed=false;
 
-        String yearFrom=pageDelivery.getYearFrom();
+        String yearFrom= gameParameter.getYearFrom();
         if(yearFrom!=null)
         {
             regex+=WHERE+"year>="+yearFrom;
             isUsed=true;
         }
-        String yearTo=pageDelivery.getYearTo();
+        String yearTo= gameParameter.getYearTo();
         if(yearTo!=null)
         {
             if(isUsed)
@@ -142,29 +146,29 @@ public class GameDAO extends AbstractDAO<Game>
                 isUsed=true;
             }
         }
-        String genre=pageDelivery.getIdGenre();
-        if(genre!=null)
+        String idGenre= gameParameter.getIdGenre();
+        if(idGenre!=null && !idGenre.equals(EntityConst.DEFAULT_ID_GENRE))
         {
             if(isUsed)
             {
-                regex+=AND+"idGenre="+genre;
+                regex+=AND+"idGenre="+idGenre;
             }
             else
             {
-                regex+=WHERE+"idGenre="+genre;
+                regex+=WHERE+"idGenre="+idGenre;
                 isUsed=true;
             }
         }
-        String developer=pageDelivery.getIdDeveloper();
-        if(developer!=null)
+        String idDeveloper= gameParameter.getIdDeveloper();
+        if(idDeveloper!=null && !idDeveloper.equals(EntityConst.DEFAULT_ID_DEVELOPER))
         {
             if(isUsed)
             {
-                regex+=AND+"games.idDeveloper="+developer;
+                regex+=AND+"games.idDeveloper="+idDeveloper;
             }
             else
             {
-                regex+=WHERE+"games.idDeveloper="+developer;
+                regex+=WHERE+"games.idDeveloper="+idDeveloper;
             }
         }
 

@@ -102,7 +102,7 @@ public class MarkDAO extends AbstractDAO<Mark>
     }
 
     @Override
-    public long findSize() throws DAOException {
+    public long findSize(Object... values) throws DAOException {
         return 0;
     }
 }

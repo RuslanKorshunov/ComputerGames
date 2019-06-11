@@ -1,6 +1,6 @@
 package by.epam.computergames.entity;
 
-public class PageDelivery
+public class GameParameter
 {
     private String pageNumber;
     private String yearFrom;
@@ -8,6 +8,21 @@ public class PageDelivery
     private String idGenre;
     private String idDeveloper;
     private String command;
+
+    public GameParameter(String pageNumber,
+                         String yearFrom,
+                         String yearTo,
+                         String idGenre,
+                         String idDeveloper,
+                         String command)
+    {
+        this.pageNumber = pageNumber;
+        this.yearFrom = yearFrom;
+        this.yearTo = yearTo;
+        this.idGenre = idGenre;
+        this.idDeveloper = idDeveloper;
+        this.command = command;
+    }
 
     public String getPageNumber() {
         return pageNumber;

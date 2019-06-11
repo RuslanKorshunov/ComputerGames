@@ -35,7 +35,7 @@
                 </td>
                 <td>
                     <select name="genre">
-                        <option value="" selected>
+                        <option value="0" selected>
                         </option>
                         <option value="1">
                             <fmt:message key="idGenre.life_simulation"/>
@@ -58,7 +58,7 @@
                 </td>
             </tr>
         </table>
-        <input type="submit" name="command" value="get_games">
+        <input type="submit" name="command" value="change_search_parameter">
         <input type="hidden" name="page_number" value="0">
     </form>
 </body>

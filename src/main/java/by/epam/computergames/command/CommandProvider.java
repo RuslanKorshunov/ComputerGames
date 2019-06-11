@@ -56,6 +56,9 @@ public class CommandProvider
                 case GET_SEARCH_PAGE:
                     command=new GetSearchPageCommand();
                     break;
+                case CHANGE_SEARCH_PARAMETER:
+                    command=new ChangeSearchParameterCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

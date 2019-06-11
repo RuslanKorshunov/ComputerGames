@@ -2,9 +2,6 @@ package by.epam.computergames.entity;
 
 public class Game
 {
-    private static final String PATH="webapp/img/";
-    private static final String NOT_FOUND="not_found.png";
-
     private long idGame;
     private String name;
     private Genre genre;

@@ -3,6 +3,7 @@ package by.epam.computergames.command;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.DAOException;
+import by.epam.computergames.entity.EntityConst;
 import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
@@ -30,6 +31,11 @@ public class AuthorizationCommand implements AbstractCommand
             session.setAttribute(RequestConst.ROLE.getValue(), user.getRole());
             session.setAttribute(RequestConst.NAME.getValue(), user.getName());
             session.setAttribute(RequestConst.SURNAME.getValue(), user.getSurname());
+
+            session.setAttribute(RequestConst.YEAR_FROM.getValue(), EntityConst.DEFAULT_YEAR_FROM);
+            session.setAttribute(RequestConst.YEAR_TO.getValue(), EntityConst.DEFAULT_YEAR_TO);
+            session.setAttribute(RequestConst.GENRE.getValue(), EntityConst.DEFAULT_ID_GENRE);
+            session.setAttribute(RequestConst.DEVELOPER.getValue(), EntityConst.DEFAULT_ID_DEVELOPER);
             Page page = Page.MAIN_PAGE;
             router.setTarget(page.getPath());
         }

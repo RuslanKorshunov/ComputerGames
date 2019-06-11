@@ -18,7 +18,8 @@ public enum CommandConst
     RATE_GAME("rate_game"),
     BACKWARD("backward"),
     FORWARD("forward"),
-    GET_SEARCH_PAGE("get_search_page");
+    GET_SEARCH_PAGE("get_search_page"),
+    CHANGE_SEARCH_PARAMETER("change_search_parameter");
 
     private String value;
 

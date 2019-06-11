@@ -115,7 +115,6 @@ public class UserDAO extends AbstractDAO<User>
             catch (SQLException eSQL)
             {
                 //todo логгирование
-                System.out.println(e);
             }
             throw new  DAOException("UserDAO can't get data from database due to an internal error.", e);
         }
@@ -128,7 +127,6 @@ public class UserDAO extends AbstractDAO<User>
             catch (SQLException e)
             {
                 //todo log
-                System.out.println(e);
             }
             closeStatement(statement);
         }
@@ -171,7 +169,7 @@ public class UserDAO extends AbstractDAO<User>
     }
 
     @Override
-    public long findSize() throws DAOException {
+    public long findSize(Object... values) throws DAOException {
         return 0;
     }
 }
