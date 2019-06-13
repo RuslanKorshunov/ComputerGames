@@ -20,6 +20,7 @@ public class GetGameCommand implements AbstractCommand
         Router router=new Router();
 
         String idGameValue=request.getParameter(RequestConst.ID.getValue());
+        String pageNumber=request.getParameter(RequestConst.PAGE_NUMBER.getValue());
         long idGame=Long.parseLong(idGameValue);
 
         GameWarehouse gameWarehouse=GameWarehouse.getInstance();

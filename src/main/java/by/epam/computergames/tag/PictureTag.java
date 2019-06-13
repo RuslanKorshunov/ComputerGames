@@ -29,7 +29,8 @@ public class PictureTag extends TagSupport
             for(PictureDelivery delivery: deliveries)
             {
                 String path=contextPath+"/img/"+delivery.getPicture();
-                String command="ControlServlet?command="+delivery.getCommand().getValue()+"&id="+delivery.getId();
+                String command="ControlServlet?command="+delivery.getCommand().getValue()+
+                                "&id="+delivery.getId();
                 writer.write("<a href=\""+command+"\" class=\"image\">");
                 writer.write("<img src=\""+path+"\"/></a>");
             }
@@ -47,7 +48,7 @@ public class PictureTag extends TagSupport
         return SKIP_BODY;
     }
 
-    @Override
+    /*@Override
     public int doEndTag() throws JspException
     {
         try
@@ -64,5 +65,5 @@ public class PictureTag extends TagSupport
             //TODO добавить лог
         }
         return EVAL_PAGE;
-    }
+    }*/
 }

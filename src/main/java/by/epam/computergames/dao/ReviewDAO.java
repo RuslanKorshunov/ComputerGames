@@ -1,30 +1,30 @@
 package by.epam.computergames.dao;
 
 import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.entity.Mark;
+import by.epam.computergames.entity.Review;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MarkDAO extends AbstractDAO<Mark>
+public class ReviewDAO extends AbstractDAO<Review>
 {
-    private static final String SELECT_MARKS_QUERY="select * from marks where " +
+    private static final String SELECT_MARKS_QUERY="select mark, comment from reviews where " +
                                                     "idGame=? " +
                                                     "and login=?";
-    private static final String UPDATE_MARKS_QUERY="update marks set mark=? " +
+    private static final String UPDATE_MARKS_QUERY="update reviews set mark=?, comment=? " +
                                                     "where idGame=? " +
                                                     "and login=?";
-    private static final String INSERT_INTO_MARKS_QUERY="insert into marks values (?, ?, ?)";
-    private static final String AVG_QUERY="select round(avg(mark),1) from marks where idGame=?";
+    private static final String INSERT_INTO_MARKS_QUERY="insert into reviews values (?, ?, ?, ?)";
+    private static final String AVG_QUERY="select round(avg(mark),1) from reviews where idGame=?";
 
-    public MarkDAO() throws ConnectionException {
+    public ReviewDAO() throws ConnectionException {
         super();
     }
 
     @Override
-    public void create(Mark entity) throws DAOException
+    public void create(Review entity) throws DAOException
     {
         PreparedStatement statement=null;
         try
@@ -37,8 +37,9 @@ public class MarkDAO extends AbstractDAO<Mark>
             {
                 statement=connection.prepareStatement(UPDATE_MARKS_QUERY);
                 statement.setInt(1, entity.getMark());
-                statement.setLong(2, entity.getIdGame());
-                statement.setString(3, entity.getLogin());
+                statement.setString(2, entity.getComment());
+                statement.setLong(3, entity.getIdGame());
+                statement.setString(4, entity.getLogin());
                 statement.executeUpdate();
             }
             else
@@ -47,13 +48,14 @@ public class MarkDAO extends AbstractDAO<Mark>
                 statement.setLong(1, entity.getIdGame());
                 statement.setString(2, entity.getLogin());
                 statement.setInt(3, entity.getMark());
+                statement.setString(4, entity.getComment());
                 statement.executeUpdate();
             }
         }
         catch (SQLException e)
         {
             //TODO LOG
-            throw new DAOException("MarkDAO can't add data in database due to an internal error.", e);
+            throw new DAOException("ReviewDAO can't add data in database due to an internal error.", e);
         }
         finally
         {
@@ -78,7 +80,7 @@ public class MarkDAO extends AbstractDAO<Mark>
         }
         catch (SQLException e)
         {
-            throw new DAOException("MarkDAO can't match average rating due to an internal error.", e);
+            throw new DAOException("ReviewDAO can't match average rating due to an internal error.", e);
         }
         finally
         {
@@ -88,12 +90,42 @@ public class MarkDAO extends AbstractDAO<Mark>
     }
 
     @Override
-    public Mark findBy(String id) throws DAOException {
-        return null;
+    public Review findBy(Object... values) throws DAOException
+    {
+        long idGame=(long)values[0];
+        String login=(String)values[1];
+        Review review=new Review();
+        review.setIdGame(idGame);
+        review.setLogin(login);
+        PreparedStatement statement=null;
+        try
+        {
+            statement=connection.prepareStatement(SELECT_MARKS_QUERY);
+            statement.setLong(1, idGame);
+            statement.setString(2, login);
+            ResultSet rs=statement.executeQuery();
+            if(rs.next())
+            {
+                int mark=rs.getInt(1);
+                review.setMark(mark);
+                String comment=rs.getString(2);
+                review.setComments(comment);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DAOException("ReviewDao can't read from database due to an internal error.", e);
+        }
+        finally
+        {
+            closeStatement(statement);
+        }
+
+        return review;
     }
 
     @Override
-    public List<Mark> find(Object... values) throws DAOException {
+    public List<Review> find(Object... values) throws DAOException {
         return null;
     }
 

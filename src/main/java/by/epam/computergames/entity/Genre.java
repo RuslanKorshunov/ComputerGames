@@ -2,10 +2,10 @@ package by.epam.computergames.entity;
 
 public enum Genre
 {
-    LIFE_SIMULATION(1, "genre.life_simulation"),//TODO убрать genre
-    INTERACTIVE_MOVIE(2, "genre.interactive_movie"),
-    RPG(3, "genre.rpg"),
-    UNKNOWN(0, "genre.unknown");
+    LIFE_SIMULATION(1, "life_simulation"),//TODO убрать genre
+    INTERACTIVE_MOVIE(2, "interactive_movie"),
+    RPG(3, "rpg"),
+    UNKNOWN(0, "unknown");
 
     private int idGenre;
     private String value;

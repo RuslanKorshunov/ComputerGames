@@ -1,10 +1,11 @@
 package by.epam.computergames.entity;
 
-public class Mark
+public class Review
 {
     private int mark;
     private String login;
     private long idGame;
+    private String comments;
 
     public int getMark() {
         return mark;
@@ -28,5 +29,13 @@ public class Mark
 
     public void setIdGame(long idGame) {
         this.idGame = idGame;
+    }
+
+    public String getComment() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

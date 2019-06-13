@@ -31,15 +31,6 @@ body{
     padding-top: 0;
     color: #333;
 }
-
-/*.card .about-section{
-    position: relative;
-    padding-top: 60px;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-bottom: 180;
-    color: #333;
-}*/
 .card .about-section{
     position: relative;
     padding-top: 60px;
@@ -57,6 +48,27 @@ body{
     text-align: justify;
     top: 30px;
     bottom: 10px;
+}
+.navigation{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+.btn{
+    float: right;
+    border: 0;
+    background: #1abc9c;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    outline: none;
+    transition: 0.5s;
+}
+.btn:hover{
+    background: #16a085;
 }
 /*.card h2{
     position: relative;
@@ -78,7 +90,7 @@ body{
     top: 100%;
     bottom: 10px;
 }*/
-.rating{
+/*.rating{
     position: absolute;
     top: 90%;
     left: 50%;
@@ -117,4 +129,4 @@ body{
 .rating label:hover ~ label:after,
 .rating input:checked ~ label:after{
     opacity: 1;
-}
+}*/

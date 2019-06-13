@@ -24,17 +24,17 @@
             </h2>
             <p>
                 <c:choose>
-                    <c:when test="${fn:contains(idGenre, 'life_simulation')}">
-                        <fmt:message key="idGenre.life_simulation"/>
+                    <c:when test="${fn:contains(genre, 'life_simulation')}">
+                        <fmt:message key="genre.life_simulation"/>
                     </c:when>
-                    <c:when test="${fn:contains(idGenre, 'interactive_movie')}">
-                        <fmt:message key="idGenre.interactive_movie"/>
+                    <c:when test="${fn:contains(genre, 'interactive_movie')}">
+                        <fmt:message key="genre.interactive_movie"/>
                     </c:when>
-                    <c:when test="${fn:contains(idGenre, 'rpg')}">
-                        <fmt:message key="idGenre.rpg"/>
+                    <c:when test="${fn:contains(genre, 'rpg')}">
+                        <fmt:message key="genre.rpg"/>
                     </c:when>
                     <c:otherwise>
-                        <fmt:message key="idGenre.unknown"/>
+                        <fmt:message key="genre.unknown"/>
                     </c:otherwise>
                 </c:choose>
             </p>
@@ -42,7 +42,7 @@
                 <div class="border"></div>
             </h2>
             <p>
-                ${idDeveloper}
+                ${developer}
             </p>
             <h2><fmt:message key="label.year"/>
                 <div class="border"></div>
@@ -65,28 +65,16 @@
                 Nothing now
             </p>
         </div>
-        <form class="rating" action="ControlServlet" method="post">
-            <input type="submit" name="star_form" id="star10" value="10">
-            <label for="star10"></label>
-            <input type="submit" name="star_form" id="star9" value="9">
-            <label for="star9"></label>
-            <input type="submit" name="star_form" id="star8" value="8">
-            <label for="star8"></label>
-            <input type="submit" name="star_form" id="star7" value="7">
-            <label for="star7"></label>
-            <input type="submit" name="star_form" id="star6" value="6">
-            <label for="star6"></label>
-            <input type="submit" name="star_form" id="star5" value="5">
-            <label for="star5"></label>
-            <input type="submit" name="star_form" id="star4" value="4">
-            <label for="star4"></label>
-            <input type="submit" name="star_form" id="star3" value="3">
-            <label for="star3"></label>
-            <input type="submit" name="star_form" id="star2" value="2">
-            <label for="star2"></label>
-            <input type="submit" name="star_form" id="star1" value="1">
-            <label for="star1"></label>
-            <input type="hidden" name="command" value="rate_game">
+    </div>
+    <div class="navigation">
+<%--        <form action="ControlServlet" method="get">
+            <input type="submit" class="btn" value="<fmt:message key="label.back"/>">
+            <input type="hidden" name="command" value="get_games">
+            <input type="hidden" name="page_number" value="${page_number}">
+        </form>--%>
+        <form action="ControlServlet" method="get">
+            <input type="submit" class="btn" value="<fmt:message key="label.review"/>">
+            <input type="hidden" name="command" value="get_review_page">
             <input type="hidden" name="id" value="${id}">
         </form>
     </div>

@@ -19,8 +19,7 @@ public class DeveloperDAO extends AbstractDAO<Developer>
     }
 
     @Override
-    public Developer findBy(String id) throws DAOException
-    {
+    public Developer findBy(Object... values) throws DAOException {
         return null;
     }
 

@@ -78,7 +78,7 @@ public class GameDAO extends AbstractDAO<Game>
     }
 
     @Override
-    public Game findBy(String id) throws DAOException {
+    public Game findBy(Object... values) throws DAOException {
         return null;
     }
 

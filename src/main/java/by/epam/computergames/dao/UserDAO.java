@@ -27,8 +27,9 @@ public class UserDAO extends AbstractDAO<User>
     }
 
     @Override
-    public User findBy(String login) throws DAOException
+    public User findBy(Object ... value) throws DAOException
     {
+        String login=(String)value[0];
         User user=new User();
         PreparedStatement statement=null;
         try

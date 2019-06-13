@@ -15,11 +15,12 @@ public enum CommandConst
     GET_REGISTRATION_PAGE("get_registration_page"),
     GET_GAMES("get_games"),
     GET_GAME("get_game"),
-    RATE_GAME("rate_game"),
     BACKWARD("backward"),
     FORWARD("forward"),
     GET_SEARCH_PAGE("get_search_page"),
-    CHANGE_SEARCH_PARAMETER("change_search_parameter");
+    CHANGE_SEARCH_PARAMETER("change_search_parameter"),
+    GET_REVIEW_PAGE("get_review_page"),
+    SET_REVIEW("set_review");
 
     private String value;
 

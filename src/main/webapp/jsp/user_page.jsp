@@ -59,7 +59,7 @@
         <input type="hidden" name="command" value="change_email">
     </form>
     <form action="ControlServlet" method="get">
-        <input type="submit" name="button" value="<fmt:message key="label.go_back"/>">
+        <input type="submit" name="button" value="<fmt:message key="label.back"/>">
         <input type="hidden" name="command" value="get_main_page">
     </form>
 </body>

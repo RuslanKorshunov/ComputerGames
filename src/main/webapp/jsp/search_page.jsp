@@ -38,13 +38,13 @@
                         <option value="0" selected>
                         </option>
                         <option value="1">
-                            <fmt:message key="idGenre.life_simulation"/>
+                            <fmt:message key="genre.life_simulation"/>
                         </option>
                         <option value="2">
-                            <fmt:message key="idGenre.interactive_movie"/>
+                            <fmt:message key="genre.interactive_movie"/>
                         </option>
                         <option value="3">
-                            <fmt:message key="idGenre.rpg"/>
+                            <fmt:message key="genre.rpg"/>
                         </option>
                     </select>
                 </td>

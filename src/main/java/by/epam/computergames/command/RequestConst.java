@@ -29,7 +29,9 @@ public enum RequestConst
     PAGE_NUMBER("page_number"),
     DEVELOPERS("developers"),
     YEAR_FROM("year_from"),
-    YEAR_TO("year_to");
+    YEAR_TO("year_to"),
+    COMMENT("comment"),
+    MARK("mark");
 
     String value;
 

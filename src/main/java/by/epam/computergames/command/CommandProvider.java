@@ -44,8 +44,8 @@ public class CommandProvider
                 case GET_GAME:
                     command=new GetGameCommand();
                     break;
-                case RATE_GAME:
-                    command=new RateGameCommand();
+                case SET_REVIEW:
+                    command=new SetReviewCommand();
                     break;
                 case BACKWARD:
                     command=new SearchGamesCommand();
@@ -58,6 +58,9 @@ public class CommandProvider
                     break;
                 case CHANGE_SEARCH_PARAMETER:
                     command=new ChangeSearchParameterCommand();
+                    break;
+                case GET_REVIEW_PAGE:
+                    command=new GetReviewPageCommand();
                     break;
             }
         }

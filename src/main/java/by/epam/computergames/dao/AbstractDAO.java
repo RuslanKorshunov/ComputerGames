@@ -21,7 +21,7 @@ public abstract class AbstractDAO<T>
         this.connection=ConnectionPool.getInstance().getConnection();
     }
 
-    public abstract T findBy(String id) throws DAOException;
+    public abstract T findBy(Object ... values) throws DAOException;
 
     public abstract List<T> find(Object...values) throws DAOException;
 

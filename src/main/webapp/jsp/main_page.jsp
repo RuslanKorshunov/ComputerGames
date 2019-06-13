@@ -34,11 +34,23 @@
             <div class="gallery">
                 <c:choose >
                     <c:when test="${fn:contains(list, 'games')}">
-                        <form action="ControlServlet" method="get">
-                            <input type="submit" value="<fmt:message key="label.search"/>"/>
-                            <input type="hidden" name="command" value="get_search_page"/>
-                        </form>
                         <ctg:pictureTag deliveries="${games}" pageNumber="${page_number}"/>
+                        <div class="navigation">
+                            <form action="ControlServlet" method="get">
+                                <input type="submit" class="btn" value="<fmt:message key="label.backward"/>">
+                                <input type="hidden" name="command" value="backward">
+                                <input type="hidden" name="page_number" value="${page_number}">
+                            </form>
+                            <form action="ControlServlet" method="get">
+                                <input type="submit" class="btn" value="<fmt:message key="label.search"/>"/>
+                                <input type="hidden" name="command" value="get_search_page"/>
+                            </form>
+                            <form action="ControlServlet" method="get">
+                                <input type="submit" class="btn" value="<fmt:message key="label.forward"/>">
+                                <input type="hidden" name="command" value="forward">
+                                <input type="hidden" name="page_number" value="${page_number}">
+                            </form>
+                        </div>
                     </c:when>
                     <c:when test="${fn:contains(list, 'developers')}">
                         2
