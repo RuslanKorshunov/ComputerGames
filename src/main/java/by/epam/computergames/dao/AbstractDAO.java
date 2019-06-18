@@ -45,6 +45,7 @@ public abstract class AbstractDAO<T>
             try
             {
                 statement.close();
+                logger.info("statement's closed.");
             }
             catch (SQLException e)
             {

@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="ctg" uri="CustomTags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
-    <fmt:setLocale value="en_US" scope="session" />
+    <fmt:setLocale value="${lang}" scope="session"/>
     <fmt:setBundle basename="prop.text"  />
 <head>
     <title>${game_name}</title>
@@ -66,17 +66,14 @@
             </p>
         </div>
     </div>
-    <div class="navigation">
-<%--        <form action="ControlServlet" method="get">
-            <input type="submit" class="btn" value="<fmt:message key="label.back"/>">
-            <input type="hidden" name="command" value="get_games">
-            <input type="hidden" name="page_number" value="${page_number}">
-        </form>--%>
-        <form action="ControlServlet" method="get">
-            <input type="submit" class="btn" value="<fmt:message key="label.review"/>">
-            <input type="hidden" name="command" value="get_review_page">
-            <input type="hidden" name="id" value="${id}">
-        </form>
-    </div>
+    <c:if test="${role.getId()!=null}">
+        <div class="navigation">
+            <form action="ControlServlet" method="get">
+                <input type="submit" class="btn" value="<fmt:message key="label.review"/>">
+                <input type="hidden" name="command" value="get_review_page">
+                <input type="hidden" name="id" value="${id}">
+            </form>
+        </div>
+    </c:if>
 </body>
 </html>

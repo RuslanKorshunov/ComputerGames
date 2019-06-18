@@ -4,6 +4,8 @@ import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.Sex;
 import by.epam.computergames.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +14,8 @@ import java.util.List;
 
 public class UserDAO extends AbstractDAO<User>
 {
+    private static final Logger logger= LogManager.getLogger(UserDAO.class);
+
     private static final String SELECT_USER_BY_LOGIN_QUERY ="select users.login, users.password, " +
                                                             "users.type, userinfo.name, " +
                                                             "userinfo.surname, userinfo.sex, " +
@@ -115,7 +119,7 @@ public class UserDAO extends AbstractDAO<User>
             }
             catch (SQLException eSQL)
             {
-                //todo логгирование
+                logger.warn("There is "+e+" exception when connection tried make rollback.");
             }
             throw new  DAOException("UserDAO can't get data from database due to an internal error.", e);
         }
@@ -127,7 +131,7 @@ public class UserDAO extends AbstractDAO<User>
             }
             catch (SQLException e)
             {
-                //todo log
+                logger.warn("There is "+e+" exception when connection tried set autocommit.");
             }
             closeStatement(statement);
         }
@@ -145,7 +149,6 @@ public class UserDAO extends AbstractDAO<User>
         }
         catch(SQLException e)
         {
-            //todo log
             throw new DAOException("UserDAO can't update data in database due to an internal error.", e);
         }
         finally

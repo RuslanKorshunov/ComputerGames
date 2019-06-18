@@ -31,7 +31,8 @@ public enum RequestConst
     YEAR_FROM("year_from"),
     YEAR_TO("year_to"),
     COMMENT("comment"),
-    MARK("mark");
+    MARK("mark"),
+    LANG("lang");
 
     String value;
 

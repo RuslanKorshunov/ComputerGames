@@ -54,7 +54,6 @@ public class ReviewDAO extends AbstractDAO<Review>
         }
         catch (SQLException e)
         {
-            //TODO LOG
             throw new DAOException("ReviewDAO can't add data in database due to an internal error.", e);
         }
         finally

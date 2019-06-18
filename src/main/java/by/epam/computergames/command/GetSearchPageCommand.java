@@ -7,12 +7,16 @@ import by.epam.computergames.entity.Developer;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.SearchDevelopersService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class GetSearchPageCommand implements AbstractCommand
 {
+    private static final Logger logger= LogManager.getLogger(GetSearchPageCommand.class);
+
     @Override
     public Router execute(HttpServletRequest request)
     {
@@ -26,7 +30,7 @@ public class GetSearchPageCommand implements AbstractCommand
         }
         catch (ConnectionException|DAOException|IncorrectDataException|CryptologistException e)
         {
-            //todo log
+            logger.error(e);
             Page page=Page.MAIN_PAGE;
             router.setTarget(page.getPath());
         }

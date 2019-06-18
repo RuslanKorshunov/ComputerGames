@@ -2,7 +2,7 @@ package by.epam.computergames.entity;
 
 public enum Genre
 {
-    LIFE_SIMULATION(1, "life_simulation"),//TODO убрать genre
+    LIFE_SIMULATION(1, "life_simulation"),
     INTERACTIVE_MOVIE(2, "interactive_movie"),
     RPG(3, "rpg"),
     UNKNOWN(0, "unknown");

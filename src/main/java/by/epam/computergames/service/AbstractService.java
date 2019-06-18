@@ -5,11 +5,15 @@ import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.AbstractDAO;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public abstract class AbstractService<T>
 {
+    private static final Logger logger= LogManager.getLogger(AbstractService.class);
+
     public T find(Object ... values) throws IncorrectDataException,
                                             ConnectionException,
                                             DAOException,
@@ -20,8 +24,7 @@ public abstract class AbstractService<T>
 
     public List<T> findAll(Object ... values) throws IncorrectDataException,
                                                         ConnectionException,
-                                                        DAOException,
-                                                        CryptologistException
+                                                        DAOException
     {
         return null;
     }
@@ -29,12 +32,12 @@ public abstract class AbstractService<T>
     public void change(Object ... values) throws IncorrectDataException,
                                                     ConnectionException,
                                                     DAOException
-    {};
+    {}
     public void add(T entity) throws IncorrectDataException,
                                         ConnectionException,
                                         DAOException,
                                         CryptologistException
-    {};
+    {}
 
     protected void returnConnection(AbstractDAO dao)
     {
@@ -47,7 +50,7 @@ public abstract class AbstractService<T>
         }
         catch (ConnectionException e)
         {
-            //todo log
+            logger.warn("Service couldn't return connection.");
         }
     }
 }

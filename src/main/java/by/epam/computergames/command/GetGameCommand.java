@@ -9,11 +9,15 @@ import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.FindAverageRatingService;
 import by.epam.computergames.warehouse.GameWarehouse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class GetGameCommand implements AbstractCommand
 {
+    private static final Logger logger= LogManager.getLogger(GetGameCommand.class);
+
     @Override
     public Router execute(HttpServletRequest request)
     {
@@ -47,7 +51,7 @@ public class GetGameCommand implements AbstractCommand
         }
         catch (IncorrectDataException|ConnectionException|DAOException|CryptologistException e)
         {
-            //TODO log
+            logger.error(e);
             Page page=Page.MAIN_PAGE;
             router.setTarget(page.getPath());
         }

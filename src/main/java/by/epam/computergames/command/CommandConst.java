@@ -20,7 +20,9 @@ public enum CommandConst
     GET_SEARCH_PAGE("get_search_page"),
     CHANGE_SEARCH_PARAMETER("change_search_parameter"),
     GET_REVIEW_PAGE("get_review_page"),
-    SET_REVIEW("set_review");
+    SET_REVIEW("set_review"),
+    CHANGE_LANG("change_lang"),
+    GET_AUTHORIZATION_PAGE("get_authorization_page");
 
     private String value;
 

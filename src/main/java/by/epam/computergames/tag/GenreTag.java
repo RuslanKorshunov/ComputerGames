@@ -1,6 +1,8 @@
 package by.epam.computergames.tag;
 
 import by.epam.computergames.entity.Genre;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -9,6 +11,7 @@ import java.io.IOException;
 
 public class GenreTag extends TagSupport
 {
+    private static final Logger logger= LogManager.getLogger(GenreTag.class);
     private int idGenre;
     private static final String NOT_DEFINED= "genre.unknown";
 
@@ -23,22 +26,14 @@ public class GenreTag extends TagSupport
         JspWriter writer=pageContext.getOut();
         try
         {
-/*            try
-            {*/
-                Genre genre=Genre.getGenre(idGenre);
-                String genreValue=genre.getValue();
-                writer.write("<fmt:message key=\"interactive_movie\"/>");
-                writer.write("<br>");
-/*            }
-            catch (IncorrectDataException e)
-            {
-                //todo лог
-                writer.write("<fmt:message key=\""+NOT_DEFINED+"\"/>");
-            }*/
+            Genre genre=Genre.getGenre(idGenre);
+            String genreValue=genre.getValue();
+            writer.write("<fmt:message key=\"interactive_movie\"/>");
+            writer.write("<br>");
         }
         catch (IOException e)
         {
-            //todo log
+            logger.error(e);
         }
 
         return SKIP_BODY;

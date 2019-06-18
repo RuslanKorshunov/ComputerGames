@@ -1,6 +1,8 @@
 package by.epam.computergames.tag;
 
 import by.epam.computergames.entity.Developer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -9,6 +11,8 @@ import java.util.List;
 
 public class DeveloperSelectTag extends TagSupport
 {
+    private static final Logger logger= LogManager.getLogger(DeveloperSelectTag.class);
+
     private List<Developer> developers;
 
     public void setDevelopers(List<Developer> developers)
@@ -34,7 +38,7 @@ public class DeveloperSelectTag extends TagSupport
         }
         catch (IOException e)
         {
-            //todo log
+            logger.error(e);
         }
         return SKIP_BODY;
     }

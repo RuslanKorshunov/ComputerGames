@@ -1,6 +1,8 @@
 package by.epam.computergames.tag;
 
 import by.epam.computergames.entity.PictureDelivery;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -10,6 +12,8 @@ import java.util.List;
 
 public class PictureTag extends TagSupport
 {
+    private static final Logger logger= LogManager.getLogger(PictureTag.class);
+
     private List<PictureDelivery> deliveries;
     private int pageNumber;
 
@@ -43,27 +47,8 @@ public class PictureTag extends TagSupport
         }
         catch(IOException e)
         {
-            //TODO добавить лог
+            logger.error(e);
         }
         return SKIP_BODY;
     }
-
-    /*@Override
-    public int doEndTag() throws JspException
-    {
-        try
-        {
-            JspWriter writer=pageContext.getOut();
-            writer.write("<form action=\"ControlServlet\" method=\"get\">\n" +
-                    "<input type=\"submit\" name=\"command\" value=\"forward\">\n" +
-                    "<input type=\"submit\" name=\"command\" value=\"backward\">\n" +
-                    "<input type=\"hidden\" name=\"page_number\" value=\""+pageNumber+"\">\n" +
-                    "</form>");
-        }
-        catch (IOException e)
-        {
-            //TODO добавить лог
-        }
-        return EVAL_PAGE;
-    }*/
 }

@@ -5,12 +5,17 @@ import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.ChangeUserParameterService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
 public class ChangeUserParameterCommand implements AbstractCommand
 {
+    private static final Logger logger= LogManager.getLogger(ChangeUserParameterCommand.class);
+
     @Override
     public Router execute(HttpServletRequest request)
     {

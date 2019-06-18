@@ -4,10 +4,9 @@ import by.epam.computergames.command.AbstractCommand;
 import by.epam.computergames.command.CommandProvider;
 import by.epam.computergames.command.RequestConst;
 import by.epam.computergames.command.Router;
-import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.cryptologist.CryptologistException;
-import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +18,8 @@ import java.io.IOException;
 @WebServlet(name = "ControlServlet", urlPatterns = {"/ControlServlet"})
 public class ControlServlet extends HttpServlet
 {
+    private static final Logger logger= LogManager.getLogger(ControlServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -26,9 +27,9 @@ public class ControlServlet extends HttpServlet
         {
             processRequest(request ,response);
         }
-        catch (ConnectionException|IncorrectDataException|DAOException|CryptologistException e)
+        catch (IncorrectDataException e)
         {
-            System.out.println(e);
+            logger.error(e);
         }
     }
 
@@ -39,18 +40,15 @@ public class ControlServlet extends HttpServlet
         {
             processRequest(request ,response);
         }
-        catch (ConnectionException|IncorrectDataException|DAOException|CryptologistException e)
+        catch (IncorrectDataException e)
         {
-            System.out.println(e);
+            logger.error(e);
         }
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ConnectionException,
-                                                                                                    IOException,
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException,
                                                                                                     ServletException,
-                                                                                                    IncorrectDataException,
-                                                                                                    DAOException,
-                                                                                                    CryptologistException
+                                                                                                    IncorrectDataException
     {
         CommandProvider commandProvider=new CommandProvider();
         String commandName=request.getParameter(RequestConst.COMMAND.getValue());

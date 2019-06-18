@@ -8,12 +8,16 @@ import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.RegistrationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class RegistrationCommand implements AbstractCommand
 {
+    private static final Logger logger= LogManager.getLogger(RegistrationCommand.class);
+
     @Override
     public Router execute(HttpServletRequest request)
     {
@@ -55,16 +59,13 @@ public class RegistrationCommand implements AbstractCommand
         }
         catch (IncorrectDataException|DAOException e)
         {
-            System.out.println(e);
-            //todo лог
+            logger.error(e);
             router.setTarget(Page.REGISTRATION_PAGE.getPath());
         }
         catch (ConnectionException|CryptologistException e)
         {
-            System.out.println(e);
-            //TODO мне кажется, лучше перенаправлять на главное окно с правами гостя
-            //todo лог
-            router.setTarget(Page.LOGIN_PAGE.getPath());
+            logger.error(e);
+            router.setTarget(Page.AUTHORIZATION_PAGE.getPath());
         }
 
         return router;

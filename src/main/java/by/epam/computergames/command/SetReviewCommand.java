@@ -7,12 +7,16 @@ import by.epam.computergames.entity.Review;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.ReviewService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class SetReviewCommand implements AbstractCommand
 {
+    private static final Logger logger= LogManager.getLogger(SetReviewCommand.class);
+
     @Override
     public Router execute(HttpServletRequest request)
     {
@@ -40,7 +44,7 @@ public class SetReviewCommand implements AbstractCommand
         }
         catch (ConnectionException|DAOException|IncorrectDataException|CryptologistException e)
         {
-            //TODO log
+            logger.error(e);
             AbstractCommand command=new GetReviewPageCommand();
             router=command.execute(request);
         }

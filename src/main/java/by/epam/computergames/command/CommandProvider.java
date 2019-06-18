@@ -62,6 +62,11 @@ public class CommandProvider
                 case GET_REVIEW_PAGE:
                     command=new GetReviewPageCommand();
                     break;
+                case CHANGE_LANG:
+                    command=new ChangeLanguageCommand();
+                    break;
+                case GET_AUTHORIZATION_PAGE:
+                    command=new GetAuthorizationPageCommand();
             }
         }
         catch (NullPointerException e)

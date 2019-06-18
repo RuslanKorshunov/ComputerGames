@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ctg" uri="CustomTags"%>
 <html>
-<fmt:setLocale value="en_US" scope="session" />
+<fmt:setLocale value="${lang}" scope="session"/>
 <fmt:setBundle basename="prop.text"  />
 <head>
     <link rel="stylesheet" href="css/main_style.css">

@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ctg" uri="CustomTags"%>
 <html>
-<fmt:setLocale value="en_US" scope="session" />
+<fmt:setLocale value="${lang}" scope="session" />
 <fmt:setBundle basename="prop.text"  />
 <head>
     <title><fmt:message key="label.search"/></title>

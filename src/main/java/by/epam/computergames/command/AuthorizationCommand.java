@@ -8,12 +8,16 @@ import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.AuthorizationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class AuthorizationCommand implements AbstractCommand
 {
+    private static final Logger logger= LogManager.getLogger(AuthorizationCommand.class);
+
     @Override
     public Router execute(HttpServletRequest request)
     {
@@ -38,10 +42,12 @@ public class AuthorizationCommand implements AbstractCommand
             session.setAttribute(RequestConst.DEVELOPER.getValue(), EntityConst.DEFAULT_ID_DEVELOPER);
             Page page = Page.MAIN_PAGE;
             router.setTarget(page.getPath());
+            logger.info(user.getRole()+" "+user.getName()+" "+user.getSurname()+" with login "+user.getLogin()+" logs in system.");
         }
         catch (IncorrectDataException|CryptologistException|DAOException|ConnectionException e)
         {
-            Page page = Page.LOGIN_PAGE;
+            logger.error(e);
+            Page page = Page.AUTHORIZATION_PAGE;
             router.setTarget(page.getPath());
         }
         return router;
