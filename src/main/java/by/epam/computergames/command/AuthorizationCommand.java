@@ -7,7 +7,7 @@ import by.epam.computergames.entity.EntityConst;
 import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
-import by.epam.computergames.service.AuthorizationService;
+import by.epam.computergames.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,15 +26,17 @@ public class AuthorizationCommand implements AbstractCommand
         String login = request.getParameter(RequestConst.LOGIN.getValue());
         String password = request.getParameter(RequestConst.PASSWORD.getValue());
 
-        AbstractService service = new AuthorizationService();
+        AbstractService service = new UserService();
         try
         {
             User user = (User)service.find(login, password);
             HttpSession session = request.getSession();
             session.setAttribute(RequestConst.LOGIN.getValue(), login);
-            session.setAttribute(RequestConst.ROLE.getValue(), user.getRole());
+            session.setAttribute(RequestConst.ROLE.getValue(), user.getRole().getId());
             session.setAttribute(RequestConst.NAME.getValue(), user.getName());
             session.setAttribute(RequestConst.SURNAME.getValue(), user.getSurname());
+            session.setAttribute(RequestConst.SEX.getValue(), user.getSex().getValue());
+            session.setAttribute(RequestConst.EMAIL.getValue(), user.getEmail());
 
             session.setAttribute(RequestConst.YEAR_FROM.getValue(), EntityConst.DEFAULT_YEAR_FROM);
             session.setAttribute(RequestConst.YEAR_TO.getValue(), EntityConst.DEFAULT_YEAR_TO);

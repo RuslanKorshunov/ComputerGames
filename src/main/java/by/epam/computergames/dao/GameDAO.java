@@ -93,7 +93,7 @@ public class GameDAO extends AbstractDAO<Game>
     }
 
     @Override
-    public double findAverageValue(long id) throws DAOException {
+    public double findAverageValue(Object... values) throws DAOException {
         return 0;
     }
 
@@ -119,6 +119,11 @@ public class GameDAO extends AbstractDAO<Game>
             throw new DAOException("GameDAO can't find size from database due to an internal error.", e);
         }
         return size;
+    }
+
+    @Override
+    public void delete(Object... values) throws DAOException {
+
     }
 
     private String checkGameParameter(GameParameter gameParameter, String regex)

@@ -66,14 +66,20 @@
             </p>
         </div>
     </div>
-    <c:if test="${role.getId()!=null}">
-        <div class="navigation">
+    <div class="navigation">
+        <c:if test="${role!=3}">
             <form action="ControlServlet" method="get">
                 <input type="submit" class="btn" value="<fmt:message key="label.review"/>">
                 <input type="hidden" name="command" value="get_review_page">
                 <input type="hidden" name="id" value="${id}">
             </form>
-        </div>
-    </c:if>
+        </c:if>
+        <form action="ControlServlet" method="get">
+            <input type="submit" class="btn" value="<fmt:message key="label.reviews"/>">
+            <input type="hidden" name="command" value="get_reviews_page">
+            <input type="hidden" name="id" value="${id}">
+            <input type="hidden" name="page_number" value="0">
+        </form>
+    </div>
 </body>
 </html>

@@ -20,17 +20,17 @@
         </label>
 
         <ul class="menu">
-            <c:if test="${role.getId()!=null}">
+            <c:if test="${role!=3}">
                 <a href="ControlServlet?command=get_user_info">${name} ${surname}</a>
             </c:if>
             <a href="ControlServlet?command=get_games&page_number=0"><fmt:message key="menu.games"/></a>
             <a href="ControlServlet?command=change_lang"><fmt:message key="label.en_ru"/></a>
 <%--            <a href="#"><fmt:message key="menu.developers"/></a>
             <a href="#"><fmt:message key="menu.ratings"/></a>--%>
-            <c:if test="${role.getId()!=null}">
+            <c:if test="${role!=3}">
                 <a href="ControlServlet?command=logout"><fmt:message key="label.log_out"/></a>
             </c:if>
-            <c:if test="${role.getId()==null}">
+            <c:if test="${role==3}">
                 <a href="ControlServlet?command=get_authorization_page"><fmt:message key="label.log_in"/></a>
             </c:if>
             <label for="chk" class="hide-menu-btn">

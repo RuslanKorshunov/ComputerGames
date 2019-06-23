@@ -33,10 +33,15 @@ public abstract class AbstractService<T>
                                                     ConnectionException,
                                                     DAOException
     {}
+
     public void add(T entity) throws IncorrectDataException,
                                         ConnectionException,
                                         DAOException,
                                         CryptologistException
+    {}
+
+    public void delete(Object ... values) throws ConnectionException,
+                                                    DAOException
     {}
 
     protected void returnConnection(AbstractDAO dao)

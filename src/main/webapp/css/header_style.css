@@ -13,10 +13,12 @@
   line-height: 100px;
   float:left;
   text-transform:uppercase;
+  background: #1abc9c;
 }
 .menu{
   float:right;
   line-height: 100px;
+  background: #1abc9c;
 }
 .menu a{
   color: #fff;
@@ -24,6 +26,7 @@
   text-decoration: none;
   padding: 0 10px;
   transition: 0.4s;
+  background: #1abc9c;
 }
 
 .show-menu-btn,.hide-menu-btn{

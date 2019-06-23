@@ -39,6 +39,8 @@ public class CommandProvider
                     command=new GetRegistrationPageCommand();
                     break;
                 case GET_GAMES:
+                case BACKWARD_GAMES:
+                case FORWARD_GAMES:
                     command=new SearchGamesCommand();
                     break;
                 case GET_GAME:
@@ -46,12 +48,6 @@ public class CommandProvider
                     break;
                 case SET_REVIEW:
                     command=new SetReviewCommand();
-                    break;
-                case BACKWARD:
-                    command=new SearchGamesCommand();
-                    break;
-                case FORWARD:
-                    command=new SearchGamesCommand();
                     break;
                 case GET_SEARCH_PAGE:
                     command=new GetSearchPageCommand();
@@ -67,6 +63,15 @@ public class CommandProvider
                     break;
                 case GET_AUTHORIZATION_PAGE:
                     command=new GetAuthorizationPageCommand();
+                    break;
+                case GET_REVIEWS_PAGE:
+                case FORWARD_REVIEWS:
+                case BACKWARD_REVIEWS:
+                    command=new GetReviewsPageCommand();
+                    break;
+                case DELETE_REVIEW:
+                    command=new DeleteReviewCommand();
+                    break;
             }
         }
         catch (NullPointerException e)

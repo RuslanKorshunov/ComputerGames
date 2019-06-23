@@ -38,7 +38,7 @@
                         <div class="navigation">
                             <form action="ControlServlet" method="get">
                                 <input type="submit" class="btn" value="<fmt:message key="label.backward"/>">
-                                <input type="hidden" name="command" value="backward">
+                                <input type="hidden" name="command" value="backward_games">
                                 <input type="hidden" name="page_number" value="${page_number}">
                             </form>
                             <form action="ControlServlet" method="get">
@@ -47,7 +47,7 @@
                             </form>
                             <form action="ControlServlet" method="get">
                                 <input type="submit" class="btn" value="<fmt:message key="label.forward"/>">
-                                <input type="hidden" name="command" value="forward">
+                                <input type="hidden" name="command" value="forward_games">
                                 <input type="hidden" name="page_number" value="${page_number}">
                             </form>
                         </div>
@@ -61,11 +61,6 @@
                     <c:otherwise>
                     </c:otherwise>
                 </c:choose>
-<%--                <form action="ControlServlet" method="get">
-                    <input type="submit" name="command" value="forward">
-                    <input type="submit" name="command" value="backward">
-                    <input type="hidden" name="page_number" value="${page_number}">
-                </form>--%>
             </div>
         </div>
     </div>

@@ -29,9 +29,11 @@ public abstract class AbstractDAO<T>
 
     public abstract void create(T entity) throws DAOException;
 
-    public abstract double findAverageValue(long id) throws DAOException;
+    public abstract double findAverageValue(Object ... values) throws DAOException;
 
     public abstract long findSize(Object ... values) throws DAOException;
+
+    public abstract void delete(Object ... values) throws DAOException;
 
     public void returnConnection() throws ConnectionException
     {

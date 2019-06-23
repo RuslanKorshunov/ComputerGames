@@ -24,14 +24,13 @@ public class GetReviewPageCommand implements AbstractCommand
         HttpSession session=request.getSession();
         String login=(String)session.getAttribute(RequestConst.LOGIN.getValue());
         String idGame=request.getParameter(RequestConst.ID.getValue());
-        long idGameLong=Long.valueOf(idGame);//todo мне не нравится это
         request.setAttribute(RequestConst.ID.getValue(), idGame);
         try
         {
             AbstractService service=new ReviewService();
             Review review=new Review();
             review.setLogin(login);
-            review.setIdGame(idGameLong);
+            review.setIdGame(idGame);
             review=(Review) service.find(review);//todo мне это не нравится
             request.setAttribute(RequestConst.MARK.getValue(), review.getMark());
             request.setAttribute(RequestConst.COMMENT.getValue(), review.getComment());

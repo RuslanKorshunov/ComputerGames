@@ -1,6 +1,5 @@
 package by.epam.computergames.command;
 
-import by.epam.computergames.entity.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +14,6 @@ public class LogOutCommand implements AbstractCommand
     public Router execute(HttpServletRequest request)
     {
         HttpSession session=request.getSession();
-        Role role=(Role)session.getAttribute(RequestConst.ROLE.getValue());
         String name=(String)session.getAttribute(RequestConst.NAME.getValue());
         String surname=(String)session.getAttribute(RequestConst.SURNAME.getValue());
         String login=(String)session.getAttribute(RequestConst.LOGIN.getValue());
@@ -24,7 +22,7 @@ public class LogOutCommand implements AbstractCommand
         router.setTarget(page.getPath());
         router.setRedirect();
         session.invalidate();
-        logger.info(role+" "+name+" "+surname+" with login "+login+" logs out.");
+        logger.info(name+" "+surname+" with login "+login+" logs out.");
         return router;
     }
 }

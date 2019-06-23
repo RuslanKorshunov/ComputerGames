@@ -2,6 +2,7 @@ package by.epam.computergames.warehouse;
 
 import by.epam.computergames.entity.Game;
 import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.validator.NumberValidator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,18 +53,23 @@ public class GameWarehouse
         }
     }
 
-    public Game get(long id) throws IncorrectDataException
+    public Game get(String id) throws IncorrectDataException
     {
-        Game game=null;
+        if(id==null || !NumberValidator.validate(id))
+        {
+            throw new IncorrectDataException("id "+id+" has invalid value.");
+        }
+        long idLong=Long.valueOf(id);
+        Game game;
         if(instance!=null)
         {
             Lock lock=new ReentrantLock();
             lock.lock();
             try
             {
-                if(games.containsKey(id))
+                if(games.containsKey(idLong))
                 {
-                    game=games.get(id);
+                    game=games.get(idLong);
                 }
                 else
                 {

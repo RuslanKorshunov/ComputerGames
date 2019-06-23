@@ -8,14 +8,12 @@ import by.epam.computergames.dao.GameDAO;
 import by.epam.computergames.entity.Game;
 import by.epam.computergames.entity.GameParameter;
 import by.epam.computergames.exception.IncorrectDataException;
-import by.epam.computergames.validator.DeveloperValidator;
-import by.epam.computergames.validator.GenreValidator;
-import by.epam.computergames.validator.YearValidator;
+import by.epam.computergames.validator.NumberValidator;
 import by.epam.computergames.warehouse.GameWarehouse;
 
 import java.util.List;
 
-public class SearchGamesService extends AbstractService
+public class GameService extends AbstractService
 {
     private static final int NUMBER_OF_ENTITIES=8;
     private static final int FIRST_PAGE_INDEX=0;
@@ -28,23 +26,22 @@ public class SearchGamesService extends AbstractService
         GameParameter gameParameter =(GameParameter)values[0];
 
         String yearFrom= gameParameter.getYearFrom();
-        if(yearFrom!=null &&!YearValidator.validate(yearFrom))
+        if(yearFrom!=null &&!NumberValidator.validate(yearFrom))
         {
             throw new IncorrectDataException("Year "+yearFrom+" has invalid value.");
         }
         String yearTo= gameParameter.getYearTo();
-        if(yearTo!=null && !YearValidator.validate(yearTo))
+        if(yearTo!=null && !NumberValidator.validate(yearTo))
         {
             throw new IncorrectDataException("Year "+yearTo+" has invalid value.");
         }
-        //todo БРЕЕЕЕД
         String idGenre= gameParameter.getIdGenre();
-        if(idGenre!=null && !GenreValidator.validate(idGenre))
+        if(idGenre!=null && !NumberValidator.validate(idGenre))
         {
             throw new IncorrectDataException("IdGenre "+idGenre+" has invalid value.");
         }
         String idDeveloper= gameParameter.getIdDeveloper();
-        if(idDeveloper!=null && !DeveloperValidator.validate(idDeveloper))
+        if(idDeveloper!=null && !NumberValidator.validate(idDeveloper))
         {
             throw new IncorrectDataException("IdDeveloper "+idDeveloper+" has invalid value.");
         }
@@ -55,9 +52,9 @@ public class SearchGamesService extends AbstractService
         if(idFirst>=size && pageNumber!=FIRST_PAGE_INDEX)
         {
             pageNumber--;
-            gameParameter.setPageNumber(pageNumber);
             idFirst=pageNumber*NUMBER_OF_ENTITIES;
         }
+        gameParameter.setPageNumber(pageNumber);
         AbstractDAO dao=null;
         List<Game> games;
         try
@@ -101,13 +98,13 @@ public class SearchGamesService extends AbstractService
     {
         String command= gameParameter.getCommand();
         int pageNumber=Integer.parseInt(gameParameter.getPageNumber());
-        if(command.equals(CommandConst.FORWARD.getValue()))
+        if(command.equals(CommandConst.FORWARD_GAMES.getValue()))
         {
-            gameParameter.setPageNumber(pageNumber++);
+            pageNumber++;
         }
-        if(command.equals(CommandConst.BACKWARD.getValue()) && pageNumber!=FIRST_PAGE_INDEX)
+        if(command.equals(CommandConst.BACKWARD_GAMES.getValue()) && pageNumber!=FIRST_PAGE_INDEX)
         {
-            gameParameter.setPageNumber(pageNumber--);
+            pageNumber--;
         }
         return pageNumber;
     }

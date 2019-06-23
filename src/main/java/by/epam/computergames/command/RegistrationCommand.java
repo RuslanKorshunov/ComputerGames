@@ -7,7 +7,7 @@ import by.epam.computergames.entity.Sex;
 import by.epam.computergames.entity.User;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
-import by.epam.computergames.service.RegistrationService;
+import by.epam.computergames.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,24 +29,24 @@ public class RegistrationCommand implements AbstractCommand
         String name=request.getParameter(RequestConst.NAME.getValue());
         String surname=request.getParameter(RequestConst.SURNAME.getValue());
         String sex=request.getParameter(RequestConst.SEX.getValue());
+        User user=new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setName(name);
+        user.setSurname(surname);
+        if(sex==null)
+        {
+            user.setSex(Sex.THIRD);
+        }
+        else
+        {
+            user.setSex(Sex.valueOf(sex.toUpperCase()));
+        }
+
+        AbstractService service=new UserService();
         try
         {
-            User user=new User();
-            user.setLogin(login);
-            user.setPassword(password);
-            user.setEmail(email);
-            user.setName(name);
-            user.setSurname(surname);
-            if(sex==null)
-            {
-                user.setSex(Sex.THIRD);
-            }
-            else
-            {
-                user.setSex(Sex.valueOf(sex.toUpperCase()));
-            }
-
-            AbstractService service=new RegistrationService();
             service.add(user);
             Page page=Page.MAIN_PAGE;
             router.setTarget(page.getPath());

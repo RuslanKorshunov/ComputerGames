@@ -6,7 +6,7 @@ import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.entity.Developer;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
-import by.epam.computergames.service.SearchDevelopersService;
+import by.epam.computergames.service.DeveloperService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +21,7 @@ public class GetSearchPageCommand implements AbstractCommand
     public Router execute(HttpServletRequest request)
     {
         Router router=new Router();
-        AbstractService service=new SearchDevelopersService();
+        AbstractService service=new DeveloperService();
         try
         {
             List<Developer> developers=(List<Developer>)service.find();

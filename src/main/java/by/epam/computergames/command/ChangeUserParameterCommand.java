@@ -4,7 +4,7 @@ import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
-import by.epam.computergames.service.ChangeUserParameterService;
+import by.epam.computergames.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,11 +21,13 @@ public class ChangeUserParameterCommand implements AbstractCommand
     {
         Router router;
         HttpSession session=request.getSession();
-        GetUserInfoCommand getUserInfoCommand=new GetUserInfoCommand();
+
+        String login=(String) session.getAttribute(RequestConst.LOGIN.getValue());
+        String commandString=request.getParameter(RequestConst.COMMAND.getValue());
+
+        AbstractCommand getUserInfoCommand=new GetUserInfoCommand();
         try
         {
-            String login=(String) session.getAttribute(RequestConst.LOGIN.getValue());
-            String commandString=request.getParameter(RequestConst.COMMAND.getValue());
             CommandConst command= CommandConst.valueOf(commandString.toUpperCase());
             String newValue=null;
             switch (command)
@@ -46,7 +48,7 @@ public class ChangeUserParameterCommand implements AbstractCommand
                     newValue=request.getParameter(RequestConst.NEW_EMAIL_FORM.getValue());
             }
 
-            AbstractService service=new ChangeUserParameterService();
+            AbstractService service=new UserService();
             service.change(login, command, newValue);
             switch (command)
             {
@@ -61,7 +63,7 @@ public class ChangeUserParameterCommand implements AbstractCommand
         }
         catch (IncorrectDataException|DAOException|ConnectionException e)
         {
-            //todo лог
+            logger.error(e);
             router=getUserInfoCommand.execute(request);
         }
 

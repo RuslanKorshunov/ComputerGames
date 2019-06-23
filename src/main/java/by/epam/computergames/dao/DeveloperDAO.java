@@ -65,12 +65,17 @@ public class DeveloperDAO extends AbstractDAO<Developer>
     }
 
     @Override
-    public double findAverageValue(long id) throws DAOException {
+    public double findAverageValue(Object... values) throws DAOException {
         return 0;
     }
 
     @Override
     public long findSize(Object... values) throws DAOException {
         return 0;
+    }
+
+    @Override
+    public void delete(Object... values) throws DAOException {
+
     }
 }

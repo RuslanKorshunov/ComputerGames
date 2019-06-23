@@ -51,4 +51,15 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>reviewTag</name>
+        <tag-class>by.epam.computergames.tag.ReviewTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>reviews</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.List</type>
+        </attribute>
+    </tag>
 </taglib>

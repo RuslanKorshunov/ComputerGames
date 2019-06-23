@@ -1,7 +1,6 @@
 package by.epam.computergames.command;
 
 import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.cryptologist.CryptologistException;
 import by.epam.computergames.dao.DAOException;
 import by.epam.computergames.entity.GameParameter;
 import by.epam.computergames.entity.PictureDelivery;
@@ -42,7 +41,7 @@ public class SearchGamesCommand implements AbstractCommand
             Page pageMain=Page.MAIN_PAGE;
             router.setTarget(pageMain.getPath());
         }
-        catch (IncorrectDataException|DAOException|ConnectionException|CryptologistException e)
+        catch (IncorrectDataException|DAOException|ConnectionException e)
         {
             logger.error(e);
             Page pageMain=Page.MAIN_PAGE;

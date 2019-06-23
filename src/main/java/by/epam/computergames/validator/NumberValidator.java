@@ -1,8 +1,8 @@
 package by.epam.computergames.validator;
 
-public class DeveloperValidator
+public class NumberValidator
 {
-    private static final String REGEX="[0-9]{1,4}";
+    private static final String REGEX="\\d+";
 
     public static boolean validate(String developer)
     {

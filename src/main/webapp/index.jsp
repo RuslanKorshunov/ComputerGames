@@ -1,3 +1,4 @@
+<%@ page import="by.epam.computergames.entity.Role" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -7,6 +8,7 @@
     <c:set var="genre" value="0" scope="session"/>
     <c:set var="developer" value="0" scope="session"/>
     <c:set var="lang" value="en_US" scope="session"/>
+    <c:set var="role" value="<%=Role.GUEST.getId()%>" scope="session"/>
     <jsp:forward page="jsp/main_page.jsp"/>
 </body>
 </html>

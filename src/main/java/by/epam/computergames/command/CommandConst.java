@@ -15,14 +15,18 @@ public enum CommandConst
     GET_REGISTRATION_PAGE("get_registration_page"),
     GET_GAMES("get_games"),
     GET_GAME("get_game"),
-    BACKWARD("backward"),
-    FORWARD("forward"),
+    BACKWARD_GAMES("backward_games"),
+    FORWARD_GAMES("forward_games"),
+    FORWARD_REVIEWS("forward_reviews"),
+    BACKWARD_REVIEWS("backward_reviews"),
     GET_SEARCH_PAGE("get_search_page"),
     CHANGE_SEARCH_PARAMETER("change_search_parameter"),
     GET_REVIEW_PAGE("get_review_page"),
     SET_REVIEW("set_review"),
     CHANGE_LANG("change_lang"),
-    GET_AUTHORIZATION_PAGE("get_authorization_page");
+    GET_AUTHORIZATION_PAGE("get_authorization_page"),
+    GET_REVIEWS_PAGE("get_reviews_page"),
+    DELETE_REVIEW("delete_review");
 
     private String value;
 

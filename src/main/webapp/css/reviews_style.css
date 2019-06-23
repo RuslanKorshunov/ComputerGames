@@ -1,0 +1,60 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "montserrat",sans-serif;
+}
+.h1{
+    text-align: center;
+    text-transform: uppercase;
+    color: #333;
+}
+.reviews-main{
+    position: fixed;
+    /*top: 0;*/
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+}
+.navig{
+    /*position: absolute;*/
+    top: 20%;
+    left: 50%;
+    /*transform: translate(-50%, -50%);*/
+    display: flex;
+}
+.reviews{
+    max-width: 600px;
+    margin: auto;
+    padding: 0 10px;
+}
+.review{
+    padding: 20px;
+}
+.review-text{
+    display: block;
+    width: 100%;
+    height: 150px;
+    box-sizing: border-box;
+    margin: 16px 0;
+    border: 0;
+    background: white;
+    padding: 10px;
+    outline: none;
+    color: black;
+    transition: 0.5s;
+    resize: none;
+}
+.btn{
+    float: right;
+    border: 0;
+    background: #1abc9c;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.btn:hover{
+    background: #16a085;
+}

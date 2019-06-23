@@ -2,16 +2,18 @@ package by.epam.computergames.entity;
 
 public class Review
 {
-    private int mark;
+    private String mark;
     private String login;
-    private long idGame;
-    private String comments;
+    private String idGame;
+    private String comment;
+    private String name;
+    private String surname;
 
-    public int getMark() {
+    public String getMark() {
         return mark;
     }
 
-    public void setMark(int mark) {
+    public void setMark(String mark) {
         this.mark = mark;
     }
 
@@ -23,19 +25,47 @@ public class Review
         this.login = login;
     }
 
-    public long getIdGame() {
+    public String getIdGame() {
         return idGame;
     }
 
-    public void setIdGame(long idGame) {
+    public void setIdGame(String idGame) {
         this.idGame = idGame;
     }
 
     public String getComment() {
-        return comments;
+        return comment;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "mark=" + mark +
+                ", login='" + login + '\'' +
+                ", idGame=" + idGame +
+                ", comment='" + comment + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }

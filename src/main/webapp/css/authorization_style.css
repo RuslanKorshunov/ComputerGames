@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    background: #f1f1f1;
+    font-family: "montserrat",sans-serif;
+}
+.login-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    text-align: center;
+}
+.login-form h1{
+    color: black;
+    font-weight: 400;
+    margin-top: 0;
+}
+.txtb{
+    display: block;
+    box-sizing: border-box;
+    width: 240px;
+    background: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    color: black;
+    outline: none;
+    margin: 10px 0;
+    border-radius: 6px;
+    text-align: center;
+}
+.btn{
+    display: block;
+    box-sizing: border-box;
+    width: 240px;
+    background: #1abc9c;
+    border: 1px solid white;
+    padding: 10px 20px;
+    color: white;
+    outline: none;
+    margin: 10px 0;
+    border-radius: 6px;
+    text-align: center;
+}
+.btn:hover{
+    background: #16a085;
+}

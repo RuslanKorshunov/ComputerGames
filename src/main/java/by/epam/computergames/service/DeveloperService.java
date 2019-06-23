@@ -8,7 +8,7 @@ import by.epam.computergames.entity.Developer;
 
 import java.util.List;
 
-public class SearchDevelopersService extends AbstractService
+public class DeveloperService extends AbstractService
 {
     @Override
     public List<Developer> find(Object... values) throws ConnectionException, DAOException

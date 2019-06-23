@@ -7,7 +7,7 @@ import by.epam.computergames.entity.Game;
 import by.epam.computergames.entity.Genre;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
-import by.epam.computergames.service.FindAverageRatingService;
+import by.epam.computergames.service.AverageRatingService;
 import by.epam.computergames.warehouse.GameWarehouse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,9 +23,7 @@ public class GetGameCommand implements AbstractCommand
     {
         Router router=new Router();
 
-        String idGameValue=request.getParameter(RequestConst.ID.getValue());
-        String pageNumber=request.getParameter(RequestConst.PAGE_NUMBER.getValue());
-        long idGame=Long.parseLong(idGameValue);
+        String idGame=request.getParameter(RequestConst.ID.getValue());
 
         GameWarehouse gameWarehouse=GameWarehouse.getInstance();
         try
@@ -41,7 +39,7 @@ public class GetGameCommand implements AbstractCommand
             String picture=request.getContextPath()+"/img/"+game.getPicture();
             request.setAttribute(RequestConst.PICTURE.getValue(), picture);
             request.setAttribute(RequestConst.ID.getValue(), idGame);
-            AbstractService service =new FindAverageRatingService();
+            AbstractService service =new AverageRatingService();
             double rating=(double)service.find(idGame);
             request.setAttribute(RequestConst.RATING.getValue(), rating);
             int year=game.getYear();
