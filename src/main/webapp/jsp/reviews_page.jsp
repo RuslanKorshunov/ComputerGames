@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ct" uri="CustomTags"%>
@@ -6,6 +6,7 @@
 <fmt:setLocale value="${lang}" scope="session" />
 <fmt:setBundle basename="prop.text"/>
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/reviews_style.css">
     <link rel="stylesheet" href="css/main_style.css">
     <title><fmt:message key="label.reviews"/></title>

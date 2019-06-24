@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ctg" uri="CustomTags"%>
@@ -7,6 +7,7 @@
 <fmt:setLocale value="${lang}" scope="session" />
 <fmt:setBundle basename="prop.text"  />
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/review_style.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title><fmt:message key="label.review"/></title>
@@ -15,7 +16,7 @@
     <c:import url="header.jsp"/>
     <div class="review-main">
         <div class="review-form">
-            <h2>Mark: ${mark}</h2>
+            <h2><fmt:message key="label.mark"/>: ${mark}</h2>
             <form action="ControlServlet" method="post">
                 <select name="mark">
                     <option value="0" selected>
@@ -52,12 +53,12 @@
                     </option>
                 </select>
                 <textarea class="review-text" name="comment">${comment}</textarea>
-                <input type="submit" class="review-btn" value="Send">
+                <input type="submit" class="review-btn" value="<fmt:message key="label.save"/>">
                 <input type="hidden" name="command" value="set_review">
                 <input type="hidden" name="id" value="${id}">
             </form>
             <form action="ControlServlet" method="get">
-                <input type="submit" class="review-btn" value="Back">
+                <input type="submit" class="review-btn" value="<fmt:message key="label.back"/>">
                 <input type="hidden" name="command" value="get_game">
                 <input type="hidden" name="id" value="${id}">
             </form>

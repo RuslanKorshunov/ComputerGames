@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ctg" uri="CustomTags"%>
@@ -6,6 +6,7 @@
 <fmt:setLocale value="${lang}" scope="session" />
 <fmt:setBundle basename="prop.text"  />
 <head>
+    <meta charset="utf-8">
     <title><fmt:message key="label.search"/></title>
 </head>
 <body>
@@ -58,7 +59,8 @@
                 </td>
             </tr>
         </table>
-        <input type="submit" name="command" value="change_search_parameter">
+        <input type="submit" value="<fmt:message key="label.ok"/>">
+        <input type="hidden" name="command" value="change_search_parameter">
         <input type="hidden" name="page_number" value="0">
     </form>
 </body>
