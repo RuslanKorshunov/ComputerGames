@@ -1,7 +1,7 @@
 package by.epam.computergames.command;
 
 import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.dao.DAOException;
+import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.UserService;
@@ -12,59 +12,52 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class ChangeUserParameterCommand implements AbstractCommand
-{
-    private static final Logger logger= LogManager.getLogger(ChangeUserParameterCommand.class);
+public class ChangeUserParameterCommand implements AbstractCommand {
+    private static final Logger logger = LogManager.getLogger(ChangeUserParameterCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request)
-    {
+    public Router execute(HttpServletRequest request) {
         Router router;
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
 
-        String login=(String) session.getAttribute(RequestConst.LOGIN.getValue());
-        String commandString=request.getParameter(RequestConst.COMMAND.getValue());
+        String login = (String) session.getAttribute(RequestParameter.LOGIN.getValue());
+        String commandString = request.getParameter(RequestParameter.COMMAND.getValue());
 
-        AbstractCommand getUserInfoCommand=new GetUserInfoCommand();
-        try
-        {
-            CommandConst command= CommandConst.valueOf(commandString.toUpperCase());
-            String newValue=null;
-            switch (command)
-            {
+        AbstractCommand getUserInfoCommand = new GetUserInfoCommand();
+        try {
+            CommandName command = CommandName.valueOf(commandString.toUpperCase());
+            String newValue = null;
+            switch (command) {
                 case CHANGE_NAME:
-                    newValue=request.getParameter(RequestConst.NEW_NAME_FORM.getValue());
+                    newValue = request.getParameter(RequestParameter.NEW_NAME_FORM.getValue());
                     break;
                 case CHANGE_SURNAME:
-                    newValue=request.getParameter(RequestConst.NEW_SURNAME_FORM.getValue());
+                    newValue = request.getParameter(RequestParameter.NEW_SURNAME_FORM.getValue());
                     break;
                 case CHANGE_PASSWORD:
-                    newValue=request.getParameter(RequestConst.NEW_PASSWORD_FORM.getValue());
+                    newValue = request.getParameter(RequestParameter.NEW_PASSWORD_FORM.getValue());
                     break;
                 case CHANGE_SEX:
-                    newValue=request.getParameter(RequestConst.NEW_SEX_FORM.getValue());
+                    newValue = request.getParameter(RequestParameter.NEW_SEX_FORM.getValue());
                     break;
                 case CHANGE_EMAIL:
-                    newValue=request.getParameter(RequestConst.NEW_EMAIL_FORM.getValue());
+                    newValue = request.getParameter(RequestParameter.NEW_EMAIL_FORM.getValue());
             }
 
-            AbstractService service=new UserService();
+            AbstractService service = new UserService();
             service.change(login, command, newValue);
-            switch (command)
-            {
+            switch (command) {
                 case CHANGE_NAME:
-                    session.setAttribute(RequestConst.NAME.getValue(), newValue);
+                    session.setAttribute(RequestParameter.NAME.getValue(), newValue);
                     break;
                 case CHANGE_SURNAME:
-                    session.setAttribute(RequestConst.SURNAME.getValue(), newValue);
+                    session.setAttribute(RequestParameter.SURNAME.getValue(), newValue);
                     break;
             }
-            router=getUserInfoCommand.execute(request);
-        }
-        catch (IncorrectDataException|DAOException|ConnectionException e)
-        {
+            router = getUserInfoCommand.execute(request);
+        } catch (IncorrectDataException | DaoException | ConnectionException e) {
             logger.error(e);
-            router=getUserInfoCommand.execute(request);
+            router = getUserInfoCommand.execute(request);
         }
 
         return router;

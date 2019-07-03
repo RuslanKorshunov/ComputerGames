@@ -9,30 +9,24 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
-public class GenreTag extends TagSupport
-{
-    private static final Logger logger= LogManager.getLogger(GenreTag.class);
+public class GenreTag extends TagSupport {
+    private static final Logger logger = LogManager.getLogger(GenreTag.class);
     private int idGenre;
-    private static final String NOT_DEFINED= "genre.unknown";
+    private static final String NOT_DEFINED = "genre.unknown";
 
-    public void setIdGenre(int idGenre)
-    {
+    public void setIdGenre(int idGenre) {
         this.idGenre = idGenre;
     }
 
     @Override
-    public int doStartTag()
-    {
-        JspWriter writer=pageContext.getOut();
-        try
-        {
-            Genre genre=Genre.getGenre(idGenre);
-            String genreValue=genre.getValue();
+    public int doStartTag() {
+        JspWriter writer = pageContext.getOut();
+        try {
+            Genre genre = Genre.getGenre(idGenre);
+            String genreValue = genre.getValue();
             writer.write("<fmt:message key=\"interactive_movie\"/>");
             writer.write("<br>");
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             logger.error(e);
         }
 
@@ -40,8 +34,7 @@ public class GenreTag extends TagSupport
     }
 
     @Override
-    public int doEndTag() throws JspException
-    {
+    public int doEndTag() throws JspException {
 
         return EVAL_PAGE;
     }

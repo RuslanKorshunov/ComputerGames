@@ -1,7 +1,6 @@
 package by.epam.computergames.entity;
 
-public class Game
-{
+public class Game {
     private long idGame;
     private String name;
     private Genre genre;
@@ -29,9 +28,8 @@ public class Game
         return genre;
     }
 
-    public void setGenre(int idGenre)
-    {
-        genre=Genre.getGenre(idGenre);
+    public void setGenre(int idGenre) {
+        genre = Genre.getGenre(idGenre);
     }
 
     public void setGenre(Genre genre) {
@@ -50,8 +48,7 @@ public class Game
         return picture;
     }
 
-    public void setPicture(String picture)
-    {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 

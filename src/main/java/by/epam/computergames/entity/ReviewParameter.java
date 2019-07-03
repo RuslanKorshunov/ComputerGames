@@ -1,7 +1,6 @@
 package by.epam.computergames.entity;
 
-public class ReviewParameter
-{
+public class ReviewParameter {
     private String idGame;
     private String pageNumber;
     private String command;
@@ -18,9 +17,8 @@ public class ReviewParameter
         return pageNumber;
     }
 
-    public void setPageNumber(int pageNumber)
-    {
-        this.pageNumber=String.valueOf(pageNumber);
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = String.valueOf(pageNumber);
     }
 
     public void setPageNumber(String pageNumber) {

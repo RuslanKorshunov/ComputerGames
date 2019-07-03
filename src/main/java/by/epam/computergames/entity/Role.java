@@ -1,20 +1,17 @@
 package by.epam.computergames.entity;
 
-public enum Role
-{
+public enum Role {
     ADMIN(1),
     USER(2),
     GUEST(3);
 
     int id;
 
-    Role(int id)
-    {
-        this.id=id;
+    Role(int id) {
+        this.id = id;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 }

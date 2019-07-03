@@ -1,7 +1,6 @@
 package by.epam.computergames.command;
 
-public enum Page
-{
+public enum PageName {
     INDEX("index.jsp"),
     AUTHORIZATION_PAGE("jsp/authorization_page.jsp"),
     MAIN_PAGE("jsp/main_page.jsp"),
@@ -14,13 +13,11 @@ public enum Page
 
     private String path;
 
-    Page(String path)
-    {
+    PageName(String path) {
         this.path = path;
     }
 
-    public String getPath()
-    {
+    public String getPath() {
         return path;
     }
 }

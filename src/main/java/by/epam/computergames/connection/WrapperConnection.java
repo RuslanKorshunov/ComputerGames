@@ -5,23 +5,12 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class ProxyConnection
-{
+public class WrapperConnection {
     private Connection connection;
 
-    ProxyConnection(String url, String user, String password) throws ConnectionException
-    {
-        try
-        {
-            connection= DriverManager.getConnection(url, user, password);
-            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-        }
-        catch (SQLException e)
-        {
-            throw new ConnectionException("Connection couldn't be created.", e);
-        }
+    WrapperConnection(Connection connection){
+        this.connection=connection;
     }
-
 
     public Statement createStatement() throws SQLException {
         return connection.createStatement();

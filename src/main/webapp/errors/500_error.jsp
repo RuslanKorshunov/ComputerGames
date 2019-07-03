@@ -1,7 +1,7 @@
-<%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 <html>
 <head>
-    <title>Connection exception</title>
+    <title>500 Page</title>
 </head>
 <body>
     Request from ${pageContext.errorData.requestURI} is failed  <br/>

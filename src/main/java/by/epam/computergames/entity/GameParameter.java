@@ -1,7 +1,6 @@
 package by.epam.computergames.entity;
 
-public class GameParameter
-{
+public class GameParameter {
     private String pageNumber;
     private String yearFrom;
     private String yearTo;
@@ -14,8 +13,7 @@ public class GameParameter
                          String yearTo,
                          String idGenre,
                          String idDeveloper,
-                         String command)
-    {
+                         String command) {
         this.pageNumber = pageNumber;
         this.yearFrom = yearFrom;
         this.yearTo = yearTo;
@@ -28,9 +26,8 @@ public class GameParameter
         return pageNumber;
     }
 
-    public void setPageNumber(int pageNumber)
-    {
-        this.pageNumber=String.valueOf(pageNumber);
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = String.valueOf(pageNumber);
     }
 
     public void setPageNumber(String pageNumber) {
@@ -41,9 +38,8 @@ public class GameParameter
         return yearFrom;
     }
 
-    public void setYearFrom(int yearFrom)
-    {
-        this.yearFrom=String.valueOf(yearFrom);
+    public void setYearFrom(int yearFrom) {
+        this.yearFrom = String.valueOf(yearFrom);
     }
 
     public void setYearFrom(String yearFrom) {
@@ -54,8 +50,8 @@ public class GameParameter
         return yearTo;
     }
 
-    public void setYearTo(int yearTo){
-        this.yearTo=String.valueOf(yearTo);
+    public void setYearTo(int yearTo) {
+        this.yearTo = String.valueOf(yearTo);
     }
 
     public void setYearTo(String yearTo) {

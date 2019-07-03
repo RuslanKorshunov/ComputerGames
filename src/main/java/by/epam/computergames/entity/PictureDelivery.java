@@ -1,16 +1,14 @@
 package by.epam.computergames.entity;
 
-import by.epam.computergames.command.CommandConst;
+import by.epam.computergames.command.CommandName;
 
-public class PictureDelivery
-{
+public class PictureDelivery {
     private long id;
-    private CommandConst command;
+    private CommandName command;
     private String picture;
 
-    public PictureDelivery()
-    {
-        command = CommandConst.GET_GAME;
+    public PictureDelivery() {
+        command = CommandName.GET_GAME;
     }
 
     public long getId() {
@@ -21,7 +19,7 @@ public class PictureDelivery
         this.id = id;
     }
 
-    public CommandConst getCommand() {
+    public CommandName getCommand() {
         return command;
     }
 

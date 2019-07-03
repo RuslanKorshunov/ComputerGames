@@ -1,7 +1,6 @@
 package by.epam.computergames.entity;
 
-public class Review
-{
+public class Review {
     private String mark;
     private String login;
     private String idGame;

@@ -1,7 +1,7 @@
 package by.epam.computergames.command;
 
 import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.dao.DAOException;
+import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.entity.EntityConst;
 import by.epam.computergames.entity.GameParameter;
 import by.epam.computergames.entity.PictureDelivery;
@@ -13,52 +13,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class ChangeSearchParameterCommand implements AbstractCommand
-{
-    private static final Logger logger= LogManager.getLogger(ChangeSearchParameterCommand.class);
+public class ChangeSearchParameterCommand implements AbstractCommand {
+    private static final Logger logger = LogManager.getLogger(ChangeSearchParameterCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request)
-    {
-        Router router=new Router();
-        String pageNumber=request.getParameter(RequestConst.PAGE_NUMBER.getValue());
-        String yearFrom=request.getParameter(RequestConst.YEAR_FROM.getValue());
-        if(yearFrom.equals(""))
-        {
-            yearFrom=EntityConst.DEFAULT_YEAR_FROM;
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
+        String pageNumber = request.getParameter(RequestParameter.PAGE_NUMBER.getValue());
+        String yearFrom = request.getParameter(RequestParameter.YEAR_FROM.getValue());
+        if (yearFrom.equals("")) {
+            yearFrom = EntityConst.DEFAULT_YEAR_FROM;
         }
-        String yearTo=request.getParameter(RequestConst.YEAR_TO.getValue());
-        if(yearTo.equals(""))
-        {
-            yearTo=EntityConst.DEFAULT_YEAR_TO;
+        String yearTo = request.getParameter(RequestParameter.YEAR_TO.getValue());
+        if (yearTo.equals("")) {
+            yearTo = EntityConst.DEFAULT_YEAR_TO;
         }
-        String genre=request.getParameter(RequestConst.GENRE.getValue());
-        String developer=request.getParameter(RequestConst.DEVELOPER.getValue());
-        String command=request.getParameter(RequestConst.COMMAND.getValue());
+        String genre = request.getParameter(RequestParameter.GENRE.getValue());
+        String developer = request.getParameter(RequestParameter.DEVELOPER.getValue());
+        String command = request.getParameter(RequestParameter.COMMAND.getValue());
 
-        GameParameter gameParameter=new GameParameter(pageNumber, yearFrom, yearTo, genre, developer, command);
+        GameParameter gameParameter = new GameParameter(pageNumber, yearFrom, yearTo, genre, developer, command);
 
-        try
-        {
-            List<PictureDelivery> deliveries=InnerCommand.findPictureDelivery(gameParameter);
-            request.setAttribute(RequestConst.LIST.getValue(), RequestConst.GAMES.getValue());
-            request.setAttribute(RequestConst.GAMES.getValue(), deliveries);
-            request.setAttribute(RequestConst.PAGE_NUMBER.getValue(), gameParameter.getPageNumber());
+        try {
+            List<PictureDelivery> deliveries = InnerCommand.findPictureDelivery(gameParameter);
+            request.setAttribute(RequestParameter.LIST.getValue(), RequestParameter.GAMES.getValue());
+            request.setAttribute(RequestParameter.GAMES.getValue(), deliveries);
+            request.setAttribute(RequestParameter.PAGE_NUMBER.getValue(), gameParameter.getPageNumber());
 
-            HttpSession session=request.getSession();
-            session.setAttribute(RequestConst.YEAR_FROM.getValue(), yearFrom);
-            session.setAttribute(RequestConst.YEAR_TO.getValue(), yearTo);
-            session.setAttribute(RequestConst.GENRE.getValue(), genre);
-            session.setAttribute(RequestConst.DEVELOPER.getValue(), developer);
+            HttpSession session = request.getSession();
+            session.setAttribute(RequestParameter.YEAR_FROM.getValue(), yearFrom);
+            session.setAttribute(RequestParameter.YEAR_TO.getValue(), yearTo);
+            session.setAttribute(RequestParameter.GENRE.getValue(), genre);
+            session.setAttribute(RequestParameter.DEVELOPER.getValue(), developer);
 
-            Page pageMain=Page.MAIN_PAGE;
-            router.setTarget(pageMain.getPath());
-        }
-        catch (ConnectionException|DAOException|IncorrectDataException e)
-        {
+            PageName pageName = PageName.MAIN_PAGE;
+            router.setTarget(pageName);
+        } catch (ConnectionException | DaoException | IncorrectDataException e) {
             logger.error(e);
-            Page page=Page.SEARCH_PAGE;
-            router.setTarget(page.getPath());
+            PageName pageName = PageName.SEARCH_PAGE;
+            router.setTarget(pageName);
         }
 
         return router;

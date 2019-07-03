@@ -1,7 +1,6 @@
 package by.epam.computergames.entity;
 
-public class Developer
-{
+public class Developer {
     private long idDeveloper;
     private String name;
 

@@ -1,7 +1,6 @@
 package by.epam.computergames.command;
 
-public enum CommandConst
-{
+public enum CommandName {
     AUTHORIZATION("authorization"),
     LOGOUT("logout"),
     GET_USER_INFO("get_user_info"),
@@ -30,8 +29,7 @@ public enum CommandConst
 
     private String value;
 
-    CommandConst(String value)
-    {
+    CommandName(String value) {
         this.value = value;
     }
 

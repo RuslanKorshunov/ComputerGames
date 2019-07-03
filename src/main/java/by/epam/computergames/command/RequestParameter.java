@@ -1,7 +1,6 @@
 package by.epam.computergames.command;
 
-public enum RequestConst
-{
+public enum RequestParameter {
     LOGIN("login"),
     PASSWORD("password"),
     ROLE("role"),
@@ -37,8 +36,7 @@ public enum RequestConst
 
     String value;
 
-    RequestConst(String value)
-    {
+    RequestParameter(String value) {
         this.value = value;
     }
 

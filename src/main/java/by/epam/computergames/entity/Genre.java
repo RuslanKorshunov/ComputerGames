@@ -1,7 +1,6 @@
 package by.epam.computergames.entity;
 
-public enum Genre
-{
+public enum Genre {
     LIFE_SIMULATION(1, "life_simulation"),
     INTERACTIVE_MOVIE(2, "interactive_movie"),
     RPG(3, "rpg"),
@@ -23,22 +22,20 @@ public enum Genre
         return value;
     }
 
-    public static Genre getGenre(int idGenre)
-    {
+    public static Genre getGenre(int idGenre) {
         Genre genre;
-        switch (idGenre)
-        {
+        switch (idGenre) {
             case 1:
-                genre=LIFE_SIMULATION;
+                genre = LIFE_SIMULATION;
                 break;
             case 2:
-                genre=INTERACTIVE_MOVIE;
+                genre = INTERACTIVE_MOVIE;
                 break;
             case 3:
-                genre=RPG;
+                genre = RPG;
                 break;
-                default:
-                    genre=UNKNOWN;
+            default:
+                genre = UNKNOWN;
         }
         return genre;
     }

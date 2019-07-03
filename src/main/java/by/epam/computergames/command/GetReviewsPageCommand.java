@@ -1,7 +1,7 @@
 package by.epam.computergames.command;
 
 import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.dao.DAOException;
+import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.entity.Review;
 import by.epam.computergames.entity.ReviewParameter;
 import by.epam.computergames.exception.IncorrectDataException;
@@ -13,38 +13,32 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class GetReviewsPageCommand implements AbstractCommand
-{
-    private static final Logger logger= LogManager.getLogger(GetReviewPageCommand.class);
+public class GetReviewsPageCommand implements AbstractCommand {
+    private static final Logger logger = LogManager.getLogger(GetReviewPageCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request)
-    {
-        Router router=new Router();
-        String idGame=request.getParameter(RequestConst.ID.getValue());
-        String pageNumber=request.getParameter(RequestConst.PAGE_NUMBER.getValue());
-        String command=request.getParameter(RequestConst.COMMAND.getValue());
-        ReviewParameter reviewParameter=new ReviewParameter();
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
+        String idGame = request.getParameter(RequestParameter.ID.getValue());
+        String pageNumber = request.getParameter(RequestParameter.PAGE_NUMBER.getValue());
+        String command = request.getParameter(RequestParameter.COMMAND.getValue());
+        ReviewParameter reviewParameter = new ReviewParameter();
         reviewParameter.setIdGame(idGame);
         reviewParameter.setPageNumber(pageNumber);
         reviewParameter.setCommand(command);
-        AbstractService service=null;
-        try
-        {
-            service=new ReviewService();
-            List<Review> reviews=service.findAll(reviewParameter);
-            reviews.forEach(review -> System.out.println(review));
-            request.setAttribute(RequestConst.ID.getValue(), idGame);
-            request.setAttribute(RequestConst.REVIEWS.getValue(), reviews);
-            Page page=Page.REVIEWS_PAGE;
-            request.setAttribute(RequestConst.PAGE_NUMBER.getValue(), reviewParameter.getPageNumber());
-            router.setTarget(page.getPath());
-        }
-        catch(IncorrectDataException| ConnectionException| DAOException e)
-        {
+        AbstractService service = null;
+        try {
+            service = new ReviewService();
+            List<Review> reviews = service.findAll(reviewParameter);
+            request.setAttribute(RequestParameter.ID.getValue(), idGame);
+            request.setAttribute(RequestParameter.REVIEWS.getValue(), reviews);
+            request.setAttribute(RequestParameter.PAGE_NUMBER.getValue(), reviewParameter.getPageNumber());
+            PageName pageName = PageName.REVIEWS_PAGE;
+            router.setTarget(pageName);
+        } catch (IncorrectDataException | ConnectionException | DaoException e) {
             logger.error(e);
-            Page page=Page.MAIN_PAGE;
-            router.setTarget(page.getPath());
+            PageName pageName = PageName.MAIN_PAGE;
+            router.setTarget(pageName);
         }
 
         return router;

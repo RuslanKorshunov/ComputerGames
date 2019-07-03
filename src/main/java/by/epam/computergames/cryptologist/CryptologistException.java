@@ -1,7 +1,6 @@
 package by.epam.computergames.cryptologist;
 
-public class CryptologistException extends Exception
-{
+public class CryptologistException extends Exception {
     public CryptologistException() {
     }
 

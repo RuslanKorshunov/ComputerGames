@@ -1,7 +1,6 @@
 package by.epam.computergames.exception;
 
-public class IncorrectDataException extends Exception
-{
+public class IncorrectDataException extends Exception {
     public IncorrectDataException() {
         super();
     }
