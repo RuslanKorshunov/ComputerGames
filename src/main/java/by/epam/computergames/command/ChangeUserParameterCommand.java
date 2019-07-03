@@ -51,6 +51,11 @@ public class ChangeUserParameterCommand implements AbstractCommand {
                 case CHANGE_SURNAME:
                     session.setAttribute(RequestParameter.SURNAME.getValue(), newValue);
                     break;
+                case CHANGE_EMAIL:
+                    session.setAttribute(RequestParameter.EMAIL.getValue(), newValue);
+                    break;
+                case CHANGE_SEX:
+                    session.setAttribute(RequestParameter.SEX.getValue(), newValue);
             }
             router = getUserInfoCommand.execute(request);
         } catch (ServiceException e) {

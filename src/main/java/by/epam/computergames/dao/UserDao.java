@@ -24,6 +24,10 @@ public class UserDao extends AbstractDao<User> {
     private static final String INSERT_INTO_USERS_QUERY = "insert into users values (?, ?, ?)";
     private static final String INSERT_INTO_USERINFO_QUERY = "insert into userinfo values (?, ?, ?, ?, ?)";
 
+    private static final String MALE = "male";
+    private static final String FEMALE = "female";
+    private static final String THIRD = "third";
+
     public UserDao() throws DaoException {
         super();
     }
@@ -56,13 +60,13 @@ public class UserDao extends AbstractDao<User> {
                 String surname = rs.getString(5);
                 user.setSurname(surname);
                 switch (rs.getString(6)) {
-                    case "male":
+                    case MALE:
                         user.setSex(Sex.MALE);
                         break;
-                    case "female":
+                    case FEMALE:
                         user.setSex(Sex.FEMALE);
                         break;
-                    case "third":
+                    case THIRD:
                         user.setSex(Sex.THIRD);
                         break;
                     default:
@@ -118,8 +122,10 @@ public class UserDao extends AbstractDao<User> {
     public void update(String tableName, String column, String newValue, String login) throws DaoException {
         PreparedStatement statement = null;
         try {
-            final String UPDATE_USER_QUERY = "update " + tableName + " set " + column + "='" + newValue + "' where login='" + login + "'";
+            final String UPDATE_USER_QUERY = "update " + tableName + " set " + column + "=? where login=?";
             statement = connection.prepareStatement(UPDATE_USER_QUERY);
+            statement.setString(1, newValue);
+            statement.setString(2, login);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("UserDao can't update data in database due to an internal error.", e);
