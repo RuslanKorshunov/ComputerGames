@@ -1,12 +1,9 @@
 package by.epam.computergames.command;
 
-import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.cryptologist.CryptologistException;
-import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.entity.EntityConst;
 import by.epam.computergames.entity.User;
-import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
+import by.epam.computergames.service.ServiceException;
 import by.epam.computergames.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,7 +39,7 @@ public class AuthorizationCommand implements AbstractCommand {
             PageName pageName = PageName.MAIN_PAGE;
             router.setTarget(pageName);
             logger.info(user.getRole() + " " + user.getName() + " " + user.getSurname() + " with login " + user.getLogin() + " logs in system.");
-        } catch (IncorrectDataException | CryptologistException | DaoException | ConnectionException e) {
+        } catch (ServiceException e) {
             logger.error(e);
             PageName pageName = PageName.AUTHORIZATION_PAGE;
             router.setTarget(pageName);

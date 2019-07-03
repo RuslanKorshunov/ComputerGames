@@ -15,8 +15,15 @@ public abstract class AbstractDao<T> {
 
     protected WrapperConnection connection;
 
-    public AbstractDao() throws ConnectionException {
-        this.connection = ConnectionPool.getInstance().getConnection();
+    public AbstractDao() throws DaoException {
+        try
+        {
+            this.connection = ConnectionPool.getInstance().getConnection();
+        }
+        catch (ConnectionException e)
+        {
+            throw new DaoException(e);
+        }
     }
 
     public abstract T findBy(Object... values) throws DaoException;

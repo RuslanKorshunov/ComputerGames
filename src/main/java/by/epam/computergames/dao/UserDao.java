@@ -24,7 +24,7 @@ public class UserDao extends AbstractDao<User> {
     private static final String INSERT_INTO_USERS_QUERY = "insert into users values (?, ?, ?)";
     private static final String INSERT_INTO_USERINFO_QUERY = "insert into userinfo values (?, ?, ?, ?, ?)";
 
-    public UserDao() throws ConnectionException {
+    public UserDao() throws DaoException {
         super();
     }
 

@@ -1,10 +1,9 @@
 package by.epam.computergames.command;
 
-import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.entity.Review;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.ReviewService;
+import by.epam.computergames.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +28,7 @@ public class DeleteReviewCommand implements AbstractCommand {
             service.delete(review);
             AbstractCommand command = new GetReviewsPageCommand();
             router = command.execute(request);
-        } catch (ConnectionException | DaoException e) {
+        } catch (ServiceException e) {
             logger.error(e);
             AbstractCommand command = new GetGameCommand();
             router = command.execute(request);

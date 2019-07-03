@@ -1,6 +1,5 @@
 package by.epam.computergames.dao;
 
-import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Developer;
 
 import java.sql.PreparedStatement;
@@ -12,7 +11,7 @@ import java.util.List;
 public class DeveloperDao extends AbstractDao<Developer> {
     private static final String FIND_QUERY = "select * from developers";
 
-    public DeveloperDao() throws ConnectionException {
+    public DeveloperDao() throws DaoException{
         super();
     }
 

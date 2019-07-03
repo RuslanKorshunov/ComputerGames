@@ -1,12 +1,9 @@
 package by.epam.computergames.command;
 
-import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.cryptologist.CryptologistException;
-import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.entity.Sex;
 import by.epam.computergames.entity.User;
-import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
+import by.epam.computergames.service.ServiceException;
 import by.epam.computergames.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,13 +47,9 @@ public class RegistrationCommand implements AbstractCommand {
             session.setAttribute(RequestParameter.ROLE.getValue(), user.getRole());
             session.setAttribute(RequestParameter.NAME.getValue(), user.getName());
             session.setAttribute(RequestParameter.SURNAME.getValue(), user.getSurname());
-        } catch (IncorrectDataException | DaoException e) {
+        } catch (ServiceException e) {
             logger.error(e);
-            PageName pageName=PageName.REGISTRATION_PAGE;
-            router.setTarget(pageName);
-        } catch (ConnectionException | CryptologistException e) {
-            logger.error(e);
-            PageName pageName=PageName.AUTHORIZATION_PAGE;
+            PageName pageName = PageName.REGISTRATION_PAGE;
             router.setTarget(pageName);
         }
 

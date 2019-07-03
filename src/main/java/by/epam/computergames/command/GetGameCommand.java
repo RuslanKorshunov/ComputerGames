@@ -1,13 +1,11 @@
 package by.epam.computergames.command;
 
-import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.cryptologist.CryptologistException;
-import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.entity.Game;
 import by.epam.computergames.entity.Genre;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.AverageRatingService;
+import by.epam.computergames.service.ServiceException;
 import by.epam.computergames.warehouse.GameWarehouse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +41,7 @@ public class GetGameCommand implements AbstractCommand {
             request.setAttribute(RequestParameter.YEAR.getValue(), year);
             PageName pageName = PageName.GAME_PAGE;
             router.setTarget(pageName);
-        } catch (IncorrectDataException | ConnectionException | DaoException | CryptologistException e) {
+        } catch (ServiceException | IncorrectDataException e) {
             logger.error(e);
             PageName pageName = PageName.MAIN_PAGE;
             router.setTarget(pageName);

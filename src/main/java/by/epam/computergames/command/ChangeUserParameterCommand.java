@@ -1,9 +1,7 @@
 package by.epam.computergames.command;
 
-import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.dao.DaoException;
-import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
+import by.epam.computergames.service.ServiceException;
 import by.epam.computergames.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +53,7 @@ public class ChangeUserParameterCommand implements AbstractCommand {
                     break;
             }
             router = getUserInfoCommand.execute(request);
-        } catch (IncorrectDataException | DaoException | ConnectionException e) {
+        } catch (ServiceException e) {
             logger.error(e);
             router = getUserInfoCommand.execute(request);
         }

@@ -35,7 +35,7 @@ public class ControlServlet extends HttpServlet {
         } catch (ConnectionException e) {
             logger.warn("ConnectionPool couldn't be destroyed.");
         }
-        logger.warn("Servlet was destroyed.");
+        logger.info("Servlet was destroyed.");
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

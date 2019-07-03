@@ -1,12 +1,9 @@
 package by.epam.computergames.command;
 
-import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.cryptologist.CryptologistException;
-import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.entity.Review;
-import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
 import by.epam.computergames.service.ReviewService;
+import by.epam.computergames.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,7 +30,7 @@ public class GetReviewPageCommand implements AbstractCommand {
             request.setAttribute(RequestParameter.COMMENT.getValue(), review.getComment());
             PageName pageName = PageName.REVIEW_PAGE;
             router.setTarget(pageName);
-        } catch (ConnectionException | DaoException | IncorrectDataException | CryptologistException e) {
+        } catch (ServiceException e) {
             logger.error(e);
             router = new Router();
             request.setAttribute(RequestParameter.ID.getValue(), idGame);

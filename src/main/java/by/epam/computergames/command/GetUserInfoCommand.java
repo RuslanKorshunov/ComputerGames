@@ -8,7 +8,6 @@ public class GetUserInfoCommand implements AbstractCommand {
         Router router = new Router();
         PageName pageName = PageName.USER_PAGE;
         router.setTarget(pageName);
-
         return router;
     }
 }

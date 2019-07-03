@@ -44,7 +44,7 @@ public class ConnectionPool {
             connection = instance.connectionsFree.take();
             instance.connectionsUses.add(connection);
         } catch (InterruptedException e) {
-            throw new ConnectionException("ConnectionPool cant' give connection.", e);
+            throw new ConnectionException("ConnectionPool can't give connection.", e);
         }
         return connection;
     }

@@ -1,6 +1,5 @@
 package by.epam.computergames.dao;
 
-import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.EntityConst;
 import by.epam.computergames.entity.Game;
 import by.epam.computergames.entity.GameParameter;
@@ -21,7 +20,7 @@ public class GameDao extends AbstractDao<Game> {
     private static final String END_QUERY = " limit ?, ?";
     private static final String FIND_SIZE_QUERY = "select count(idGame) from games";
 
-    public GameDao() throws ConnectionException {
+    public GameDao() throws DaoException {
         super();
     }
 

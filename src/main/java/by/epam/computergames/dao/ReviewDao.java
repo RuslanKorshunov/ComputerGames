@@ -1,6 +1,5 @@
 package by.epam.computergames.dao;
 
-import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Review;
 
 import java.sql.PreparedStatement;
@@ -27,7 +26,7 @@ public class ReviewDao extends AbstractDao<Review> {
     private static final String FIND_SIZE_QUERY = "select count(idGame) from reviews where idGame=?";
     private static final String DELETE_QUERY = "delete from reviews where idGame=? and login=?";
 
-    public ReviewDao() throws ConnectionException {
+    public ReviewDao() throws DaoException {
         super();
     }
 

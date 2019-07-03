@@ -1,11 +1,9 @@
 package by.epam.computergames.command;
 
-import by.epam.computergames.connection.ConnectionException;
-import by.epam.computergames.dao.DaoException;
 import by.epam.computergames.entity.EntityConst;
 import by.epam.computergames.entity.GameParameter;
 import by.epam.computergames.entity.PictureDelivery;
-import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,10 +46,10 @@ public class ChangeSearchParameterCommand implements AbstractCommand {
 
             PageName pageName = PageName.MAIN_PAGE;
             router.setTarget(pageName);
-        } catch (ConnectionException | DaoException | IncorrectDataException e) {
+        } catch (ServiceException e) {
             logger.error(e);
-            PageName pageName = PageName.SEARCH_PAGE;
-            router.setTarget(pageName);
+            AbstractCommand getSearchPageCommand = new GetSearchPageCommand();
+            router = getSearchPageCommand.execute(request);
         }
 
         return router;
