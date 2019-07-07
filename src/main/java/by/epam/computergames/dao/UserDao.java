@@ -119,7 +119,11 @@ public class UserDao extends AbstractDao<User> {
     }
 
     @Override
-    public void update(String tableName, String column, String newValue, String login) throws DaoException {
+    public void update(Object ... values) throws DaoException {
+        String tableName=(String)values[0];
+        String column=(String)values[1];
+        String newValue=(String)values[2];
+        String login=(String)values[3];
         PreparedStatement statement = null;
         try {
             final String UPDATE_USER_QUERY = "update " + tableName + " set " + column + "=? where login=?";

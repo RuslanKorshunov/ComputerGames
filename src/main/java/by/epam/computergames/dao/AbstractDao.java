@@ -30,7 +30,7 @@ public abstract class AbstractDao<T> {
 
     public abstract List<T> find(Object... values) throws DaoException;
 
-    public abstract void update(String tableName, String column, String newValue, String id) throws DaoException;
+    public abstract void update(Object ... values) throws DaoException;
 
     public abstract void create(T entity) throws DaoException;
 

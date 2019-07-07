@@ -43,7 +43,7 @@ public class ChangeUserParameterCommand implements AbstractCommand {
             }
 
             AbstractService service = new UserService();
-            service.change(login, command, newValue);
+            service.update(login, command, newValue);
             switch (command) {
                 case CHANGE_NAME:
                     session.setAttribute(RequestParameter.NAME.getValue(), newValue);

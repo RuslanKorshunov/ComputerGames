@@ -18,8 +18,8 @@ class InnerCommand {
         games.forEach(game ->
         {
             PictureDelivery delivery = new PictureDelivery();
-            long idGame = game.getIdGame();
-            delivery.setId(idGame);
+            String idGame = game.getIdGame();
+            delivery.setIdGame(idGame);
             String picture = game.getPicture();
             delivery.setPicture(picture);
             deliveries.add(delivery);

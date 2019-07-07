@@ -64,7 +64,7 @@ public class UserService extends AbstractService<User> {
     }
 
     @Override
-    public void change(Object... values) throws ServiceException {
+    public void update(Object... values) throws ServiceException {
         String login = (String) values[0];
         CommandName command = (CommandName) values[1];
         String newValue = (String) values[2];

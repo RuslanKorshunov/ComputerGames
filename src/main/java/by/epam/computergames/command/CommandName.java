@@ -25,7 +25,9 @@ public enum CommandName {
     CHANGE_LANG("change_lang"),
     GET_AUTHORIZATION_PAGE("get_authorization_page"),
     GET_REVIEWS_PAGE("get_reviews_page"),
-    DELETE_REVIEW("delete_review");
+    DELETE_REVIEW("delete_review"),
+    GET_CHANGE_GAME_PAGE("get_change_game_page"),
+    CHANGE_GAME("change_game");
 
     private String value;
 

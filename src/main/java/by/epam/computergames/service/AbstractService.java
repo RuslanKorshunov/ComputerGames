@@ -18,7 +18,7 @@ public abstract class AbstractService<T> {
         return null;
     }
 
-    public void change(Object... values) throws ServiceException {
+    public void update(Object... values) throws ServiceException {
     }
 
     public void add(T entity) throws ServiceException{

@@ -34,26 +34,6 @@
             </form>
         </div>
         <ct:reviewTag reviews="${reviews}"/>
-        <%--<div class="reviews">
-            <div class="review">
-            <h5>Ruslan Korshunov <fmt:message key="label.mark"/>: 5</h5>
-            <textarea class="review-text" disabled></textarea>
-            <c:if test="${role.getId()==1}">
-                <form action="ControlServlet" method="get">
-                    <input type="submit" class="btn" value="Delete">
-                </form>
-            </c:if>
-        </div>
-            <div class="review">
-                <h5>Ruslan Korshunov <fmt:message key="label.mark"/>: 5</h5>
-                <textarea class="review-text" disabled></textarea>
-                <c:if test="${role.getId()==1}">
-                    <form action="ControlServlet" method="get">
-                        <input type="submit" class="btn" value="Delete">
-                    </form>
-                </c:if>
-            </div>
-        </div>--%>
     </div>
 </body>
 </html>

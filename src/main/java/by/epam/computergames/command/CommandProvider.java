@@ -72,6 +72,12 @@ public class CommandProvider {
                 case DELETE_REVIEW:
                     command = new DeleteReviewCommand();
                     break;
+                case GET_CHANGE_GAME_PAGE:
+                    command = new GetChangeGamePageCommand();
+                    break;
+                case CHANGE_GAME:
+                    command = new ChangeGameCommand();
+                    break;
             }
         } catch (IllegalArgumentException e) {
             throw new IncorrectDataException("parameter has invalid value.", e);

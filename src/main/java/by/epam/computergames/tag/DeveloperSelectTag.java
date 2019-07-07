@@ -22,7 +22,7 @@ public class DeveloperSelectTag extends TagSupport {
     public int doStartTag() {
         try {
             JspWriter writer = pageContext.getOut();
-            writer.write("<select name=\"developer\">\n");
+            writer.write("<select class=\"txtb\" name=\"developer\">\n");
             writer.write("<option value=\"0\" selected></option>");
             for (Developer developer : developers) {
                 long idDeveloper = developer.getIdDeveloper();

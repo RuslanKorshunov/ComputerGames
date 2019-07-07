@@ -3,7 +3,7 @@ package by.epam.computergames.entity;
 import by.epam.computergames.command.CommandName;
 
 public class PictureDelivery {
-    private long id;
+    private String idGame;
     private CommandName command;
     private String picture;
 
@@ -11,12 +11,12 @@ public class PictureDelivery {
         command = CommandName.GET_GAME;
     }
 
-    public long getId() {
-        return id;
+    public String getIdGame() {
+        return idGame;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdGame(String idGame) {
+        this.idGame = idGame;
     }
 
     public CommandName getCommand() {

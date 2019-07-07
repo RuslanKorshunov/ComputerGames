@@ -146,7 +146,8 @@ public class ReviewDao extends AbstractDao<Review> {
     }
 
     @Override
-    public void update(String tableName, String column, String newValue, String id) throws DaoException {
+    public void update(Object... values) throws DaoException {
+
     }
 
     @Override

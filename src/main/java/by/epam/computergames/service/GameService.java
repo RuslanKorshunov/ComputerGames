@@ -23,19 +23,19 @@ public class GameService extends AbstractService {
 
         try {
             String yearFrom = gameParameter.getYearFrom();
-            if (yearFrom != null && !NumberValidator.validate(yearFrom)) {
+            if (yearFrom == null || !NumberValidator.validate(yearFrom)) {
                 throw new IncorrectDataException("Year has invalid value " + "\"" + yearFrom + "\"");
             }
             String yearTo = gameParameter.getYearTo();
-            if (yearTo != null && !NumberValidator.validate(yearTo)) {
+            if (yearTo == null || !NumberValidator.validate(yearTo)) {
                 throw new IncorrectDataException("Year has invalid value " + "\"" + yearTo + "\"");
             }
             String idGenre = gameParameter.getIdGenre();
-            if (idGenre != null && !NumberValidator.validate(idGenre)) {
+            if (idGenre == null || !NumberValidator.validate(idGenre)) {
                 throw new IncorrectDataException("IdGenre has invalid value " + "\"" + idGenre + "\"");
             }
             String idDeveloper = gameParameter.getIdDeveloper();
-            if (idDeveloper != null && !NumberValidator.validate(idDeveloper)) {
+            if (idDeveloper == null || !NumberValidator.validate(idDeveloper)) {
                 throw new IncorrectDataException("IdDeveloper has invalid value " + "\"" + idDeveloper + "\"");
             }
             int pageNumber = checkCommand(gameParameter);
@@ -57,7 +57,7 @@ public class GameService extends AbstractService {
 
             GameWarehouse warehouse = GameWarehouse.getInstance();
             for (Game game : games) {
-                warehouse.put(game.getIdGame(), game);
+                warehouse.put(game);
             }
         } catch (IncorrectDataException | DaoException e) {
             throw new ServiceException(e);
@@ -89,5 +89,47 @@ public class GameService extends AbstractService {
             pageNumber--;
         }
         return pageNumber;
+    }
+
+    @Override
+    public void update(Object... values) throws ServiceException {
+        Game game = (Game) values[0];
+
+        try {
+            String idGame = game.getIdGame();
+            if (idGame == null || !NumberValidator.validate(idGame)) {
+                throw new IncorrectDataException("idGame has invalid value " + "\"" + idGame + "\"");
+            }
+            String name = game.getName();
+            if (name == null) {
+                throw new IncorrectDataException("name has invalid value " + "\"" + name + "\"");
+            }
+/*            int idGenre = game.getGenre().getIdGenre();
+            if (idGenre == Genre.UNKNOWN.getIdGenre())
+            {
+                throw new IncorrectDataException("idGenre has invalid value "+"\""+idGenre+"\"");
+            }*/
+            String idDeveloper = game.getDeveloper();
+            if (idDeveloper == null || !NumberValidator.validate(idDeveloper)) {
+                throw new IncorrectDataException("idDeveloper has invalid value " + "\"" + idDeveloper + "\"");
+            }
+            String year = game.getYear();
+            if (year == null || !NumberValidator.validate(year)) {
+                throw new IncorrectDataException("year has invalid value " + "\"" + year + "\"");
+            }
+
+            AbstractDao dao = null;
+            try {
+                dao = new GameDao();
+                dao.update(game);
+                game = ((GameDao) dao).findBy(idGame);
+                GameWarehouse gameWarehouse = GameWarehouse.getInstance();
+                gameWarehouse.put(game);
+            } finally {
+                returnConnection(dao);
+            }
+        } catch (IncorrectDataException | DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 }

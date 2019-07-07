@@ -32,7 +32,8 @@ public enum RequestParameter {
     COMMENT("comment"),
     MARK("mark"),
     LANG("lang"),
-    REVIEWS("reviews");
+    REVIEWS("reviews"),
+    ABOUT("about");
 
     String value;
 

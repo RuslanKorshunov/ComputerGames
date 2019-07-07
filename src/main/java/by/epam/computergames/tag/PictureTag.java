@@ -32,7 +32,7 @@ public class PictureTag extends TagSupport {
             for (PictureDelivery delivery : deliveries) {
                 String path = contextPath + "/img/" + delivery.getPicture();
                 String command = "ControlServlet?command=" + delivery.getCommand().getValue() +
-                        "&id=" + delivery.getId();
+                        "&id=" + delivery.getIdGame();
                 writer.write("<a href=\"" + command + "\" class=\"image\">");
                 writer.write("<img src=\"" + path + "\"/></a>");
             }

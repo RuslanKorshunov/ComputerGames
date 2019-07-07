@@ -1,19 +1,20 @@
 package by.epam.computergames.command;
 
+import by.epam.computergames.entity.Developer;
 import by.epam.computergames.entity.Game;
-import by.epam.computergames.entity.Genre;
 import by.epam.computergames.exception.IncorrectDataException;
 import by.epam.computergames.service.AbstractService;
-import by.epam.computergames.service.AverageRatingService;
+import by.epam.computergames.service.DeveloperService;
 import by.epam.computergames.service.ServiceException;
 import by.epam.computergames.warehouse.GameWarehouse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-public class GetGameCommand implements AbstractCommand {
-    private static final Logger logger = LogManager.getLogger(GetGameCommand.class);
+public class GetChangeGamePageCommand implements AbstractCommand {
+    private static final Logger logger = LogManager.getLogger(GetChangeGamePageCommand.class);
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -28,27 +29,21 @@ public class GetGameCommand implements AbstractCommand {
             request.setAttribute(RequestParameter.GAME_NAME.getValue(), name);
             String developer = game.getDeveloper();
             request.setAttribute(RequestParameter.DEVELOPER.getValue(), developer);
-            Genre genre = game.getGenre();
-            String genreValue = genre.getValue();
-            request.setAttribute(RequestParameter.GENRE.getValue(), genreValue);
-            String picture = request.getContextPath() + "/img/" + game.getPicture();
-            request.setAttribute(RequestParameter.PICTURE.getValue(), picture);
-            request.setAttribute(RequestParameter.ID.getValue(), idGame);
-            AbstractService service = new AverageRatingService();
-            double rating = (double) service.find(idGame);
-            request.setAttribute(RequestParameter.RATING.getValue(), rating);
             String year = game.getYear();
             request.setAttribute(RequestParameter.YEAR.getValue(), year);
             String information = game.getInformation();
             request.setAttribute(RequestParameter.ABOUT.getValue(), information);
-            PageName pageName = PageName.GAME_PAGE;
+            AbstractService service=new DeveloperService();
+            List<Developer> developers=(List<Developer>) service.find();
+            request.setAttribute(RequestParameter.DEVELOPERS.getValue(), developers);
+            request.setAttribute(RequestParameter.ID.getValue(), idGame);
+            PageName pageName = PageName.CHANGE_GAME_PAGE;
             router.setTarget(pageName);
-        } catch (ServiceException | IncorrectDataException e) {
+        } catch (IncorrectDataException | ServiceException e) {
             logger.error(e);
-            PageName pageName = PageName.MAIN_PAGE;
-            router.setTarget(pageName);
+            AbstractCommand command = new GetGameCommand();
+            router = command.execute(request);
         }
-
         return router;
     }
 }

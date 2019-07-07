@@ -6,11 +6,13 @@ import by.epam.computergames.validator.NumberValidator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class GameWarehouse {
     private static GameWarehouse instance;
+    private static AtomicBoolean isCreated=new AtomicBoolean();
     private Map<Long, Game> games;
 
 
@@ -19,48 +21,54 @@ public class GameWarehouse {
     }
 
     public static GameWarehouse getInstance() {
-        if (instance == null) {
+        if (isCreated.compareAndSet(false, true)) {
             instance = new GameWarehouse();
         }
         return instance;
     }
 
-    public void put(long id, Game game) throws IncorrectDataException {
-        if (instance != null) {
-            Lock lock = new ReentrantLock();
-            lock.lock();
-            try {
-                if (!games.containsKey(id)) {
-                    games.put(id, game);
-                }
-            } finally {
-                lock.unlock();
+    public void put(Game game) throws IncorrectDataException {
+        Lock lock = new ReentrantLock();
+        lock.lock();
+        try {
+            if (!isCreated.get()) {
+                throw new IncorrectDataException("GameWarehause isn't initialized");
             }
-        } else {
-            throw new IncorrectDataException("GameWarehause isn't initialized.");
+            if (game == null) {
+                throw new IncorrectDataException("game can't be null");
+            }
+            String idGameStr = game.getIdGame();
+            if (idGameStr == null || !NumberValidator.validate(idGameStr)) {
+                throw new IncorrectDataException("idGae has invalid value " + "\"" + idGameStr + "\"");
+            }
+            long idGame = Long.valueOf(idGameStr);
+            games.put(idGame, game);
+        } finally {
+            lock.unlock();
         }
+
     }
 
-    public Game get(String id) throws IncorrectDataException {
-        if (id == null || !NumberValidator.validate(id)) {
-            throw new IncorrectDataException("id " + id + " has invalid value.");
+    public Game get(String idGame) throws IncorrectDataException {
+        if (!isCreated.get()) {
+            throw new IncorrectDataException("GameWarehause isn't initialized");
         }
-        long idLong = Long.valueOf(id);
+        if (idGame == null || !NumberValidator.validate(idGame)) {
+            throw new IncorrectDataException("idGame has invalid value " + "\"" + idGame + "\"");
+        }
+        long idGameLong = Long.valueOf(idGame);
         Game game;
-        if (instance != null) {
-            Lock lock = new ReentrantLock();
-            lock.lock();
-            try {
-                if (games.containsKey(idLong)) {
-                    game = games.get(idLong);
-                } else {
-                    throw new IncorrectDataException("Game with id " + id + " doesn't exist.");
-                }
-            } finally {
-                lock.unlock();
+
+        Lock lock = new ReentrantLock();
+        lock.lock();
+        try {
+            if (games.containsKey(idGameLong)) {
+                game = games.get(idGameLong);
+            } else {
+                throw new IncorrectDataException("Game with idGame " + idGame + " doesn't exist");
             }
-        } else {
-            throw new IncorrectDataException("GameWarehause isn't initialized.");
+        } finally {
+            lock.unlock();
         }
         return game;
     }

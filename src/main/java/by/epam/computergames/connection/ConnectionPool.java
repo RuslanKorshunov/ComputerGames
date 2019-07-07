@@ -50,7 +50,7 @@ public class ConnectionPool {
     }
 
     public void returnConnection(WrapperConnection connection) throws ConnectionException {
-        if (instance == null) {
+        if (!isCreated.get()) {
             throw new ConnectionException("ConnectionPool isn't initialized.");
         }
         if (connection == null) {

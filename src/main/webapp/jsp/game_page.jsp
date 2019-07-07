@@ -63,11 +63,18 @@
                 <div class="border"></div>
             </h2>
             <p>
-                Nothing now
+                ${about}
             </p>
         </div>
     </div>
     <div class="navigation">
+        <c:if test="${role==1}">
+            <form action="ControlServlet" method="get">
+                <input type="submit" class="btn" value="<fmt:message key="label.change"/>">
+                <input type="hidden" name="command" value="get_change_game_page">
+                <input type="hidden" name="id" value="${id}">
+            </form>
+        </c:if>
         <c:if test="${role!=3}">
             <form action="ControlServlet" method="get">
                 <input type="submit" class="btn" value="<fmt:message key="label.review"/>">

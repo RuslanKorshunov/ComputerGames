@@ -1,18 +1,19 @@
 package by.epam.computergames.entity;
 
 public class Game {
-    private long idGame;
+    private String idGame;
     private String name;
     private Genre genre;
     private String developer;
     private String picture;
-    private int year;
+    private String year;
+    private String information;
 
-    public long getIdGame() {
+    public String getIdGame() {
         return idGame;
     }
 
-    public void setIdGame(long idGame) {
+    public void setIdGame(String idGame) {
         this.idGame = idGame;
     }
 
@@ -52,12 +53,20 @@ public class Game {
         this.picture = picture;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public void setInformation(String information) {
+        this.information = information;
     }
 
     @Override
@@ -69,6 +78,7 @@ public class Game {
                 ", developer='" + developer + '\'' +
                 ", picture='" + picture + '\'' +
                 ", year=" + year +
+                ", information='" + information + '\'' +
                 '}';
     }
 }
