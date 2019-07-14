@@ -30,7 +30,7 @@
             </select>
             <ctg:developerSelect developers="${developers}"/>
             <input class="txtb" type="text" name="year" value="${year}">
-            <textarea class="review-text" placeholder="Описание" name="about">${about}</textarea>
+            <textarea class="review-text" placeholder="<fmt:message key="label.about"/>" name="about">${about}</textarea>
             <input class="btn" type="submit" value="<fmt:message key="label.save"/>">
             <input type="hidden" name="command" value="change_game">
             <input type="hidden" name="id" value="${id}">

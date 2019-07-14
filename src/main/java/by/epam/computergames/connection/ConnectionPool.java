@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
@@ -33,7 +35,6 @@ public class ConnectionPool {
     public static ConnectionPool getInstance() throws ConnectionException {
         if (isCreated.compareAndSet(false, true)) {
             instance = new ConnectionPool();
-
         }
         return instance;
     }
@@ -87,18 +88,21 @@ public class ConnectionPool {
         }
     }
 
-    public void checkConnections() throws IncorrectDataException, ConnectionException//TODO переделать
+    public static void checkConnections() throws IncorrectDataException, ConnectionException//TODO переделать
     {
-        if (instance == null) {
+        if (!isCreated.get()) {
             throw new IncorrectDataException("ConnectionPool isn't initialized.");
         }
-        int sizeFree = instance.connectionsFree.size();
-        int sizeUses = instance.connectionsUses.size();
-        if (sizeFree + sizeUses != DEFAULT_POOL_SIZE)//TODO это так делается???
-        {
-            ConnectionBuilder builder = new ConnectionBuilder();
-            builder.create(Math.abs(DEFAULT_POOL_SIZE - (sizeFree + sizeUses)));
-            instance.connectionsFree.addAll(builder.getConnections());
+        Lock lock = new ReentrantLock();
+        lock.lock();
+        try {
+            ConnectionPool instance = getInstance();
+            BlockingQueue<WrapperConnection> connections = instance.connectionsUses;
+            for (WrapperConnection connection : connections) {
+                instance.returnConnection(connection);
+            }
+        } finally {
+            lock.unlock();
         }
     }
 }

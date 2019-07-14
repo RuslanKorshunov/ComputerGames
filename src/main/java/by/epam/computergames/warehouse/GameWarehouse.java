@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class GameWarehouse {
     private static GameWarehouse instance;
-    private static AtomicBoolean isCreated=new AtomicBoolean();
+    private static AtomicBoolean isCreated = new AtomicBoolean();
     private Map<Long, Game> games;
 
 
@@ -71,5 +71,14 @@ public class GameWarehouse {
             lock.unlock();
         }
         return game;
+    }
+
+    public void destroy() throws IncorrectDataException {
+        if (isCreated.compareAndSet(true, false)) {
+            games.clear();
+            instance = null;
+        } else {
+            throw new IncorrectDataException("GameWarehause isn't initialized");
+        }
     }
 }

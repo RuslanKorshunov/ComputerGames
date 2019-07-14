@@ -1,21 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <fmt:setLocale value="${lang}" scope="session"/>
 <fmt:setBundle basename="prop.text"/>
 <head>
     <meta charset="utf-8">
     <title><fmt:message key="label.registration"/></title>
+    <link rel="stylesheet" href="css/registration_style.css">
 </head>
 <body>
-    <form action="ControlServlet" method="post">
+    <c:import url="header.jsp"/>
+    <div class="main">
+        <form action="ControlServlet" method="post">
         <table>
             <tr>
                 <td>
                     <fmt:message key="label.login"/>
                 </td>
                 <td>
-                    <input type="text" name="login">
+                    <input class="txtb" type="text" name="login">
                 </td>
             </tr>
             <tr>
@@ -23,7 +27,7 @@
                     <fmt:message key="label.password"/>
                 </td>
                 <td>
-                    <input type="text" name="password">
+                    <input class="txtb" type="text" name="password">
                 </td>
             </tr>
             <tr>
@@ -31,7 +35,7 @@
                     <fmt:message key="label.email"/>
                 </td>
                 <td>
-                    <input type="text" name="email">
+                    <input class="txtb" type="text" name="email">
                 </td>
             </tr>
             <tr>
@@ -39,7 +43,7 @@
                     <fmt:message key="label.name"/>
                 </td>
                 <td>
-                    <input type="text" name="name">
+                    <input class="txtb" type="text" name="name">
                 </td>
             </tr>
             <tr>
@@ -47,7 +51,7 @@
                     <fmt:message key="label.surname"/>
                 </td>
                 <td>
-                    <input type="text" name="surname">
+                    <input class="txtb" type="text" name="surname">
                 </td>
             </tr>
             <tr>
@@ -81,11 +85,12 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" name="button" value="<fmt:message key="label.registration"/>">
+                    <input class="btn" type="submit" name="button" value="<fmt:message key="label.registration"/>">
                     <input type="hidden" name="command" value="registration">
                 </td>
             </tr>
         </table>
     </form>
+    </div>
 </body>
 </html>
