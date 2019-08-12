@@ -1,6 +1,6 @@
 package by.epam.computergames.entity;
 
-public class Game {
+public class Game extends AbstractEntity implements Cloneable {
     private String idGame;
     private String name;
     private Genre genre;
@@ -80,5 +80,10 @@ public class Game {
                 ", year=" + year +
                 ", information='" + information + '\'' +
                 '}';
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

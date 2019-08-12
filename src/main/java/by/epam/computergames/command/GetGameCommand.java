@@ -35,7 +35,7 @@ public class GetGameCommand implements AbstractCommand {
             request.setAttribute(RequestParameter.PICTURE.getValue(), picture);
             request.setAttribute(RequestParameter.ID.getValue(), idGame);
             AbstractService service = new AverageRatingService();
-            double rating = (double) service.find(idGame);
+            double rating = (double) service.find(game);
             request.setAttribute(RequestParameter.RATING.getValue(), rating);
             String year = game.getYear();
             request.setAttribute(RequestParameter.YEAR.getValue(), year);

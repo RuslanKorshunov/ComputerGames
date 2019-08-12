@@ -18,7 +18,7 @@ public class GetSearchPageCommand implements AbstractCommand {
         Router router = new Router();
         AbstractService service = new DeveloperService();
         try {
-            List<Developer> developers = (List<Developer>) service.find();
+            List<Developer> developers = (List<Developer>) service.findAll();
             request.setAttribute(RequestParameter.DEVELOPERS.getValue(), developers);
             PageName pageName=PageName.SEARCH_PAGE;
             router.setTarget(pageName);

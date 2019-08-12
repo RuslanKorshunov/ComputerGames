@@ -25,7 +25,7 @@ public class GetReviewPageCommand implements AbstractCommand {
             Review review = new Review();
             review.setLogin(login);
             review.setIdGame(idGame);
-            review = (Review) service.find(review);//todo мне это не нравится
+            review = (Review) service.find(review);
             request.setAttribute(RequestParameter.MARK.getValue(), review.getMark());
             request.setAttribute(RequestParameter.COMMENT.getValue(), review.getComment());
             PageName pageName = PageName.REVIEW_PAGE;
@@ -33,7 +33,6 @@ public class GetReviewPageCommand implements AbstractCommand {
         } catch (ServiceException e) {
             logger.error(e);
             router = new Router();
-            request.setAttribute(RequestParameter.ID.getValue(), idGame);
             PageName pageName = PageName.SEARCH_PAGE;
             router.setTarget(pageName);
         }

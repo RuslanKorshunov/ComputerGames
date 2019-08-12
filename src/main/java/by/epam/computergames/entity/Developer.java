@@ -1,6 +1,6 @@
 package by.epam.computergames.entity;
 
-public class Developer {
+public class Developer extends AbstractEntity{
     private long idDeveloper;
     private String name;
 

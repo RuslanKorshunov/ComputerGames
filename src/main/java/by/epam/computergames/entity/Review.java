@@ -1,6 +1,6 @@
 package by.epam.computergames.entity;
 
-public class Review {
+public class Review extends AbstractEntity {
     private String mark;
     private String login;
     private String idGame;

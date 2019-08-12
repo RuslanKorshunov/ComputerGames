@@ -16,12 +16,9 @@ public abstract class AbstractDao<T> {
     protected WrapperConnection connection;
 
     public AbstractDao() throws DaoException {
-        try
-        {
+        try {
             this.connection = ConnectionPool.getInstance().getConnection();
-        }
-        catch (ConnectionException e)
-        {
+        } catch (ConnectionException e) {
             throw new DaoException(e);
         }
     }
@@ -30,7 +27,7 @@ public abstract class AbstractDao<T> {
 
     public abstract List<T> find(Object... values) throws DaoException;
 
-    public abstract void update(Object ... values) throws DaoException;
+    public abstract void update(Object... values) throws DaoException;
 
     public abstract void create(T entity) throws DaoException;
 
@@ -40,8 +37,14 @@ public abstract class AbstractDao<T> {
 
     public abstract void delete(Object... values) throws DaoException;
 
-    public void returnConnection() throws ConnectionException {
-        ConnectionPool.getInstance().returnConnection(connection);
+    public void close() {
+        if (connection != null) {
+            try {
+                ConnectionPool.getInstance().returnConnection(connection);
+            } catch (ConnectionException e) {
+                logger.warn("Dao couldn't be closed because it can't return connection", e);
+            }
+        }
     }
 
     protected void closeStatement(Statement statement) {

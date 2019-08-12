@@ -22,7 +22,9 @@ public class GameWarehouse {
 
     public static GameWarehouse getInstance() {
         if (isCreated.compareAndSet(false, true)) {
-            instance = new GameWarehouse();
+            if (instance == null) {
+                instance = new GameWarehouse();
+            }
         }
         return instance;
     }
@@ -64,9 +66,12 @@ public class GameWarehouse {
         try {
             if (games.containsKey(idGameLong)) {
                 game = games.get(idGameLong);
+                game = (Game) game.clone();
             } else {
                 throw new IncorrectDataException("Game with idGame " + idGame + " doesn't exist");
             }
+        } catch (CloneNotSupportedException e) {
+            throw new IncorrectDataException(e);
         } finally {
             lock.unlock();
         }

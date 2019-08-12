@@ -24,8 +24,7 @@ public class ConnectionPool {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             ConnectionBuilder builder = new ConnectionBuilder();
-            builder.create(DEFAULT_POOL_SIZE);
-            connectionsFree = builder.getConnections();
+            connectionsFree = builder.create(DEFAULT_POOL_SIZE);
             connectionsUses = new LinkedBlockingQueue<>(DEFAULT_POOL_SIZE);
         } catch (SQLException e) {
             throw new ConnectionException("DriverManager can't register Driver.", e);
@@ -34,7 +33,9 @@ public class ConnectionPool {
 
     public static ConnectionPool getInstance() throws ConnectionException {
         if (isCreated.compareAndSet(false, true)) {
-            instance = new ConnectionPool();
+            if (instance == null) {
+                instance = new ConnectionPool();
+            }
         }
         return instance;
     }
@@ -63,7 +64,7 @@ public class ConnectionPool {
         }
     }
 
-    public void destroy() {//todo показать
+    public void destroy() {
         if(isCreated.compareAndSet(true, false)) {
             closeQueue(connectionsFree);
             connectionsFree = null;
@@ -73,7 +74,7 @@ public class ConnectionPool {
         }
     }
 
-    private void closeQueue(BlockingQueue<WrapperConnection> queue) {//todo показать
+    private void closeQueue(BlockingQueue<WrapperConnection> queue) {
         if (!queue.isEmpty()) {
             for (WrapperConnection connection : queue) {
                 try {
@@ -88,7 +89,7 @@ public class ConnectionPool {
         }
     }
 
-    public static void checkConnections() throws IncorrectDataException, ConnectionException//TODO переделать
+    public static void checkConnections() throws IncorrectDataException, ConnectionException
     {
         if (!isCreated.get()) {
             throw new IncorrectDataException("ConnectionPool isn't initialized.");

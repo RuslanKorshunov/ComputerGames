@@ -1,10 +1,10 @@
 package by.epam.computergames.servlet;
 
-import by.epam.computergames.timer.ConnectionTimer;
 import by.epam.computergames.command.*;
 import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.connection.ConnectionPool;
 import by.epam.computergames.exception.IncorrectDataException;
+import by.epam.computergames.timer.ConnectionTimer;
 import by.epam.computergames.timer.ConnectionTimerTask;
 import by.epam.computergames.warehouse.GameWarehouse;
 import org.apache.logging.log4j.LogManager;
@@ -24,23 +24,6 @@ public class ControlServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(ControlServlet.class);
 
     @Override
-    public void init(){
-        logger.info("Servlet starts");
-        try {
-            ConnectionPool.getInstance();
-            GameWarehouse.getInstance();
-            ConnectionTimer timer = ConnectionTimer.getInstance();
-            TimerTask timerTask = new ConnectionTimerTask();
-            timer.schedule(timerTask, TIME, TIME);
-        } catch (ConnectionException e) {
-            logger.error("Servlet can't begin work due to a internal error", e);
-            //todo прекращение работы сервлета
-        } catch (IncorrectDataException e) {
-            logger.warn("Timer doesn't begin checking connections", e);
-        }
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -48,26 +31,6 @@ public class ControlServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
-    }
-
-    @Override
-    public void destroy() {//todo показать
-        try {
-            ConnectionTimer.getInstance().cancel();
-        } catch (IncorrectDataException e) {
-            logger.warn("Timer couldn't be canceled", e);
-        }
-        try {
-            ConnectionPool.getInstance().destroy();
-        } catch (ConnectionException e) {
-            logger.warn("ConnectionPool couldn't be destroyed", e);
-        }
-        try {
-            GameWarehouse.getInstance().destroy();
-        } catch (IncorrectDataException e) {
-            logger.warn("GameWarehouse couldn't be destroyed", e);
-        }
-        logger.info("Servlet was destroyed");
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,7 +48,43 @@ public class ControlServlet extends HttpServlet {
             logger.info("Command " + commandName + " ends.");
         } catch (IncorrectDataException e) {
             logger.error(e);
-            request.getRequestDispatcher(PageName.MAIN_PAGE.getPath()).forward(request, response);
+            response.sendRedirect(PageName.MAIN_PAGE.getPath());
         }
+    }
+
+    @Override
+    public void init(){
+        logger.info("Servlet starts");
+        try {
+            ConnectionPool.getInstance();
+            GameWarehouse.getInstance();
+            ConnectionTimer timer = ConnectionTimer.getInstance();
+            TimerTask timerTask = new ConnectionTimerTask();
+            timer.schedule(timerTask, TIME, TIME);
+        } catch (ConnectionException e) {
+            logger.fatal("Servlet can't begin work due to a internal error", e);
+        } catch (IncorrectDataException e) {
+            logger.warn("Timer doesn't begin checking connections", e);
+        }
+    }
+
+    @Override
+    public void destroy() {
+        try {
+            ConnectionTimer.getInstance().cancel();
+        } catch (IncorrectDataException e) {
+            logger.warn("Timer couldn't be canceled", e);
+        }
+        try {
+            ConnectionPool.getInstance().destroy();
+        } catch (ConnectionException e) {
+            logger.warn("ConnectionPool couldn't be destroyed", e);
+        }
+        try {
+            GameWarehouse.getInstance().destroy();
+        } catch (IncorrectDataException e) {
+            logger.warn("GameWarehouse couldn't be destroyed", e);
+        }
+        logger.info("Servlet was destroyed");
     }
 }

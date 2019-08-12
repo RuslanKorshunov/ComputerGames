@@ -1,6 +1,6 @@
 package by.epam.computergames.entity;
 
-public class GameParameter {
+public class GameParameter extends AbstractEntity {
     private String pageNumber;
     private String yearFrom;
     private String yearTo;

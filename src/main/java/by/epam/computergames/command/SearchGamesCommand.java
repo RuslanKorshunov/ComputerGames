@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class SearchGamesCommand implements AbstractCommand {
+public class SearchGamesCommand extends InnerCommand implements AbstractCommand {
     private static final Logger logger = LogManager.getLogger(SearchGamesCommand.class);
 
     @Override
@@ -29,7 +29,7 @@ public class SearchGamesCommand implements AbstractCommand {
         GameParameter gameParameter = new GameParameter(pageNumber, yearFrom, yearTo, genre, developer, command);
 
         try {
-            List<PictureDelivery> deliveries = InnerCommand.findPictureDelivery(gameParameter);
+            List<PictureDelivery> deliveries = findPictureDelivery(gameParameter);
             request.setAttribute(RequestParameter.LIST.getValue(), RequestParameter.GAMES.getValue());
             request.setAttribute(RequestParameter.GAMES.getValue(), deliveries);
             request.setAttribute(RequestParameter.PAGE_NUMBER.getValue(), gameParameter.getPageNumber());

@@ -1,6 +1,5 @@
 package by.epam.computergames.dao;
 
-import by.epam.computergames.connection.ConnectionException;
 import by.epam.computergames.entity.Role;
 import by.epam.computergames.entity.Sex;
 import by.epam.computergames.entity.User;
@@ -105,14 +104,14 @@ public class UserDao extends AbstractDao<User> {
             try {
                 connection.rollback();
             } catch (SQLException eSQL) {
-                logger.warn("There is " + e + " exception when connection tried make rollback.");
+                logger.warn(e);
             }
             throw new DaoException("UserDao can't get data from database due to an internal error.", e);
         } finally {
             try {
                 connection.setAutoCommit(true);
             } catch (SQLException e) {
-                logger.warn("There is " + e + " exception when connection tried set autocommit.");
+                logger.warn(e);
             }
             closeStatement(statement);
         }
@@ -139,8 +138,8 @@ public class UserDao extends AbstractDao<User> {
     }
 
     @Override
-    public void returnConnection() throws ConnectionException {
-        super.returnConnection();
+    public void close() {
+        super.close();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package by.epam.computergames.entity;
 
-public class ReviewParameter {
+public class ReviewParameter extends AbstractEntity {
     private String idGame;
     private String pageNumber;
     private String command;

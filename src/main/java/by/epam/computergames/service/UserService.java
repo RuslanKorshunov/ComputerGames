@@ -49,7 +49,7 @@ public class UserService extends AbstractService<User> {
                 dao = new UserDao();
                 dao.create(user);
             } finally {
-                returnConnection(dao);
+                dao.close();
             }
         } catch (IncorrectDataException |
                 DaoException |
@@ -113,7 +113,7 @@ public class UserService extends AbstractService<User> {
                 dao = new UserDao();
                 dao.update(table, column, newValue, login);
             } finally {
-                returnConnection(dao);
+                dao.close();
             }
         } catch (IncorrectDataException | DaoException e) {
             throw new ServiceException(e);
@@ -140,7 +140,7 @@ public class UserService extends AbstractService<User> {
                 dao = new UserDao();
                 user = (User) dao.findBy(login);
             } finally {
-                returnConnection(dao);
+                dao.close();
             }
 
             AESCryptologist cryptologist = new AESCryptologist();

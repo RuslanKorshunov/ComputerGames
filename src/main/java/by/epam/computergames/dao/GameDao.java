@@ -47,21 +47,6 @@ public class GameDao extends AbstractDao<Game> {
             games = new ArrayList<>();
             while (rs.next()) {
                 Game game = findGame(rs);
-                /*Game game = new Game();
-                String idGame = rs.getString(1);
-                game.setIdGame(idGame);
-                String name = rs.getString(2);
-                game.setName(name);
-                int idGenre = rs.getInt(3);
-                game.setGenre(idGenre);
-                String developer = rs.getString(4);
-                game.setDeveloper(developer);
-                String picture = rs.getString(5);
-                game.setPicture(picture);
-                String year = rs.getString(6);
-                game.setYear(year);
-                String about = rs.getString(7);
-                game.setInformation(about);*/
                 games.add(game);
             }
         } catch (SQLException e) {
@@ -129,7 +114,7 @@ public class GameDao extends AbstractDao<Game> {
         GameParameter gameParameter = (GameParameter) values[0];
         String regex = FIND_SIZE_QUERY;
         regex = checkGameParameter(gameParameter, regex);
-        PreparedStatement statement;//TODO может, лучше заменить
+        PreparedStatement statement;
         long size = 0;
         try {
             statement = connection.prepareStatement(regex);

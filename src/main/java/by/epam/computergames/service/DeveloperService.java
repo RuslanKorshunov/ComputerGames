@@ -7,9 +7,9 @@ import by.epam.computergames.entity.Developer;
 
 import java.util.List;
 
-public class DeveloperService extends AbstractService {
+public class DeveloperService extends AbstractService<Developer> {
     @Override
-    public List<Developer> find(Object... values) throws ServiceException {
+    public List<Developer> findAll(Object... values) throws ServiceException {
         List<Developer> developers;
         try {
             AbstractDao dao = null;
@@ -17,7 +17,7 @@ public class DeveloperService extends AbstractService {
                 dao = new DeveloperDao();
                 developers = dao.find();
             } finally {
-                returnConnection(dao);
+                dao.close();
             }
         } catch (DaoException e) {
             throw new ServiceException(e);

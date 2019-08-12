@@ -12,7 +12,7 @@ import by.epam.computergames.warehouse.GameWarehouse;
 
 import java.util.List;
 
-public class GameService extends AbstractService {
+public class GameService extends AbstractService<Game> {
     private static final int NUMBER_OF_ENTITIES = 8;
     private static final int FIRST_PAGE_INDEX = 0;
 
@@ -104,11 +104,6 @@ public class GameService extends AbstractService {
             if (name == null) {
                 throw new IncorrectDataException("name has invalid value " + "\"" + name + "\"");
             }
-/*            int idGenre = game.getGenre().getIdGenre();
-            if (idGenre == Genre.UNKNOWN.getIdGenre())
-            {
-                throw new IncorrectDataException("idGenre has invalid value "+"\""+idGenre+"\"");
-            }*/
             String idDeveloper = game.getDeveloper();
             if (idDeveloper == null || !NumberValidator.validate(idDeveloper)) {
                 throw new IncorrectDataException("idDeveloper has invalid value " + "\"" + idDeveloper + "\"");

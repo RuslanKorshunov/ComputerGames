@@ -24,9 +24,8 @@ public class GetReviewsPageCommand implements AbstractCommand {
         reviewParameter.setIdGame(idGame);
         reviewParameter.setPageNumber(pageNumber);
         reviewParameter.setCommand(command);
-        AbstractService service = null;
+        AbstractService service = new ReviewService();
         try {
-            service = new ReviewService();
             List<Review> reviews = service.findAll(reviewParameter);
             request.setAttribute(RequestParameter.ID.getValue(), idGame);
             request.setAttribute(RequestParameter.REVIEWS.getValue(), reviews);

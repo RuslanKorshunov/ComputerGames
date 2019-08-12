@@ -26,7 +26,7 @@ public class DeveloperDao extends AbstractDao<Developer> {
         List<Developer> developers;
         try {
             developers = new ArrayList<>();
-            statement = connection.prepareStatement(FIND_QUERY);//TODO здесь точно PrepareStatement
+            statement = connection.prepareStatement(FIND_QUERY);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Developer developer = new Developer();

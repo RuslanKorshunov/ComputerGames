@@ -32,7 +32,7 @@ public class ReviewService extends AbstractService<Review> {
                 dao = new ReviewDao();
                 review = ((ReviewDao) dao).findBy(idGame, login);
             } finally {
-                returnConnection(dao);
+                dao.close();
             }
         } catch (IncorrectDataException | DaoException e) {
             throw new ServiceException(e);
@@ -42,18 +42,18 @@ public class ReviewService extends AbstractService<Review> {
     }
 
     @Override
-    public void add(Review entity) throws ServiceException {
-        String idGame = entity.getIdGame();
+    public void add(Review review) throws ServiceException {
+        String idGame = review.getIdGame();
 
         try {
             if (idGame == null || !NumberValidator.validate(idGame)) {
                 throw new IncorrectDataException("idGame has invalid value " + "\"" + idGame + "\"");
             }
-            String login = entity.getLogin();
+            String login = review.getLogin();
             if (!LoginValidator.validate(login)) {
                 throw new IncorrectDataException("login has invalid value " + "\"" + login + "\"");
             }
-            String mark = entity.getMark();
+            String mark = review.getMark();
             if (!NumberValidator.validate(mark)) {
                 throw new IncorrectDataException("mark has invalid value " + "\"" + mark + "\"");
             }
@@ -62,9 +62,9 @@ public class ReviewService extends AbstractService<Review> {
                 AbstractDao dao = null;
                 try {
                     dao = new ReviewDao();
-                    dao.create(entity);
+                    dao.create(review);
                 } finally {
-                    returnConnection(dao);
+                    dao.close();
                 }
             } else {
                 throw new IncorrectDataException("entity can't be less than 0 and more than 10.");
@@ -102,7 +102,7 @@ public class ReviewService extends AbstractService<Review> {
                 dao = new ReviewDao();
                 reviews = dao.find(parameter.getIdGame(), first);
             } finally {
-                returnConnection(dao);
+                dao.close();
             }
         } catch (IncorrectDataException | DaoException e) {
             throw new ServiceException(e);
@@ -112,16 +112,14 @@ public class ReviewService extends AbstractService<Review> {
     }
 
     @Override
-    public void delete(Object... values) throws ServiceException {
-        Review review = (Review) values[0];
-
+    public void delete(Review review) throws ServiceException {
         try {
             AbstractDao dao = null;
             try {
                 dao = new ReviewDao();
                 dao.delete(review);
             } finally {
-                returnConnection(dao);
+                dao.close();
             }
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -136,13 +134,13 @@ public class ReviewService extends AbstractService<Review> {
             dao = new ReviewDao();
             size = dao.findSize(idGame);
         } finally {
-            returnConnection(dao);
+            dao.close();
         }
 
         return size;
     }
 
-    private int checkCommand(ReviewParameter reviewParameter) {//todo может, вынести в отдельный класс
+    private int checkCommand(ReviewParameter reviewParameter) {
         String command = reviewParameter.getCommand();
         int pageNumber = Integer.parseInt(reviewParameter.getPageNumber());
         if (command.equals(CommandName.FORWARD_REVIEWS.getValue())) {

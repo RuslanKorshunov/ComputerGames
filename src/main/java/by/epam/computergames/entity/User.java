@@ -1,6 +1,6 @@
 package by.epam.computergames.entity;
 
-public class User {
+public class User extends AbstractEntity {
     private String login;
     private String password;
     private Role role;

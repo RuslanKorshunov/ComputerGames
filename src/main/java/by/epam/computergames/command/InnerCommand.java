@@ -10,8 +10,8 @@ import by.epam.computergames.service.ServiceException;
 import java.util.ArrayList;
 import java.util.List;
 
-class InnerCommand {
-    static List<PictureDelivery> findPictureDelivery(GameParameter gameParameter) throws ServiceException {
+abstract class InnerCommand {
+    List<PictureDelivery> findPictureDelivery(GameParameter gameParameter) throws ServiceException {
         AbstractService service = new GameService();
         List<Game> games = service.findAll(gameParameter);
         List<PictureDelivery> deliveries = new ArrayList<>();

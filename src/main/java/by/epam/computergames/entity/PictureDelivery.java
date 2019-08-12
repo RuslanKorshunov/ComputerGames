@@ -2,7 +2,7 @@ package by.epam.computergames.entity;
 
 import by.epam.computergames.command.CommandName;
 
-public class PictureDelivery {
+public class PictureDelivery extends AbstractEntity {
     private String idGame;
     private CommandName command;
     private String picture;

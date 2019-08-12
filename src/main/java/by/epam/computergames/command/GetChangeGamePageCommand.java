@@ -34,7 +34,7 @@ public class GetChangeGamePageCommand implements AbstractCommand {
             String information = game.getInformation();
             request.setAttribute(RequestParameter.ABOUT.getValue(), information);
             AbstractService service=new DeveloperService();
-            List<Developer> developers=(List<Developer>) service.find();
+            List<Developer> developers=(List<Developer>) service.findAll();
             request.setAttribute(RequestParameter.DEVELOPERS.getValue(), developers);
             request.setAttribute(RequestParameter.ID.getValue(), idGame);
             PageName pageName = PageName.CHANGE_GAME_PAGE;
